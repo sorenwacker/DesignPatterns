@@ -119,7 +119,11 @@ ignore = [
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["osx-arm64"]
+
+platforms = [
+    "osx-arm64",
+    "linux-64"
+]
 
 [tool.pixi.pypi-dependencies]
 design-patterns = { path = ".", editable = true }
