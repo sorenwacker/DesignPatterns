@@ -1,3 +1,4 @@
 # design-patterns
 ::: design_patterns
-::: design_patterns.main
+    show_root: true(base)
+
