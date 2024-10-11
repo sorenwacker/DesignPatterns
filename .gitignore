@@ -157,3 +157,7 @@ Thumbs.db
 *~
 *.swp
 _version.py
+
+# pixi environments
+.pixi
+*.egg-info
