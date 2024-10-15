@@ -10,8 +10,8 @@ pytest_commit:
     when: always
     paths:
       - coverage.xml
-  reports:
-    cobertura: coverage.xml             # Define the coverage report format for GitLab
+    reports:
+      cobertura: coverage.xml  # This should be placed under artifacts
 
 # Explicitly run pytest for merge request commits
 pytest_merge_request:
