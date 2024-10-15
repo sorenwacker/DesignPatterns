@@ -10,6 +10,7 @@ pytest_commit:
     when: always
     paths:
       - coverage.xml
+    coverage: '/TOTAL.*\s+(\d+%)$/'
     reports:
       coverage_report:
         coverage_format: cobertura
