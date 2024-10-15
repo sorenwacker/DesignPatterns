@@ -6,6 +6,13 @@ pytest_commit:
     - pixi install -e dev
   script:
     - pixi run -e dev pytest --cov=src --cov-report=xml:coverage.xml ./tests
+  artifacts:
+    when: always
+    paths:
+      - coverage.xml
+    reports:
+      junit: coverage.xml
+
 
 # Explicitly run pytest for merge request commits
 pytest_merge_request:
