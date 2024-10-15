@@ -6,11 +6,11 @@ pytest_commit:
     - pixi install -e dev
   script:
     - pixi run -e dev pytest --cov=src --cov-report term --cov-report xml:coverage.xml ./tests
+  coverage: '/TOTAL.*\s+(\d+%)$/'
   artifacts:
     when: always
     paths:
       - coverage.xml
-    coverage: '/TOTAL.*\s+(\d+%)$/'
     reports:
       coverage_report:
         coverage_format: cobertura
