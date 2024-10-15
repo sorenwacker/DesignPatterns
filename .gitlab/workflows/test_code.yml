@@ -11,7 +11,9 @@ pytest_commit:
     paths:
       - coverage.xml
     reports:
-      cobertura: coverage.xml  # This should be placed under artifacts
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
 
 # Explicitly run pytest for merge request commits
 pytest_merge_request:
