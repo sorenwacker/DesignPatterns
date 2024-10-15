@@ -11,8 +11,7 @@ pytest_commit:
     paths:
       - coverage.xml
     reports:
-      junit: coverage.xml
-
+      cobertura: coverage.xml             # Define the coverage report format for GitLab
 
 # Explicitly run pytest for merge request commits
 pytest_merge_request:
