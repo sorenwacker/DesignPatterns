@@ -27,11 +27,14 @@ class AnimalFactory:
             name (str): The name of the animal.
 
         Returns:
-            Animal: An instance of Dog or Cat if the type is valid; None otherwise.
+            Animal: An instance of Dog or Cat.
+
+        Raises:
+            ValueError: If the animal_type is not 'dog' or 'cat'.
         """
         if animal_type == "dog":
             return Dog(name)
         elif animal_type == "cat":
             return Cat(name)
         else:
-            return None
+            raise ValueError(f"Unknown animal type: {animal_type}")

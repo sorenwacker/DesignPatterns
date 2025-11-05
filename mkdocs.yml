@@ -1,9 +1,52 @@
 ---
-site_name: Documentation
+site_name: Design Patterns in Python
+site_description: Comprehensive library of software design patterns with Python implementations
+site_author: Design Patterns Library
+repo_url: https://github.com/sdrwacker/design-patterns
+
 nav:
   - Home: index.md
+  - Guides:
+      - Pattern Selection Guide: pattern_guide.md
+      - Pattern Comparison: pattern_comparison.md
+      - Practical Examples: practical_examples.md
+      - Anti-Patterns: anti_patterns.md
+      - Quick Reference: quick_reference.md
 
-theme: material
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
 
 plugins:
   - autorefs:
