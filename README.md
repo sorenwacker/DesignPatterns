@@ -33,14 +33,6 @@ A library demonstrating the 23 Gang of Four design patterns implemented in Pytho
 - Bridge - Decouple abstraction from implementation
 - Composition/Inheritance - Demonstrate OOP principles
 
-## Features
-
-- Python 3.12+ with type hints
-- 94% test coverage with 275+ tests
-- mypy type checking
-- Multiple examples per pattern
-- Comprehensive documentation including benefits, drawbacks, and use cases
-
 ## Documentation
 
 - [Pattern Selection Guide](docs/pattern_guide.md)
@@ -52,16 +44,11 @@ A library demonstrating the 23 Gang of Four design patterns implemented in Pytho
 ## Installation
 
 ```bash
-# Install pixi (see https://pixi.sh)
-curl -fsSL https://pixi.sh/install.sh | bash  # Linux/MacOS
-# or: iwr -useb https://pixi.sh/install.ps1 | iex  # Windows
-
-# Install dependencies
-pixi install --all  # with dev dependencies
-# or: pixi install --environment default  # runtime only
-
-# Install package
+# Using uv (recommended)
 uv pip install -e .
+
+# Using pip
+pip install -e .
 ```
 
 ## Usage
@@ -86,9 +73,14 @@ cart.set_payment_strategy(CreditCardPayment("1234-5678"))
 
 ## Development
 
+Run tests:
+```bash
+pytest
+```
+
 Generate documentation locally:
 ```bash
-pixi run -e dev mkdocs serve --watch ./
+mkdocs serve
 ```
 
 ## License

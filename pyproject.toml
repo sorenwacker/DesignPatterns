@@ -25,6 +25,7 @@ dev = [
   "pre-commit>=3.8.0,<4",
   "mkdocstrings[python]>=0.26.1,<1",
   "mkdocs-material>=9.5.39,<10",
+  "mkdocs-autorefs>=1.2.0,<2",
   "setuptools-scm>=8.1.0,<9",
   "mypy>=1.0.0,<2",
 ]
@@ -40,7 +41,7 @@ source = "vcs"
 version-file = "_version.py"
 
 [project.urls]
-Homepage = "git@gitlab.ewi.tudelft.nl:sdrwacker/design-patterns.git"
+Homepage = "https://github.com/sorenwacker/DesignPatterns"
 
 [project.scripts]
 main_script = "design_patterns.main:main"
@@ -117,21 +118,6 @@ ignore = [
     "S101",   # Use of assert is detected
     "INP001", # Missing __init__.py file
 ]
-
-[tool.pixi.project]
-channels = ["conda-forge"]
-
-platforms = [
-    "osx-arm64",
-    "linux-64"
-]
-
-[tool.pixi.pypi-dependencies]
-design-patterns = { path = ".", editable = true }
-
-[tool.pixi.environments]
-default = { solve-group = "default" }
-dev = { features = ["dev"], solve-group = "default" }
 
 [tool.mypy]
 python_version = "3.12"

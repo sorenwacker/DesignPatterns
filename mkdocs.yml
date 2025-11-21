@@ -2,11 +2,39 @@
 site_name: Design Patterns in Python
 site_description: Comprehensive library of software design patterns with Python implementations
 site_author: Design Patterns Library
-repo_url: https://github.com/sdrwacker/design-patterns
+repo_url: https://github.com/sorenwacker/DesignPatterns
 
 nav:
   - Home: index.md
-  - Guides:
+  - Introduction: introduction.md
+  - Overview: overview.md
+  - Design Patterns:
+      - Creational:
+          - Factory: patterns/creational/factory.md
+          - Singleton: patterns/creational/singleton.md
+          - Builder: patterns/creational/builder.md
+          - Prototype: patterns/creational/prototype.md
+          - Abstract Factory: patterns/creational/abstract_factory.md
+      - Behavioral:
+          - Strategy: patterns/behavioral/strategy.md
+          - Observer: patterns/behavioral/observer.md
+          - Command: patterns/behavioral/command.md
+          - Chain of Responsibility: patterns/behavioral/chain_of_responsibility.md
+          - Interpreter: patterns/behavioral/interpreter.md
+          - State: patterns/behavioral/state.md
+          - Template Method: patterns/behavioral/template_method.md
+          - Iterator: patterns/behavioral/iterator.md
+          - Visitor: patterns/behavioral/visitor.md
+          - Mediator: patterns/behavioral/mediator.md
+          - Memento: patterns/behavioral/memento.md
+      - Structural:
+          - Decorator: patterns/structural/decorator.md
+          - Adapter: patterns/structural/adapter.md
+          - Composite: patterns/structural/composite.md
+          - Facade: patterns/structural/facade.md
+          - Proxy: patterns/structural/proxy.md
+          - Bridge: patterns/structural/bridge.md
+  - Reference:
       - Pattern Selection Guide: pattern_guide.md
       - Pattern Comparison: pattern_comparison.md
       - Practical Examples: practical_examples.md
