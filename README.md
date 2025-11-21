@@ -35,11 +35,16 @@ A library demonstrating the 23 Gang of Four design patterns implemented in Pytho
 
 ## Documentation
 
-- [Pattern Selection Guide](docs/pattern_guide.md)
-- [Pattern Comparison Guide](docs/pattern_comparison.md)
-- [Practical Examples](docs/practical_examples.md)
-- [Anti-Patterns](docs/anti_patterns.md)
-- [Quick Reference](docs/quick_reference.md)
+Full documentation available at: https://sorenwacker.github.io/DesignPatterns/
+
+- [Introduction](https://sorenwacker.github.io/DesignPatterns/introduction/)
+- [Overview](https://sorenwacker.github.io/DesignPatterns/overview/)
+- [Design Patterns](https://sorenwacker.github.io/DesignPatterns/)
+- [Pattern Selection Guide](https://sorenwacker.github.io/DesignPatterns/pattern_guide/)
+- [Pattern Comparison Guide](https://sorenwacker.github.io/DesignPatterns/pattern_comparison/)
+- [Practical Examples](https://sorenwacker.github.io/DesignPatterns/practical_examples/)
+- [Anti-Patterns](https://sorenwacker.github.io/DesignPatterns/anti_patterns/)
+- [Quick Reference](https://sorenwacker.github.io/DesignPatterns/quick_reference/)
 
 ## Installation
 
