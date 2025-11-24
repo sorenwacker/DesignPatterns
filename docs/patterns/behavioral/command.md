@@ -2,57 +2,25 @@
 
 **Category:** Behavioral Pattern
 
-## Intent
+## Overview
 
-Encapsulate a request as an object, thereby allowing for parameterization of clients with queues, requests, and operations. The Command pattern supports undoable operations, request logging, and transaction management by turning requests into stand-alone objects.
+Encapsulate a request as an object, thereby allowing for parameterization of clients with queues, requests, and operations. This pattern supports undoable operations, request logging, and transaction management by turning requests into stand-alone objects.
 
-## Problem
+## Usage Guidelines
 
-When operations need to be executed, queued, logged, or undone, direct method calls lead to:
+**Use when:**
+- Need to parameterize objects with operations
+- Operations need to be queued for later execution
+- Need to support undoable operations
+- Operations must be logged for audit or recovery
 
-- Tight coupling between requester and receiver
-- Difficulty implementing undo/redo functionality
-- No way to queue or log operations
-- Hard to parameterize objects with operations
-- Complex transaction management
-- Inability to compose operations
-
-## When to Use
-
-Use the Command pattern when:
-
-- **Parameterize objects**: Need to parameterize objects with operations
-- **Queue operations**: Operations need to be queued for later execution
-- **Undo/redo**: Need to support undoable operations
-- **Logging**: Operations must be logged for audit or recovery
-- **Transactions**: Implementing transaction-based systems
-- **Macro recording**: Recording sequences of operations for playback
-- **Decouple sender/receiver**: Sender and receiver of requests should be decoupled
-
-## When NOT to Use
-
-Avoid the Command pattern when:
-
-- **Simple operations**: Direct method calls are sufficient
-- **No history needed**: No need for undo, logging, or queueing
-- **Performance critical**: Command object overhead is unacceptable
-- **Single operation**: Only one type of operation exists
-- **Immediate execution**: All operations execute immediately without queueing
-- **Overkill**: Pattern adds unnecessary complexity
-
-## Structure
-
-The Command pattern involves:
-
-- **Command**: Interface declaring execution method
-- **Concrete Command**: Implements command and binds receiver with action
-- **Client**: Creates concrete command and sets its receiver
-- **Invoker**: Asks command to execute the request
-- **Receiver**: Knows how to perform the operations
+**Avoid when:**
+- Direct method calls are sufficient for simple operations
+- No need for undo, logging, or queueing
+- Command object overhead is unacceptable for performance
+- Only one type of operation exists
 
 ## Implementation
-
-### Remote Control Example
 
 ```python
 from typing import List
@@ -100,7 +68,7 @@ class RemoteControl:
         self.commands.clear()
 ```
 
-## Usage Example
+### Usage
 
 ```python
 # Create remote control (invoker)
@@ -123,43 +91,34 @@ remote.execute_commands()
 # Light is on
 ```
 
-## Key Benefits
+## Trade-offs
 
-1. **Decoupling**: Decouples sender from receiver of requests
-2. **Extensibility**: Easy to add new commands without changing existing code
-3. **Composability**: Commands can be composed into macro commands
-4. **Undo/Redo**: Supports undo and redo functionality
-5. **Queueing**: Commands can be queued for delayed or remote execution
-6. **Logging**: Operations can be logged for audit trails
-7. **Transactions**: Can implement rollback by undoing commands
-8. **Single Responsibility**: Separates operation invocation from execution
+**Benefits:**
+1. Decouples sender from receiver of requests
+2. Easy to add new commands without changing existing code
+3. Commands can be composed into macro commands
+4. Supports undo and redo functionality
 
-## Drawbacks
-
-1. **Increased classes**: Creates many command classes
-2. **Complexity**: Adds complexity for simple operations
-3. **Memory overhead**: Storing commands consumes memory
-4. **Indirection**: Extra layer of indirection can impact performance
-5. **Command proliferation**: Many small command classes can be overwhelming
+**Drawbacks:**
+1. Creates many command classes increasing code volume
+2. Adds complexity for simple operations
+3. Storing commands consumes memory
+4. Extra layer of indirection can impact performance
 
 ## Real-World Examples
 
-- **GUI buttons and menu items**: Each button/menu action is a command
-- **Text editors**: Undo/redo functionality
-- **Transaction systems**: Database transactions and rollback
-- **Macro recording**: Recording user actions for playback
-- **Job schedulers**: Queuing jobs for execution
-- **Remote procedure calls**: Executing operations on remote systems
-- **Wizards**: Multi-step processes with undo capability
-- **Game input**: Player actions as commands that can be replayed
+- GUI buttons and menu items with each action as a command
+- Text editors with undo/redo functionality
+- Transaction systems with database transactions and rollback
+- Job schedulers queueing jobs for execution
 
 ## Related Patterns
 
-- **Memento**: Can store command state for undo
-- **Prototype**: Commands can be cloned for reuse
-- **Composite**: Macro commands use composite pattern
-- **Chain of Responsibility**: Commands can be chained
-- **Strategy**: Command can use strategy for execution logic
+- Memento
+- Prototype
+- Composite
+- Chain of Responsibility
+- Strategy
 
 ## API Reference
 

@@ -2,53 +2,25 @@
 
 **Category:** Structural Pattern
 
-## Intent
+## Overview
 
-Convert the interface of a class into another interface clients expect. The Adapter pattern allows classes to work together that couldn't otherwise because of incompatible interfaces. It acts as a bridge between two incompatible interfaces.
+Convert the interface of a class into another interface clients expect. This pattern allows classes to work together that couldn't otherwise because of incompatible interfaces, acting as a bridge between two incompatible interfaces.
 
-## Problem
+## Usage Guidelines
 
-When you need to use existing classes with incompatible interfaces, direct usage leads to:
+**Use when:**
+- Want to use class with incompatible interface
+- Need to integrate legacy code with new systems
+- Library interface doesn't match your needs
+- Want to provide uniform interface to related classes
 
-- Inability to reuse existing classes
-- Tight coupling to specific interfaces
-- Code duplication to work around interface mismatches
-- Difficulty integrating legacy code
-- No way to make third-party libraries work with your code
-
-## When to Use
-
-Use the Adapter pattern when:
-
-- **Incompatible interfaces**: Want to use class with incompatible interface
-- **Legacy integration**: Need to integrate legacy code with new systems
-- **Third-party libraries**: Library interface doesn't match your needs
-- **Multiple adaptees**: Want to provide uniform interface to related classes
-- **Interface translation**: Need to translate between different interfaces
-- **Reuse existing**: Want to reuse existing class without modification
-
-## When NOT to Use
-
-Avoid the Adapter pattern when:
-
-- **Compatible interfaces**: Interfaces are already compatible
-- **Modify source**: Can modify the original class interface
-- **Simple wrapper**: A simple wrapper function suffices
-- **Performance critical**: Adapter overhead is unacceptable
-- **Overkill**: Pattern adds unnecessary complexity
-
-## Structure
-
-The Adapter pattern involves:
-
-- **Target**: Interface that client expects
-- **Adaptee**: Existing class with incompatible interface
-- **Adapter**: Converts adaptee interface to target interface
-- **Client**: Works with target interface
+**Avoid when:**
+- Interfaces are already compatible
+- Can modify the original class interface
+- A simple wrapper function suffices
+- Pattern adds unnecessary complexity
 
 ## Implementation
-
-### Logger Adapter Example
 
 ```python
 class LoggerInterface:
@@ -118,7 +90,7 @@ class LoggerAdapter(LoggerInterface):
         self._legacy_logger.write_log(f"ERROR: {message}")
 ```
 
-## Usage Example
+### Usage
 
 ```python
 # Create legacy logger
@@ -135,39 +107,33 @@ logger.log_error("This is an error message.")
 # Output: Legacy Log: ERROR: This is an error message.
 ```
 
-## Key Benefits
+## Trade-offs
 
-1. **Reusability**: Reuse existing classes with incompatible interfaces
-2. **Single Responsibility**: Separates interface conversion from business logic
-3. **Flexibility**: Can adapt multiple incompatible classes
-4. **Open/Closed Principle**: Introduce new adapters without changing existing code
-5. **Legacy integration**: Makes legacy code work with new systems
-6. **Third-party compatibility**: Makes third-party libraries compatible
+**Benefits:**
+1. Reuse existing classes with incompatible interfaces
+2. Separates interface conversion from business logic (Single Responsibility)
+3. Can adapt multiple incompatible classes
+4. Introduce new adapters without changing existing code (Open/Closed Principle)
 
-## Drawbacks
-
-1. **Complexity**: Adds extra classes and indirection
-2. **Performance**: Additional layer adds overhead
-3. **Confusion**: Can make code harder to understand
-4. **Multiple adapters**: Many adapters can clutter codebase
-5. **Maintenance**: More classes to maintain
+**Drawbacks:**
+1. Adds extra classes and indirection increasing complexity
+2. Additional layer adds performance overhead
+3. Can make code harder to understand
+4. Many adapters can clutter codebase
 
 ## Real-World Examples
 
-- **Database adapters**: Adapting different database drivers to common interface
-- **Payment gateways**: Adapting different payment providers to unified interface
-- **File format converters**: Converting between different file formats
-- **API wrappers**: Wrapping REST APIs with object-oriented interfaces
-- **Hardware drivers**: Adapting hardware interfaces to software interfaces
-- **Logging libraries**: Adapting different logging frameworks
-- **Cloud storage**: Adapting AWS S3, Google Cloud Storage to common interface
+- Database adapters for different database drivers
+- Payment gateways adapting different providers
+- File format converters
+- API wrappers for REST APIs
 
 ## Related Patterns
 
-- **Bridge**: Separates abstraction from implementation, Adapter makes incompatible interfaces work
-- **Decorator**: Adds behavior, Adapter changes interface
-- **Facade**: Simplifies interface, Adapter changes interface
-- **Proxy**: Provides same interface, Adapter changes interface
+- Bridge
+- Decorator
+- Facade
+- Proxy
 
 ## API Reference
 

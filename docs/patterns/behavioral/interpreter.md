@@ -2,55 +2,25 @@
 
 **Category:** Behavioral Pattern
 
-## Intent
+## Overview
 
-Define a representation for a grammar along with an interpreter that uses the representation to interpret sentences in the language. The Interpreter pattern is used to evaluate sentences in a language by representing grammar rules as classes and interpreting expressions recursively.
+Define a representation for a grammar along with an interpreter that uses the representation to interpret sentences in the language. This pattern is used to evaluate sentences by representing grammar rules as classes and interpreting expressions recursively.
 
-## Problem
+## Usage Guidelines
 
-When you need to evaluate expressions or implement a simple language, hard-coding the logic leads to:
+**Use when:**
+- Grammar is simple and well-defined
+- Efficiency is not a primary concern
+- Need to evaluate expressions in a language
+- Implementing simple business rule engines
 
-- Inflexible parsing and evaluation
-- Difficulty modifying grammar rules
-- Complex conditional logic for expression evaluation
-- Hard to extend with new expressions
-- Tight coupling between grammar and evaluation logic
-
-## When to Use
-
-Use the Interpreter pattern when:
-
-- **Simple grammar**: Grammar is simple and well-defined
-- **Efficiency not critical**: Performance is not a primary concern
-- **Frequent changes**: Grammar changes frequently
-- **Expression evaluation**: Need to evaluate expressions in a language
-- **Rule engines**: Implementing business rule engines
-- **Query languages**: Building simple query or filtering languages
-- **Configuration parsing**: Parsing and evaluating configuration expressions
-
-## When NOT to Use
-
-Avoid the Interpreter pattern when:
-
-- **Complex grammar**: Grammar is complex (use parser generators instead)
-- **Performance critical**: Interpretation overhead is unacceptable
-- **Compiled better**: Compilation to bytecode would be more efficient
-- **Standard parsers available**: Existing parsing libraries suffice
-- **Large language**: Language has many grammar rules
-
-## Structure
-
-The Interpreter pattern involves:
-
-- **Abstract Expression**: Interface for interpreting expressions
-- **Terminal Expression**: Implements interpretation for terminal symbols
-- **Non-terminal Expression**: Implements interpretation for grammar rules
-- **Context**: Contains global information for interpretation
-- **Client**: Builds abstract syntax tree and initiates interpretation
+**Avoid when:**
+- Grammar is complex (use parser generators instead)
+- Performance is critical as interpretation adds overhead
+- Compilation to bytecode would be more efficient
+- Standard parsing libraries suffice
 
 ## Implementation
-
-### Boolean Expression Interpreter
 
 ```python
 class Expression:
@@ -100,7 +70,7 @@ class AndExpression(Expression):
         return self.expr1.interpret(context) and self.expr2.interpret(context)
 ```
 
-## Usage Example
+### Usage
 
 ```python
 # Build expression: "John" AND "Doe"
@@ -117,42 +87,36 @@ director = TerminalExpression("Director")
 is_leadership = OrExpression(manager, director)
 
 print(is_leadership.interpret("Senior Manager"))  # True
-print(is_leadership.interpret("Director of Engineering"))  # True
 print(is_leadership.interpret("Software Engineer"))  # False
 ```
 
-## Key Benefits
+## Trade-offs
 
-1. **Extensibility**: Easy to add new grammar rules
-2. **Separation of concerns**: Grammar and interpretation are separate
-3. **Flexibility**: Grammar can be modified by composing expressions
-4. **Explicit grammar**: Grammar rules are represented as classes
-5. **Reusability**: Expression objects can be reused
+**Benefits:**
+1. Easy to add new grammar rules through extensibility
+2. Grammar and interpretation are separate concerns
+3. Grammar can be modified by composing expressions
+4. Expression objects can be reused
 
-## Drawbacks
-
-1. **Class proliferation**: Many classes for complex grammars
-2. **Performance**: Interpretation is slower than compiled alternatives
-3. **Complexity**: Complex grammars lead to complex class hierarchies
-4. **Maintenance**: Large grammars are hard to maintain
-5. **Limited scalability**: Not suitable for complex languages
+**Drawbacks:**
+1. Many classes for complex grammars causing class proliferation
+2. Interpretation is slower than compiled alternatives
+3. Complex grammars lead to complex class hierarchies
+4. Large grammars are hard to maintain
 
 ## Real-World Examples
 
-- **SQL interpreters**: Parsing and executing SQL queries
-- **Regular expressions**: Pattern matching engines
-- **Mathematical expressions**: Evaluating arithmetic expressions
-- **Business rule engines**: Evaluating business rules
-- **Configuration languages**: Parsing configuration files
-- **Search queries**: Interpreting search syntax
-- **Scripting languages**: Simple embedded scripting
+- SQL interpreters parsing and executing queries
+- Regular expressions for pattern matching
+- Mathematical expressions evaluation
+- Business rule engines
 
 ## Related Patterns
 
-- **Composite**: Interpreter uses Composite for expression trees
-- **Flyweight**: Can share terminal symbols
-- **Iterator**: Can iterate through expression tree
-- **Visitor**: Can process expression trees
+- Composite
+- Flyweight
+- Iterator
+- Visitor
 
 ## API Reference
 

@@ -2,51 +2,25 @@
 
 **Category:** Behavioral Pattern
 
-## Intent
+## Overview
 
-Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it, enabling runtime selection of algorithms.
+Define a family of algorithms, encapsulate each one, and make them interchangeable. This pattern lets algorithms vary independently from clients that use them, enabling runtime selection of behavior without complex conditional logic.
 
-## Problem
+## Usage Guidelines
 
-When you have multiple ways to perform an operation, hardcoding the logic leads to:
+**Use when:**
+- Multiple ways to perform an operation need to be chosen at runtime
+- Code contains many conditionals that select behavior variants
+- Related algorithms share a common interface but differ in implementation
+- Algorithm implementation details should be isolated from client code
 
-- Inflexible code with multiple conditional statements
-- Difficulty adding new algorithms without modifying existing code
-- Coupling between the context and specific algorithm implementations
-- Complex testing as all variations must be tested together
-
-## When to Use
-
-Use the Strategy pattern when:
-
-- **Multiple algorithms**: You have different ways to perform an operation and need to choose at runtime
-- **Conditional complexity**: Your code contains many conditionals that select behavior variants
-- **Algorithm isolation**: You want to isolate algorithm implementation details from client code
-- **Runtime flexibility**: The behavior needs to be selected or changed at runtime
-- **Algorithm families**: Related algorithms share a common interface but differ in implementation
-- **Client customization**: Different clients need different variations of an algorithm
-
-## When NOT to Use
-
-Avoid the Strategy pattern when:
-
-- **Single algorithm**: Only one way to perform the operation exists
-- **Simple logic**: The algorithm is trivial and doesn't justify abstraction
-- **Stable requirements**: The behavior never changes or has no variants
-- **Performance critical**: The indirection overhead is unacceptable
-- **Increased objects**: Creating many strategy objects adds unwanted complexity
-
-## Structure
-
-The Strategy pattern involves:
-
-- **Strategy Interface**: Declares method(s) common to all algorithms
-- **Concrete Strategies**: Implement different variations of the algorithm
-- **Context**: Maintains a reference to a strategy object and delegates work to it
+**Avoid when:**
+- Only one way to perform the operation exists
+- The algorithm is trivial and doesn't justify abstraction
+- The behavior never changes or has no variants
+- The indirection overhead is unacceptable for performance
 
 ## Implementation
-
-### Payment Strategy Example
 
 ```python
 from abc import ABC, abstractmethod
@@ -105,7 +79,7 @@ class ShoppingCart:
         return self._payment_strategy.pay(total)
 ```
 
-### Usage Example
+### Usage
 
 ```python
 # Create shopping cart
@@ -126,38 +100,33 @@ cart.set_payment_strategy(CryptocurrencyPayment("0x742d35Cc6634C0532925a3b844Bc9
 print(cart.checkout())  # Paid $150.00 using Crypto wallet 0x742d35Cc...
 ```
 
-## Key Benefits
+## Trade-offs
 
-1. **Runtime flexibility**: Algorithms can be switched at runtime
-2. **Open/Closed Principle**: New strategies can be added without modifying context
-3. **Eliminates conditionals**: Replaces complex conditional logic with clean object composition
-4. **Testability**: Each strategy can be tested independently
-5. **Reusability**: Strategies can be reused across different contexts
-6. **Encapsulation**: Algorithm implementation details are hidden
+**Benefits:**
+1. Algorithms can be switched at runtime for flexibility
+2. New strategies can be added without modifying context (Open/Closed Principle)
+3. Eliminates complex conditional logic through clean object composition
+4. Each strategy can be tested independently
 
-## Drawbacks
-
-1. **Increased objects**: Creates many strategy objects
-2. **Client awareness**: Clients must understand different strategies to select appropriately
-3. **Communication overhead**: Context and strategy must share data
-4. **Simple cases**: Overkill for simple algorithms that rarely change
-5. **Context dependency**: Strategies may depend on context data structure
+**Drawbacks:**
+1. Creates many strategy objects increasing class count
+2. Clients must understand different strategies to select appropriately
+3. Context and strategy must share data with communication overhead
+4. Overkill for simple algorithms that rarely change
 
 ## Real-World Examples
 
-- **Sorting algorithms**: Choosing between bubble sort, quick sort, merge sort based on data size
-- **Compression**: Selecting compression algorithm (ZIP, RAR, TAR) based on requirements
-- **Route planning**: Different navigation strategies (shortest, fastest, scenic)
-- **Authentication**: Multiple authentication methods (OAuth, JWT, Basic Auth)
-- **Pricing strategies**: Different pricing rules (regular, discount, wholesale)
-- **Validation**: Different validation strategies for various input types
+- Sorting algorithms choosing between bubble sort, quick sort, merge sort
+- Compression algorithm selection (ZIP, RAR, TAR)
+- Route planning with different strategies (shortest, fastest, scenic)
+- Authentication methods (OAuth, JWT, Basic Auth)
 
 ## Related Patterns
 
-- **State**: Similar structure but intent differs (Strategy focuses on algorithms, State on behavior changes)
-- **Template Method**: Defines algorithm structure in base class vs encapsulating complete algorithms
-- **Command**: Encapsulates requests vs encapsulating algorithms
-- **Factory**: Can be used to create appropriate strategy instances
+- State
+- Template Method
+- Command
+- Factory
 
 ## API Reference
 

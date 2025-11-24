@@ -2,50 +2,25 @@
 
 **Category:** Creational Pattern
 
-## Intent
+## Overview
 
-Define an interface for creating objects, but let subclasses or factory methods decide which class to instantiate. The Factory pattern encapsulates object creation logic, making it easier to manage and modify object instantiation.
+Define an interface for creating objects, but let subclasses or factory methods decide which class to instantiate. This pattern encapsulates object creation logic, making it easier to manage and modify instantiation without coupling code to specific classes.
 
-## Problem
+## Usage Guidelines
 
-Creating objects directly using constructors couples your code to specific classes, making it difficult to:
+**Use when:**
+- Multiple related types exist with a common interface and instances need to be created based on runtime conditions
+- Object creation requires configuration, validation, or complex initialization logic
+- Client code should be decoupled from concrete class implementations
+- You need to easily substitute mock objects during testing
 
-- Change which classes are instantiated
-- Add new types without modifying existing code
-- Centralize and control object creation logic
-- Handle complex creation scenarios
-
-## When to Use
-
-Use the Factory pattern when:
-
-- **Multiple related types**: You have multiple classes implementing a common interface and need to create instances based on runtime conditions
-- **Centralized creation logic**: Object creation requires configuration, validation, or complex initialization
-- **Decoupling**: You want to decouple client code from concrete class implementations
-- **Creation variations**: The creation process needs to be customized or extended
-- **Testing**: You need to easily substitute mock objects during testing
-
-## When NOT to Use
-
-Avoid the Factory pattern when:
-
-- **Simple instantiation**: Creating objects is straightforward with no special logic required
-- **Single type**: Only one class needs to be instantiated
-- **Unnecessary abstraction**: The added indirection doesn't provide meaningful benefits
-- **Performance critical**: The factory overhead is unacceptable for performance requirements
-- **Small codebase**: The pattern adds complexity that isn't justified by the codebase size
-
-## Structure
-
-The Factory pattern involves:
-
-- **Product Interface**: Common interface for all products
-- **Concrete Products**: Implementations of the product interface
-- **Factory**: Creates and returns product instances based on parameters
+**Avoid when:**
+- Creating objects is straightforward with no special logic required
+- Only one class needs to be instantiated
+- The added indirection doesn't provide meaningful benefits
+- Performance overhead is unacceptable for critical operations
 
 ## Implementation
-
-### Basic Factory
 
 ```python
 from abc import ABC, abstractmethod
@@ -82,7 +57,7 @@ class AnimalFactory:
             raise ValueError(f"Unknown animal type: {animal_type}")
 ```
 
-### Usage Example
+### Usage
 
 ```python
 # Create factory
@@ -96,35 +71,33 @@ print(dog.speak())  # Output: Buddy says woof!
 print(cat.speak())  # Output: Whiskers says meow!
 ```
 
-## Key Benefits
+## Trade-offs
 
-1. **Encapsulation**: Object creation logic is centralized and hidden from clients
-2. **Flexibility**: Easy to add new product types without modifying client code
-3. **Loose coupling**: Clients depend on interfaces rather than concrete classes
-4. **Single Responsibility**: Creation logic is separated from business logic
-5. **Open/Closed Principle**: Open for extension (new types) but closed for modification
+**Benefits:**
+1. Encapsulation of object creation logic, hidden from clients
+2. Easy to add new product types without modifying client code
+3. Loose coupling through dependency on interfaces rather than concrete classes
+4. Single Responsibility Principle by separating creation from business logic
 
-## Drawbacks
-
-1. **Increased complexity**: Introduces additional classes and indirection
-2. **Factory bloat**: Factory can become large with many product types
-3. **Rigidity**: Changing the factory interface affects all clients
-4. **Limited flexibility**: Simple factories can only create one type of object at a time
+**Drawbacks:**
+1. Increased complexity through additional classes and indirection
+2. Factory can become large with many product types
+3. Changing the factory interface affects all clients
+4. Limited flexibility as simple factories create only one type at a time
 
 ## Real-World Examples
 
-- **Database connections**: Creating different database connection objects based on configuration
-- **Document parsers**: Instantiating appropriate parser based on file type
-- **GUI components**: Creating platform-specific UI elements
-- **Logging frameworks**: Creating different logger implementations (file, console, remote)
-- **Payment processors**: Creating payment handler based on payment method
+- Database connections based on configuration
+- Document parsers based on file type
+- Platform-specific UI elements
+- Logger implementations (file, console, remote)
 
 ## Related Patterns
 
-- **Abstract Factory**: Creates families of related objects
-- **Builder**: Constructs complex objects step by step
-- **Prototype**: Creates objects by cloning existing instances
-- **Singleton**: Ensures only one instance of a class exists
+- Abstract Factory
+- Builder
+- Prototype
+- Singleton
 
 ## API Reference
 

@@ -2,53 +2,25 @@
 
 **Category:** Structural Pattern
 
-## Intent
+## Overview
 
-Compose objects into tree structures to represent part-whole hierarchies. The Composite pattern lets clients treat individual objects and compositions of objects uniformly, enabling building of complex structures from simple components.
+Compose objects into tree structures to represent part-whole hierarchies. This pattern lets clients treat individual objects and compositions of objects uniformly, enabling building of complex structures from simple components.
 
-## Problem
+## Usage Guidelines
 
-When working with tree structures, treating individual and composite objects differently leads to:
+**Use when:**
+- Need to represent part-whole hierarchies
+- Want to treat individual and composite objects uniformly
+- Objects can contain other objects of same type
+- Working with hierarchical data structures
 
-- Complex client code with type checking
-- Difficulty adding new component types
-- Inconsistent treatment of leaves and composites
-- Hard to build recursive structures
-- Violation of open/closed principle
-
-## When to Use
-
-Use the Composite pattern when:
-
-- **Tree structures**: Need to represent part-whole hierarchies
-- **Uniform treatment**: Want to treat individual and composite objects uniformly
-- **Recursive composition**: Objects can contain other objects of same type
-- **Hierarchical data**: Working with hierarchical data structures
-- **Graphics scenes**: Building graphics scenes with nested elements
-- **File systems**: Representing files and directories
-
-## When NOT to Use
-
-Avoid the Composite pattern when:
-
-- **No hierarchy**: Structure is flat, not hierarchical
-- **Different operations**: Leaves and composites require very different operations
-- **Type safety**: Need strong type distinctions between components
-- **Simple structure**: Structure doesn't justify pattern complexity
-- **Performance critical**: Tree traversal overhead is unacceptable
-
-## Structure
-
-The Composite pattern involves:
-
-- **Component**: Interface for all objects in composition
-- **Leaf**: Represents leaf objects with no children
-- **Composite**: Defines behavior for components with children
-- **Client**: Manipulates objects through component interface
+**Avoid when:**
+- Structure is flat, not hierarchical
+- Leaves and composites require very different operations
+- Need strong type distinctions between components
+- Tree traversal overhead is unacceptable for performance
 
 ## Implementation
-
-### Graphics Example
 
 ```python
 class Shape:
@@ -107,7 +79,7 @@ class CompositeShape(Shape):
         return "Composite Shape: " + ", ".join(shape.draw() for shape in self.shapes)
 ```
 
-## Usage Example
+### Usage
 
 ```python
 # Create individual shapes
@@ -135,38 +107,33 @@ print(main_composite.draw())
 # Composite Shape: Drawing a circle., Composite Shape: Drawing a circle., Drawing a rectangle.
 ```
 
-## Key Benefits
+## Trade-offs
 
-1. **Uniform treatment**: Clients treat simple and complex objects uniformly
-2. **Recursive composition**: Easy to create complex tree structures
-3. **Open/Closed Principle**: Easy to add new component types
-4. **Simplified client code**: Client doesn't need to distinguish between types
-5. **Flexibility**: Can build arbitrarily complex structures
+**Benefits:**
+1. Clients treat simple and complex objects uniformly
+2. Easy to create complex tree structures through recursive composition
+3. Easy to add new component types (Open/Closed Principle)
+4. Simplified client code that doesn't distinguish between types
 
-## Drawbacks
-
-1. **Overly general**: Makes design overly general
-2. **Type safety**: Hard to restrict component types
-3. **Leaf operations**: Leaf-specific operations complicate interface
-4. **Design challenge**: Can be hard to design clean component interface
-5. **Performance**: Traversing deep trees can be slow
+**Drawbacks:**
+1. Makes design overly general
+2. Hard to restrict component types for type safety
+3. Leaf-specific operations complicate interface
+4. Traversing deep trees can be slow
 
 ## Real-World Examples
 
-- **File systems**: Files and directories
-- **GUI components**: Windows, panels, buttons
-- **Organization charts**: Employees and departments
-- **Graphics scenes**: Shapes, groups, scenes
-- **Menu systems**: Menu items and submenus
-- **XML/HTML DOM**: Elements and nested elements
-- **Expression trees**: Operators and operands
+- File systems with files and directories
+- GUI components with windows, panels, buttons
+- Graphics scenes with shapes, groups, scenes
+- Menu systems with menu items and submenus
 
 ## Related Patterns
 
-- **Iterator**: Can use Iterator to traverse composite structures
-- **Visitor**: Can apply operations to composite structures
-- **Decorator**: Often used together with Composite
-- **Flyweight**: Can share composite components to save memory
+- Iterator
+- Visitor
+- Decorator
+- Flyweight
 
 ## API Reference
 
