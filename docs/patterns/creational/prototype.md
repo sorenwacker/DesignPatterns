@@ -9,12 +9,14 @@ Create new objects by cloning existing instances rather than creating new ones f
 ## Usage Guidelines
 
 **Use when:**
+
 - Creating new objects is more expensive than cloning existing ones
 - Objects require complex setup that can be reused
 - Types to create are determined at runtime
 - Need copies of objects in specific states
 
 **Avoid when:**
+
 - Creating new objects is straightforward and cheap
 - Complexity of managing object references outweighs benefits
 - Objects contain circular references that complicate cloning
@@ -123,12 +125,14 @@ print(f"Deep copy sections: {len(deep_copy.sections)}")  # 4
 ## Trade-offs
 
 **Benefits:**
+
 1. Cloning can be faster than creating objects from scratch
 2. Add or remove prototypes at runtime for flexibility
 3. Avoid factory hierarchies for product variants
 4. Clone objects in specific configured states
 
 **Drawbacks:**
+
 1. Managing shallow vs deep copy semantics can be tricky
 2. Objects with circular references are hard to clone
 3. Implementing proper cloning can be complex

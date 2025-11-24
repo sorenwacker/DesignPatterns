@@ -9,12 +9,14 @@ Define an interface for creating objects, but let subclasses or factory methods 
 ## Usage Guidelines
 
 **Use when:**
+
 - Multiple related types exist with a common interface and instances need to be created based on runtime conditions
 - Object creation requires configuration, validation, or complex initialization logic
 - Client code should be decoupled from concrete class implementations
 - You need to easily substitute mock objects during testing
 
 **Avoid when:**
+
 - Creating objects is straightforward with no special logic required
 - Only one class needs to be instantiated
 - The added indirection doesn't provide meaningful benefits
@@ -74,12 +76,14 @@ print(cat.speak())  # Output: Whiskers says meow!
 ## Trade-offs
 
 **Benefits:**
+
 1. Encapsulation of object creation logic, hidden from clients
 2. Easy to add new product types without modifying client code
 3. Loose coupling through dependency on interfaces rather than concrete classes
 4. Single Responsibility Principle by separating creation from business logic
 
 **Drawbacks:**
+
 1. Increased complexity through additional classes and indirection
 2. Factory can become large with many product types
 3. Changing the factory interface affects all clients

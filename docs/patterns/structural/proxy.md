@@ -9,12 +9,14 @@ Provide a surrogate or placeholder for another object to control access to it. T
 ## Usage Guidelines
 
 **Use when:**
+
 - Defer expensive object creation until needed (lazy initialization)
 - Control access based on permissions or authentication
 - Access objects in different address spaces (remote objects)
 - Log access to objects or cache results of expensive operations
 
 **Avoid when:**
+
 - Direct access is sufficient and simple
 - No access control or lazy loading required
 - Proxy overhead is unacceptable for performance
@@ -96,12 +98,14 @@ print(image.is_loaded())  # True - already loaded
 ## Trade-offs
 
 **Benefits:**
+
 1. Controls access to real object
 2. Defers expensive operations until needed (lazy initialization)
 3. Implements authentication and authorization for access control
 4. Adds behavior without modifying real object
 
 **Drawbacks:**
+
 1. Adds additional classes and indirection increasing complexity
 2. Proxy adds overhead affecting performance
 3. Lazy initialization may cause delays in response time

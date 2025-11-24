@@ -9,12 +9,14 @@ Represent an operation to be performed on elements of an object structure. This 
 ## Usage Guidelines
 
 **Use when:**
+
 - Need to perform many distinct operations on object structure
 - Operations change more frequently than object structure
 - Want to keep related operations together
 - Object structure is stable but operations vary
 
 **Avoid when:**
+
 - Object structure changes frequently
 - Only a few operations exist
 - Operations are simple and well-suited as methods
@@ -101,12 +103,14 @@ print(rectangle.accept(area_calc))  # Rectangle area: 24.00
 ## Trade-offs
 
 **Benefits:**
+
 1. Add new operations without modifying elements (Open/Closed Principle)
 2. Groups related operations in visitor classes (Single Responsibility)
 3. Visitor can accumulate state while traversing
 4. Separates algorithms from object structure
 
 **Drawbacks:**
+
 1. Visitor may need access to element internals breaking encapsulation
 2. Adding new element types requires updating all visitors
 3. Circular dependencies between element and visitor interfaces

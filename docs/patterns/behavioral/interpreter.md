@@ -9,12 +9,14 @@ Define a representation for a grammar along with an interpreter that uses the re
 ## Usage Guidelines
 
 **Use when:**
+
 - Grammar is simple and well-defined
 - Efficiency is not a primary concern
 - Need to evaluate expressions in a language
 - Implementing simple business rule engines
 
 **Avoid when:**
+
 - Grammar is complex (use parser generators instead)
 - Performance is critical as interpretation adds overhead
 - Compilation to bytecode would be more efficient
@@ -93,12 +95,14 @@ print(is_leadership.interpret("Software Engineer"))  # False
 ## Trade-offs
 
 **Benefits:**
+
 1. Easy to add new grammar rules through extensibility
 2. Grammar and interpretation are separate concerns
 3. Grammar can be modified by composing expressions
 4. Expression objects can be reused
 
 **Drawbacks:**
+
 1. Many classes for complex grammars causing class proliferation
 2. Interpretation is slower than compiled alternatives
 3. Complex grammars lead to complex class hierarchies

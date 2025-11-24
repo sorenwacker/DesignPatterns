@@ -9,12 +9,14 @@ Convert the interface of a class into another interface clients expect. This pat
 ## Usage Guidelines
 
 **Use when:**
+
 - Want to use class with incompatible interface
 - Need to integrate legacy code with new systems
 - Library interface doesn't match your needs
 - Want to provide uniform interface to related classes
 
 **Avoid when:**
+
 - Interfaces are already compatible
 - Can modify the original class interface
 - A simple wrapper function suffices
@@ -110,12 +112,14 @@ logger.log_error("This is an error message.")
 ## Trade-offs
 
 **Benefits:**
+
 1. Reuse existing classes with incompatible interfaces
 2. Separates interface conversion from business logic (Single Responsibility)
 3. Can adapt multiple incompatible classes
 4. Introduce new adapters without changing existing code (Open/Closed Principle)
 
 **Drawbacks:**
+
 1. Adds extra classes and indirection increasing complexity
 2. Additional layer adds performance overhead
 3. Can make code harder to understand

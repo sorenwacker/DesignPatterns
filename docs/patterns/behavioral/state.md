@@ -9,12 +9,14 @@ Allow an object to alter its behavior when its internal state changes, making th
 ## Usage Guidelines
 
 **Use when:**
+
 - Object behavior changes based on internal state
 - Multiple conditional statements based on state exist
 - Clear state transitions exist between states
 - State-specific behavior should be encapsulated
 
 **Avoid when:**
+
 - Object has only 2-3 simple states
 - States don't change or transitions are trivial
 - State-dependent behavior is minimal
@@ -134,12 +136,14 @@ print(doc.get_status())  # Published
 ## Trade-offs
 
 **Benefits:**
+
 1. State-specific behavior is encapsulated in state classes
 2. Each state class has single responsibility
 3. Easy to add new states without modifying context (Open/Closed Principle)
 4. Eliminates complex conditional logic
 
 **Drawbacks:**
+
 1. Creates many state classes increasing code volume
 2. Can be overkill for simple state machines
 3. Managing transitions can become complex

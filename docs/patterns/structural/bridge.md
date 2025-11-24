@@ -9,12 +9,14 @@ Decouple an abstraction from its implementation so that the two can vary indepen
 ## Usage Guidelines
 
 **Use when:**
+
 - Want to avoid permanent binding between abstraction and implementation
 - Both abstraction and implementation should be extended independently
 - Need to switch implementations at runtime
 - Multiple implementations of abstraction exist
 
 **Avoid when:**
+
 - Only one implementation exists
 - Implementation doesn't vary
 - Simple inheritance suffices
@@ -136,12 +138,14 @@ print(circle_vector.draw())  # Drawing circle with radius 10.0 as vector
 ## Trade-offs
 
 **Benefits:**
+
 1. Abstraction and implementation can vary independently
 2. Implementation can be selected or switched at runtime
 3. Isolates platform-specific code
 4. New abstractions and implementations without changing existing code (Open/Closed Principle)
 
 **Drawbacks:**
+
 1. Adds complexity with additional abstractions
 2. Extra layer of indirection
 3. Can be hard to design proper abstraction/implementation split

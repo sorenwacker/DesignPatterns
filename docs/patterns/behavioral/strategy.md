@@ -9,12 +9,14 @@ Define a family of algorithms, encapsulate each one, and make them interchangeab
 ## Usage Guidelines
 
 **Use when:**
+
 - Multiple ways to perform an operation need to be chosen at runtime
 - Code contains many conditionals that select behavior variants
 - Related algorithms share a common interface but differ in implementation
 - Algorithm implementation details should be isolated from client code
 
 **Avoid when:**
+
 - Only one way to perform the operation exists
 - The algorithm is trivial and doesn't justify abstraction
 - The behavior never changes or has no variants
@@ -103,12 +105,14 @@ print(cart.checkout())  # Paid $150.00 using Crypto wallet 0x742d35Cc...
 ## Trade-offs
 
 **Benefits:**
+
 1. Algorithms can be switched at runtime for flexibility
 2. New strategies can be added without modifying context (Open/Closed Principle)
 3. Eliminates complex conditional logic through clean object composition
 4. Each strategy can be tested independently
 
 **Drawbacks:**
+
 1. Creates many strategy objects increasing class count
 2. Clients must understand different strategies to select appropriately
 3. Context and strategy must share data with communication overhead

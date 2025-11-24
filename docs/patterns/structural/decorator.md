@@ -9,12 +9,14 @@ Attach additional responsibilities to an object dynamically. Decorators provide 
 ## Usage Guidelines
 
 **Use when:**
+
 - Need to add responsibilities to objects at runtime
 - Features should be added and removed dynamically
 - Want to combine features in various ways
 - Existing classes should remain unchanged (Open/Closed Principle)
 
 **Avoid when:**
+
 - All behavior is known at compile time and doesn't change
 - A single subclass would suffice for simple enhancements
 - The order of applying decorators significantly affects behavior and causes confusion
@@ -104,12 +106,14 @@ print(f"{coffee.get_description()}: ${coffee.get_cost():.2f}")
 ## Trade-offs
 
 **Benefits:**
+
 1. Add or remove responsibilities at runtime for flexibility
 2. Extend functionality without modifying existing code (Open/Closed Principle)
 3. Each decorator focuses on one concern (Single Responsibility)
 4. Mix and match decorators for different combinations
 
 **Drawbacks:**
+
 1. Many small objects and layers can be hard to understand
 2. Decorator order may matter, causing confusion
 3. Decorated objects differ from original objects causing identity issues

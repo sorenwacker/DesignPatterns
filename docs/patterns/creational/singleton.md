@@ -9,12 +9,14 @@ Ensure a class has only one instance and provide a global point of access to it.
 ## Usage Guidelines
 
 **Use when:**
+
 - Only one instance of a class should exist in the system
 - The instance needs to be accessible from anywhere in the application
 - Managing shared resources like database connections, thread pools, or caches
 - Centralized configuration that must be consistent across the application
 
 **Avoid when:**
+
 - Singletons make unit testing harder due to global state
 - Creates hidden dependencies throughout the codebase
 - Complex synchronization needed for thread-safe access
@@ -89,12 +91,14 @@ print(db1.execute_query("SELECT * FROM users"))
 ## Trade-offs
 
 **Benefits:**
+
 1. Controlled access through single point of control
 2. Reduced namespace pollution while providing global access
 3. Lazy initialization with instance created only when first needed
 4. Thread safety with proper implementation ensuring safe concurrent access
 
 **Drawbacks:**
+
 1. Introduces global state making code harder to reason about
 2. Hard to mock or replace in unit tests
 3. Classes depending on singletons have hidden dependencies

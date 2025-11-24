@@ -9,12 +9,14 @@ Encapsulate a request as an object, thereby allowing for parameterization of cli
 ## Usage Guidelines
 
 **Use when:**
+
 - Need to parameterize objects with operations
 - Operations need to be queued for later execution
 - Need to support undoable operations
 - Operations must be logged for audit or recovery
 
 **Avoid when:**
+
 - Direct method calls are sufficient for simple operations
 - No need for undo, logging, or queueing
 - Command object overhead is unacceptable for performance
@@ -94,12 +96,14 @@ remote.execute_commands()
 ## Trade-offs
 
 **Benefits:**
+
 1. Decouples sender from receiver of requests
 2. Easy to add new commands without changing existing code
 3. Commands can be composed into macro commands
 4. Supports undo and redo functionality
 
 **Drawbacks:**
+
 1. Creates many command classes increasing code volume
 2. Adds complexity for simple operations
 3. Storing commands consumes memory

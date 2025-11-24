@@ -9,12 +9,14 @@ Define an object that encapsulates how a set of objects interact. This pattern p
 ## Usage Guidelines
 
 **Use when:**
+
 - Many objects communicate in complex ways
 - Want to centralize communication logic
 - Objects shouldn't depend on each other directly
 - Want to reuse objects in different contexts
 
 **Avoid when:**
+
 - Objects have simple, straightforward interactions
 - Mediator indirection is unacceptable for performance
 - Mediator becomes too complex (God object)
@@ -115,12 +117,14 @@ print(bob.get_messages())
 ## Trade-offs
 
 **Benefits:**
+
 1. Loose coupling with colleagues not referencing each other directly
 2. Centralized control of communication logic in one place
 3. Simplified objects as mediator handles complexity
 4. Colleagues can be reused with different mediators
 
 **Drawbacks:**
+
 1. Mediator can become too complex and hard to maintain (God object)
 2. Single point of failure as mediator failure affects all colleagues
 3. Indirect communication can make debugging harder

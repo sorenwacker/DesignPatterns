@@ -9,12 +9,14 @@ Provide a simplified interface to a complex subsystem. This pattern defines a hi
 ## Usage Guidelines
 
 **Use when:**
+
 - Subsystem has many classes and complex interactions
 - Want to provide simple interface to complex functionality
 - Creating layers in application architecture
 - Most clients need only subset of subsystem functionality
 
 **Avoid when:**
+
 - Subsystem is already simple
 - Clients need fine-grained control
 - No common usage patterns exist
@@ -151,12 +153,14 @@ operations = theater.end_movie()
 ## Trade-offs
 
 **Benefits:**
+
 1. Provides simple interface to complex subsystem
 2. Clients decoupled from subsystem classes reducing coupling
 3. Supports layering in application architecture
 4. Subsystem becomes easier to use
 
 **Drawbacks:**
+
 1. Facade can become too large and complex (God object)
 2. May not expose all subsystem features limiting functionality
 3. Facade tightly coupled to subsystem

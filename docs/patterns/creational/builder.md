@@ -9,12 +9,14 @@ Separate the construction of a complex object from its representation, allowing 
 ## Usage Guidelines
 
 **Use when:**
+
 - Object creation involves many steps or configuration options
 - Same construction process should create different representations
 - Many optional parameters would lead to multiple constructors
 - Building immutable objects step by step before finalization
 
 **Avoid when:**
+
 - Object has few parameters and simple construction
 - Object always created the same way
 - Builder adds unacceptable performance overhead
@@ -189,12 +191,14 @@ print(computer.get_specifications())
 ## Trade-offs
 
 **Benefits:**
+
 1. Readable code through fluent interface that is self-documenting
 2. Step-by-step construction of complex objects incrementally
 3. Same builder can create different product variants
 4. Can construct immutable objects piece by piece
 
 **Drawbacks:**
+
 1. Adds extra classes and code, increasing complexity
 2. Builder methods may duplicate product setters
 3. Creates intermediate objects during construction

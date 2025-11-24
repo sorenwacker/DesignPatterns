@@ -9,12 +9,14 @@ Capture and externalize an object's internal state without violating encapsulati
 ## Usage Guidelines
 
 **Use when:**
+
 - Need to implement undo and redo functionality
 - Want to save object state at specific points in time
 - Need to rollback to previous states
 - Creating save points in games or applications
 
 **Avoid when:**
+
 - State is simple and can be easily recreated
 - Storing many mementos consumes too much memory
 - All state is already public
@@ -111,12 +113,14 @@ print(editor.get_content())  # "Hello "
 ## Trade-offs
 
 **Benefits:**
+
 1. Encapsulation preserved with internal state saved without exposing structure
 2. Simplified originator that doesn't manage its own history
 3. Easy to implement undo and redo operations
 4. Can save multiple snapshots at different points
 
 **Drawbacks:**
+
 1. Storing many mementos uses significant memory
 2. Creating mementos can be expensive for large objects
 3. Caretaker must manage memento lifecycle

@@ -9,12 +9,14 @@ Define a one-to-many dependency between objects so that when one object changes 
 ## Usage Guidelines
 
 **Use when:**
+
 - Object state changes need to trigger updates in other objects
 - One object (subject) needs to notify many objects (observers)
 - Subject and observers should be loosely coupled
 - Set of observers can change at runtime
 
 **Avoid when:**
+
 - Direct method calls suffice for simple scenarios
 - Notification overhead is unacceptable for performance
 - Risk of memory leaks from forgotten observer references
@@ -154,12 +156,14 @@ weather_station.detach(phone_display)
 ## Trade-offs
 
 **Benefits:**
+
 1. Loose coupling between subject and observers
 2. Can add/remove observers at runtime dynamically
 3. One state change notifies multiple observers through broadcast
 4. Add new observers without modifying subject (Open/Closed Principle)
 
 **Drawbacks:**
+
 1. Observers may be updated in unexpected order
 2. Forgotten observer references can cause memory leaks
 3. Notifying many observers can be slow

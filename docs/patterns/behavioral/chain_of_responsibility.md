@@ -9,12 +9,14 @@ Avoid coupling the sender of a request to its receiver by giving more than one o
 ## Usage Guidelines
 
 **Use when:**
+
 - More than one object can handle a request
 - Set of handlers should be determined at runtime
 - Sender shouldn't know which handler processes the request
 - Implementing middleware or filter chains
 
 **Avoid when:**
+
 - Only one object can handle requests
 - Every request must be handled with guarantee
 - Chain traversal overhead is unacceptable for performance
@@ -103,12 +105,14 @@ print(approval_handler.handle("FeedbackRequest"))
 ## Trade-offs
 
 **Benefits:**
+
 1. Reduced coupling as sender doesn't need to know the receiver
 2. Flexibility to add or remove handlers at runtime
 3. Multiple objects share handling responsibility
 4. Single Responsibility Principle with each handler focused on one type
 
 **Drawbacks:**
+
 1. Request might not be handled by any handler
 2. Chain traversal can be slow for performance
 3. Hard to track which handler processes request for debugging

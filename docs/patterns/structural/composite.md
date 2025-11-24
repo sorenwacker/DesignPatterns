@@ -9,12 +9,14 @@ Compose objects into tree structures to represent part-whole hierarchies. This p
 ## Usage Guidelines
 
 **Use when:**
+
 - Need to represent part-whole hierarchies
 - Want to treat individual and composite objects uniformly
 - Objects can contain other objects of same type
 - Working with hierarchical data structures
 
 **Avoid when:**
+
 - Structure is flat, not hierarchical
 - Leaves and composites require very different operations
 - Need strong type distinctions between components
@@ -110,12 +112,14 @@ print(main_composite.draw())
 ## Trade-offs
 
 **Benefits:**
+
 1. Clients treat simple and complex objects uniformly
 2. Easy to create complex tree structures through recursive composition
 3. Easy to add new component types (Open/Closed Principle)
 4. Simplified client code that doesn't distinguish between types
 
 **Drawbacks:**
+
 1. Makes design overly general
 2. Hard to restrict component types for type safety
 3. Leaf-specific operations complicate interface

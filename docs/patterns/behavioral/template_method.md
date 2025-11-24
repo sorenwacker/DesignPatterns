@@ -9,12 +9,14 @@ Define the skeleton of an algorithm in a base class, allowing subclasses to over
 ## Usage Guidelines
 
 **Use when:**
+
 - Multiple classes share the same algorithm skeleton
 - Some steps vary between implementations
 - Want to enforce specific algorithm sequence
 - Common steps should be implemented once
 
 **Avoid when:**
+
 - Each implementation is completely different
 - Composition would be more flexible than inheritance
 - No shared logic between implementations
@@ -117,12 +119,14 @@ print(result)  # {'status': 'analyzed', 'data': 'Parsed CSV(data.csv)'}
 ## Trade-offs
 
 **Benefits:**
+
 1. Common code is in one place promoting code reuse
 2. Algorithm structure is consistent across implementations
 3. Template method prevents algorithm modification
 4. Hook methods provide optional extension points
 
 **Drawbacks:**
+
 1. Tight coupling through inheritance
 2. Subclass constraints may violate Liskov Substitution Principle
 3. Algorithm structure is fixed with limited flexibility

@@ -9,12 +9,14 @@ Provide a way to access elements of an aggregate object sequentially without exp
 ## Usage Guidelines
 
 **Use when:**
+
 - Need to access collection elements sequentially
 - Want different ways to traverse same collection
 - Want uniform interface for traversing different collections
 - Internal collection structure should be hidden
 
 **Avoid when:**
+
 - Built-in iteration is sufficient for simple collections
 - Need random access to elements
 - Only one way to traverse collection exists
@@ -110,12 +112,14 @@ while iterator.has_next():
 ## Trade-offs
 
 **Benefits:**
+
 1. Separates traversal logic from collection (Single Responsibility Principle)
 2. Multiple traversals can happen simultaneously
 3. Same interface for different collections provides uniformity
 4. Collection internals remain hidden through encapsulation
 
 **Drawbacks:**
+
 1. Overkill for simple collections
 2. Additional abstraction adds performance overhead
 3. Iterator must track traversal state

@@ -9,12 +9,14 @@ Provide an interface for creating families of related or dependent objects witho
 ## Usage Guidelines
 
 **Use when:**
+
 - System needs to work with multiple families of related products
 - Products from one family must be used together for consistency
 - You want to switch between product families easily
 - Application should be independent of product creation details
 
 **Avoid when:**
+
 - Only one product family exists
 - Products aren't related or don't need to work together
 - Product creation is straightforward
@@ -162,12 +164,14 @@ print(app.interact())  # macOS button clicked, macOS checkbox toggled
 ## Trade-offs
 
 **Benefits:**
+
 1. Isolates concrete classes from client code
 2. Ensures products from same family are used together
 3. Easy to switch between product families
 4. Easy to introduce new product families (Open/Closed Principle)
 
 **Drawbacks:**
+
 1. Introduces many interfaces and classes, increasing complexity
 2. Adding new products requires changing all factories
 3. More abstract and harder to understand than simpler patterns
