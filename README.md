@@ -1,5 +1,9 @@
 # Design Patterns in Python
 
+[![Docs](https://github.com/sorenwacker/DesignPatterns/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/sorenwacker/DesignPatterns/actions/workflows/deploy-docs.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 A library demonstrating the 23 Gang of Four design patterns implemented in Python with modern idioms and type hints.
 
 ## Patterns
