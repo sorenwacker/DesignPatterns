@@ -36,3 +36,9 @@
 | **Facade** | Provide simplified interface to complex subsystem | Reduces system complexity |
 | **Proxy** | Control access to another object | Lazy initialization, access control |
 | **Bridge** | Decouple abstraction from implementation | Independent variation of abstractions |
+
+## Testing Patterns
+
+| Pattern | Purpose | Key Benefit |
+|---------|---------|-------------|
+| **Fixture** | Provide fixed baseline state for tests | Reusable test setup and consistent test data |

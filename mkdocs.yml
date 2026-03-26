@@ -34,6 +34,8 @@ nav:
           - Facade: patterns/structural/facade.md
           - Proxy: patterns/structural/proxy.md
           - Bridge: patterns/structural/bridge.md
+      - Testing:
+          - Fixture: patterns/testing/fixture.md
   - Reference:
       - Pattern Selection Guide: pattern_guide.md
       - Pattern Comparison: pattern_comparison.md
