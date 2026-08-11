@@ -23,7 +23,6 @@ Example:
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any
 
 
 class Observer(ABC):
@@ -36,7 +35,6 @@ class Observer(ABC):
         Args:
             subject: The subject that triggered the update.
         """
-        pass
 
 
 class Subject(ABC):
@@ -84,10 +82,7 @@ class WeatherStation(Subject):
         self._pressure: float = 0.0
 
     def set_measurements(
-        self,
-        temperature: float,
-        humidity: float,
-        pressure: float
+        self, temperature: float, humidity: float, pressure: float
     ) -> None:
         """Set weather measurements and notify observers.
 
@@ -188,8 +183,10 @@ class TVDisplay(Observer):
         Returns:
             Current weather display text.
         """
-        return (f"TV Display: Temperature is {self._temperature}°C, "
-                f"Humidity is {self._humidity}%")
+        return (
+            f"TV Display: Temperature is {self._temperature}°C, "
+            f"Humidity is {self._humidity}%"
+        )
 
 
 class NewsletterSubscriber(Observer):

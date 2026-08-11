@@ -1,6 +1,7 @@
 """Tests for the Inheritance principle example."""
 
 import pytest
+
 from design_patterns.structural.inheritance import Animal, Cat, Dog
 
 
@@ -43,5 +44,7 @@ def test_cat_is_animal():
 def test_animal_speak_not_implemented():
     """Test that base Animal.speak raises NotImplementedError."""
     animal = Animal("Generic")
-    with pytest.raises(NotImplementedError, match="Subclasses must implement this method"):
+    with pytest.raises(
+        NotImplementedError, match="Subclasses must implement this method"
+    ):
         animal.speak()

@@ -1,6 +1,7 @@
 """Tests for the Factory pattern."""
 
 import pytest
+
 from design_patterns.creational.factory import AnimalFactory
 
 

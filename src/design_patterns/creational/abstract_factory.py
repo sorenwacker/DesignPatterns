@@ -42,7 +42,6 @@ class Button(ABC):
         Returns:
             String representation of the rendered button.
         """
-        pass
 
     @abstractmethod
     def click(self) -> str:
@@ -51,7 +50,6 @@ class Button(ABC):
         Returns:
             String describing the click action.
         """
-        pass
 
 
 class Checkbox(ABC):
@@ -64,7 +62,6 @@ class Checkbox(ABC):
         Returns:
             String representation of the rendered checkbox.
         """
-        pass
 
     @abstractmethod
     def toggle(self) -> str:
@@ -73,7 +70,6 @@ class Checkbox(ABC):
         Returns:
             String describing the toggle action.
         """
-        pass
 
 
 class WindowsButton(Button):
@@ -206,7 +202,6 @@ class GUIFactory(ABC):
         Returns:
             A button instance.
         """
-        pass
 
     @abstractmethod
     def create_checkbox(self) -> Checkbox:
@@ -215,7 +210,6 @@ class GUIFactory(ABC):
         Returns:
             A checkbox instance.
         """
-        pass
 
 
 class WindowsFactory(GUIFactory):

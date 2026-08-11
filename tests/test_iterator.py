@@ -1,6 +1,7 @@
 """Tests for the Iterator pattern."""
 
 import pytest
+
 from design_patterns.behavioral.iterator import (
     BinaryTree,
     Book,

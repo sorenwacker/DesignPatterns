@@ -26,7 +26,7 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Optional
+    pass
 
 
 class State(ABC):
@@ -42,7 +42,6 @@ class State(ABC):
         Returns:
             Result message.
         """
-        pass
 
     @abstractmethod
     def approve(self, document: Document) -> str:
@@ -54,7 +53,6 @@ class State(ABC):
         Returns:
             Result message.
         """
-        pass
 
     @abstractmethod
     def reject(self, document: Document) -> str:
@@ -66,7 +64,6 @@ class State(ABC):
         Returns:
             Result message.
         """
-        pass
 
     @abstractmethod
     def get_status(self) -> str:
@@ -75,7 +72,6 @@ class State(ABC):
         Returns:
             Status string.
         """
-        pass
 
 
 class DraftState(State):
@@ -310,7 +306,6 @@ class TrafficLightState(ABC):
         Returns:
             Result message.
         """
-        pass
 
     @abstractmethod
     def get_color(self) -> str:
@@ -319,7 +314,6 @@ class TrafficLightState(ABC):
         Returns:
             Color string.
         """
-        pass
 
 
 class RedLightState(TrafficLightState):

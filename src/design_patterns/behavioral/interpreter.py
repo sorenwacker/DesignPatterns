@@ -11,7 +11,6 @@ class Expression:
         Returns:
             bool: The result of the interpretation.
         """
-        pass
 
 
 class TerminalExpression(Expression):
@@ -47,7 +46,6 @@ class AndExpression(Expression):
     def interpret(self, context: str) -> bool:
         """Return true if both expressions are true."""
         return self.expr1.interpret(context) and self.expr2.interpret(context)
-
 
 
 if __name__ == "__main__":

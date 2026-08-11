@@ -10,20 +10,19 @@ Example:
 
     ```python
     builder = ComputerBuilder()
-    computer = (builder
-                .set_cpu("Intel i9")
-                .set_ram(32)
-                .set_storage("1TB SSD")
-                .set_gpu("NVIDIA RTX 4090")
-                .build())
+    computer = (
+        builder.set_cpu("Intel i9")
+        .set_ram(32)
+        .set_storage("1TB SSD")
+        .set_gpu("NVIDIA RTX 4090")
+        .build()
+    )
 
     print(computer.get_specifications())
     ```
 """
 
 from __future__ import annotations
-
-from typing import Any
 
 
 class Computer:
@@ -305,13 +304,14 @@ class HouseBuilder:
         Returns:
             A simple house.
         """
-        return (self
-                .set_foundation("Concrete slab")
-                .set_walls("Brick")
-                .set_roof("Asphalt shingles")
-                .set_windows(4)
-                .set_doors(1)
-                .build())
+        return (
+            self.set_foundation("Concrete slab")
+            .set_walls("Brick")
+            .set_roof("Asphalt shingles")
+            .set_windows(4)
+            .set_doors(1)
+            .build()
+        )
 
     def build_luxury_house(self) -> House:
         """Build a luxury house with premium features.
@@ -321,12 +321,13 @@ class HouseBuilder:
         Returns:
             A luxury house.
         """
-        return (self
-                .set_foundation("Deep foundation")
-                .set_walls("Stone")
-                .set_roof("Tile")
-                .set_windows(12)
-                .set_doors(3)
-                .add_garage()
-                .add_garden()
-                .build())
+        return (
+            self.set_foundation("Deep foundation")
+            .set_walls("Stone")
+            .set_roof("Tile")
+            .set_windows(12)
+            .set_doors(3)
+            .add_garage()
+            .add_garden()
+            .build()
+        )

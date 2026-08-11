@@ -41,8 +41,14 @@ def test_full_chain_with_multiple_handlers():
     """Test a complete chain with multiple handlers."""
     handler_chain = ApprovalRequestHandler(EscalationRequestHandler())
 
-    assert handler_chain.handle("ApprovalRequest") == "ApprovalRequestHandler handled ApprovalRequest"
-    assert handler_chain.handle("EscalationRequest") == "EscalationRequestHandler handled EscalationRequest"
+    assert (
+        handler_chain.handle("ApprovalRequest")
+        == "ApprovalRequestHandler handled ApprovalRequest"
+    )
+    assert (
+        handler_chain.handle("EscalationRequest")
+        == "EscalationRequestHandler handled EscalationRequest"
+    )
     assert handler_chain.handle("FeedbackRequest") == "No handler for FeedbackRequest"
 
 

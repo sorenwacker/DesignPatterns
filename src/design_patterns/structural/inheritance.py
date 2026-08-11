@@ -1,21 +1,22 @@
 """Inheritance Pattern Example
 
-This module demonstrates the inheritance design pattern in Python 
+This module demonstrates the inheritance design pattern in Python
 using an `Animal` base class and its subclasses `Dog` and `Cat`.
-The `Animal` class defines a common interface that requires 
-subclasses to implement the `speak` method, providing specific 
+The `Animal` class defines a common interface that requires
+subclasses to implement the `speak` method, providing specific
 implementations for different animal types.
 """
+
 
 class Animal:
     """Base class for all animals.
 
-    This class defines the common interface for all animal types, 
+    This class defines the common interface for all animal types,
     requiring subclasses to implement the `speak` method.
-    
+
     Attributes:
         name (str): The name of the animal.
-        
+
     Usage:
         ```
         class Dog(Animal):

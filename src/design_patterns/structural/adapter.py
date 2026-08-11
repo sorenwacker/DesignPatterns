@@ -19,17 +19,19 @@ Example:
     logger = LoggerAdapter(legacy_logger)
     logger.log_info("This is an informational message.")
     > Legacy Log: INFO: This is an informational message.
-    
+
     logger.log_error("This is an error message.")
     > Legacy Log: ERROR: This is an error message.
     ```
 """
+
 
 class LoggerInterface:
     """The target interface that clients will use.
 
     This interface defines the logging methods that the application expects.
     """
+
     def log_info(self, message: str) -> None:
         """Logs an informational message.
 
@@ -53,6 +55,7 @@ class LegacyLogger:
     This class represents an existing logging system that has its own interface.
     It logs messages to the console.
     """
+
     def write_log(self, message: str) -> None:
         """Writes a log message.
 

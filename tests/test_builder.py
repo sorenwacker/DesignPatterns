@@ -16,15 +16,16 @@ def test_computer_builder_basic():
 def test_computer_builder_full():
     """Test building a fully configured computer."""
     builder = ComputerBuilder()
-    computer = (builder
-                .set_cpu("Intel i9")
-                .set_ram(32)
-                .set_storage("1TB SSD")
-                .set_gpu("NVIDIA RTX 4090")
-                .set_os("Ubuntu Linux")
-                .add_peripheral("Mechanical Keyboard")
-                .add_peripheral("Gaming Mouse")
-                .build())
+    computer = (
+        builder.set_cpu("Intel i9")
+        .set_ram(32)
+        .set_storage("1TB SSD")
+        .set_gpu("NVIDIA RTX 4090")
+        .set_os("Ubuntu Linux")
+        .add_peripheral("Mechanical Keyboard")
+        .add_peripheral("Gaming Mouse")
+        .build()
+    )
 
     assert computer.cpu == "Intel i9"
     assert computer.ram == 32
@@ -67,12 +68,13 @@ def test_computer_empty_specifications():
 def test_house_builder_basic():
     """Test building a basic house."""
     builder = HouseBuilder()
-    house = (builder
-             .set_foundation("Concrete")
-             .set_walls("Wood")
-             .set_windows(3)
-             .set_doors(1)
-             .build())
+    house = (
+        builder.set_foundation("Concrete")
+        .set_walls("Wood")
+        .set_windows(3)
+        .set_doors(1)
+        .build()
+    )
 
     assert house.foundation == "Concrete"
     assert house.walls == "Wood"
@@ -85,11 +87,7 @@ def test_house_builder_basic():
 def test_house_builder_with_extras():
     """Test building a house with garage and garden."""
     builder = HouseBuilder()
-    house = (builder
-             .set_foundation("Deep foundation")
-             .add_garage()
-             .add_garden()
-             .build())
+    house = builder.set_foundation("Deep foundation").add_garage().add_garden().build()
 
     assert house.garage is True
     assert house.garden is True

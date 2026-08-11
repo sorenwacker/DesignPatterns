@@ -36,7 +36,6 @@ class Renderer(ABC):
         Returns:
             Rendering result.
         """
-        pass
 
     @abstractmethod
     def render_square(self, side: float) -> str:
@@ -48,7 +47,6 @@ class Renderer(ABC):
         Returns:
             Rendering result.
         """
-        pass
 
 
 class VectorRenderer(Renderer):
@@ -121,7 +119,6 @@ class Shape(ABC):
         Returns:
             Drawing result.
         """
-        pass
 
     @abstractmethod
     def resize(self, factor: float) -> None:
@@ -130,7 +127,6 @@ class Shape(ABC):
         Args:
             factor: Resize factor.
         """
-        pass
 
 
 class Circle(Shape):
@@ -203,17 +199,14 @@ class Device(ABC):
         Returns:
             True if enabled.
         """
-        pass
 
     @abstractmethod
     def enable(self) -> None:
         """Enable the device."""
-        pass
 
     @abstractmethod
     def disable(self) -> None:
         """Disable the device."""
-        pass
 
     @abstractmethod
     def get_volume(self) -> int:
@@ -222,7 +215,6 @@ class Device(ABC):
         Returns:
             Volume level.
         """
-        pass
 
     @abstractmethod
     def set_volume(self, percent: int) -> None:
@@ -231,7 +223,6 @@ class Device(ABC):
         Args:
             percent: Volume percentage.
         """
-        pass
 
 
 class TV(Device):
@@ -336,9 +327,8 @@ class RemoteControl:
         if self.device.is_enabled():
             self.device.disable()
             return "Device turned off"
-        else:
-            self.device.enable()
-            return "Device turned on"
+        self.device.enable()
+        return "Device turned on"
 
     def volume_up(self) -> str:
         """Increase volume.

@@ -33,7 +33,6 @@ class Coffee(ABC):
         Returns:
             The cost in dollars.
         """
-        pass
 
     @abstractmethod
     def get_description(self) -> str:
@@ -42,7 +41,6 @@ class Coffee(ABC):
         Returns:
             Coffee description.
         """
-        pass
 
 
 class SimpleCoffee(Coffee):
@@ -183,7 +181,6 @@ class DataSource(ABC):
         Args:
             data: The data to write.
         """
-        pass
 
     @abstractmethod
     def read_data(self) -> str:
@@ -192,7 +189,6 @@ class DataSource(ABC):
         Returns:
             The data.
         """
-        pass
 
 
 class FileDataSource(DataSource):

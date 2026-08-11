@@ -43,7 +43,6 @@ class ShapeVisitor(ABC):
         Returns:
             Result of visiting the circle.
         """
-        pass
 
     @abstractmethod
     def visit_rectangle(self, rectangle: Rectangle) -> str:
@@ -55,7 +54,6 @@ class ShapeVisitor(ABC):
         Returns:
             Result of visiting the rectangle.
         """
-        pass
 
     @abstractmethod
     def visit_triangle(self, triangle: Triangle) -> str:
@@ -67,7 +65,6 @@ class ShapeVisitor(ABC):
         Returns:
             Result of visiting the triangle.
         """
-        pass
 
 
 class Shape(ABC):
@@ -83,7 +80,6 @@ class Shape(ABC):
         Returns:
             Result of the visit.
         """
-        pass
 
 
 class Circle(Shape):
@@ -172,7 +168,8 @@ class AreaCalculator(ShapeVisitor):
             Area description.
         """
         import math
-        area = math.pi * circle.radius ** 2
+
+        area = math.pi * circle.radius**2
         return f"Circle area: {area:.2f}"
 
     def visit_rectangle(self, rectangle: Rectangle) -> str:
@@ -213,6 +210,7 @@ class PerimeterCalculator(ShapeVisitor):
             Perimeter description.
         """
         import math
+
         perimeter = 2 * math.pi * circle.radius
         return f"Circle perimeter: {perimeter:.2f}"
 
@@ -238,6 +236,7 @@ class PerimeterCalculator(ShapeVisitor):
             Perimeter description.
         """
         import math
+
         hypotenuse = math.sqrt(triangle.base**2 + triangle.height**2)
         perimeter = triangle.base + triangle.height + hypotenuse
         return f"Triangle perimeter: {perimeter:.2f}"

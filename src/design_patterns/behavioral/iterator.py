@@ -20,7 +20,8 @@ Example:
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Iterator as TypingIterator
+from collections.abc import Iterator as TypingIterator
+from typing import Any
 
 
 class Iterator(ABC):
@@ -33,7 +34,6 @@ class Iterator(ABC):
         Returns:
             True if more elements exist.
         """
-        pass
 
     @abstractmethod
     def next(self) -> Any:
@@ -45,7 +45,6 @@ class Iterator(ABC):
         Raises:
             StopIteration: When no more elements exist.
         """
-        pass
 
 
 class Aggregate(ABC):
@@ -58,7 +57,6 @@ class Aggregate(ABC):
         Returns:
             An iterator instance.
         """
-        pass
 
 
 class Book:

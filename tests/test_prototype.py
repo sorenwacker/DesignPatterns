@@ -1,6 +1,7 @@
 """Tests for the Prototype pattern."""
 
 import pytest
+
 from design_patterns.creational.prototype import (
     Circle,
     Document,

@@ -1,6 +1,7 @@
 """Tests for the Strategy pattern."""
 
 import pytest
+
 from design_patterns.behavioral.strategy import (
     BubbleSort,
     CreditCardPayment,

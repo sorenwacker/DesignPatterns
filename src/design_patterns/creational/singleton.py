@@ -17,6 +17,7 @@ Example:
         def __init__(self):
             self.connection = "Connected to database"
 
+
     db1 = DatabaseConnection()
     db2 = DatabaseConnection()
     assert db1 is db2  # True, same instance

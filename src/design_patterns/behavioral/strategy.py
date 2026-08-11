@@ -41,7 +41,6 @@ class PaymentStrategy(ABC):
         Returns:
             A message indicating payment status.
         """
-        pass
 
 
 class CreditCardPayment(PaymentStrategy):
@@ -177,7 +176,6 @@ class SortStrategy(ABC):
         Returns:
             The sorted list.
         """
-        pass
 
 
 class BubbleSort(SortStrategy):
@@ -195,7 +193,7 @@ class BubbleSort(SortStrategy):
         result = data.copy()
         n = len(result)
         for i in range(n):
-            for j in range(0, n - i - 1):
+            for j in range(n - i - 1):
                 if result[j] > result[j + 1]:
                     result[j], result[j + 1] = result[j + 1], result[j]
         return result

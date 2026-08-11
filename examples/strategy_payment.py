@@ -6,16 +6,14 @@ that can be swapped at runtime without changing the shopping cart code.
 """
 
 from abc import ABC, abstractmethod
-from typing import Dict, List
 
 
 class PaymentStrategy(ABC):
     """Abstract payment strategy interface"""
 
     @abstractmethod
-    def pay(self, amount: float) -> Dict[str, any]:
+    def pay(self, amount: float) -> dict[str, any]:
         """Process payment and return result"""
-        pass
 
 
 class CreditCardPayment(PaymentStrategy):
@@ -26,11 +24,11 @@ class CreditCardPayment(PaymentStrategy):
         self.cvv = cvv
         self.expiry = expiry
 
-    def pay(self, amount: float) -> Dict[str, any]:
+    def pay(self, amount: float) -> dict[str, any]:
         # Mask card number for display
         masked_card = f"****-****-****-{self.card_number[-4:]}"
 
-        print(f"\nProcessing credit card payment...")
+        print("\nProcessing credit card payment...")
         print(f"Card: {masked_card}")
         print(f"Amount: ${amount:.2f}")
         print("Authorization: SUCCESS")
@@ -50,8 +48,8 @@ class PayPalPayment(PaymentStrategy):
     def __init__(self, email: str):
         self.email = email
 
-    def pay(self, amount: float) -> Dict[str, any]:
-        print(f"\nProcessing PayPal payment...")
+    def pay(self, amount: float) -> dict[str, any]:
+        print("\nProcessing PayPal payment...")
         print(f"PayPal account: {self.email}")
         print(f"Amount: ${amount:.2f}")
         print("Redirecting to PayPal...")
@@ -73,7 +71,7 @@ class CryptocurrencyPayment(PaymentStrategy):
         self.wallet_address = wallet_address
         self.currency = currency
 
-    def pay(self, amount: float) -> Dict[str, any]:
+    def pay(self, amount: float) -> dict[str, any]:
         # Simulate conversion rate
         crypto_amount = amount / 50000  # Simplified conversion
 
@@ -98,7 +96,7 @@ class ShoppingCart:
     """Shopping cart that uses payment strategies"""
 
     def __init__(self):
-        self.items: List[Dict[str, any]] = []
+        self.items: list[dict[str, any]] = []
         self.payment_strategy: PaymentStrategy | None = None
 
     def add_item(self, name: str, price: float, quantity: int = 1):
@@ -114,7 +112,7 @@ class ShoppingCart:
         """Set the payment strategy to use"""
         self.payment_strategy = strategy
 
-    def checkout(self) -> Dict[str, any]:
+    def checkout(self) -> dict[str, any]:
         """Process checkout with selected payment strategy"""
         if not self.payment_strategy:
             raise ValueError("No payment method selected")
@@ -129,9 +127,7 @@ class ShoppingCart:
         print("=" * 60)
         print("\nItems:")
         for item in self.items:
-            print(
-                f"  {item['quantity']}x {item['name']:<30} ${item['price']:.2f}"
-            )
+            print(f"  {item['quantity']}x {item['name']:<30} ${item['price']:.2f}")
         print(f"\nTotal: ${total:.2f}")
 
         result = self.payment_strategy.pay(total)
@@ -195,9 +191,7 @@ def main():
 
     print("\nCustomer changes mind, switches to credit card...")
     cart4.set_payment_strategy(
-        CreditCardPayment(
-            card_number="9876543298765432", cvv="456", expiry="06/26"
-        )
+        CreditCardPayment(card_number="9876543298765432", cvv="456", expiry="06/26")
     )
     cart4.checkout()
 

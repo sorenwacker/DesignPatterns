@@ -6,8 +6,6 @@ system that involves multiple subsystems (inventory, payment, shipping, notifica
 """
 
 from datetime import datetime
-from typing import Dict, List
-
 
 # ============================================================================
 # COMPLEX SUBSYSTEMS
@@ -37,7 +35,7 @@ class InventoryService:
                 f"  [Inventory] ✓ Available: {self.inventory[product_id]['quantity']} in stock"
             )
         else:
-            print(f"  [Inventory] ✗ Insufficient stock")
+            print("  [Inventory] ✗ Insufficient stock")
         return available
 
     def reserve_items(self, product_id: str, quantity: int) -> bool:
@@ -59,24 +57,24 @@ class InventoryService:
 class PaymentService:
     """Processes payments"""
 
-    def validate_payment_info(self, payment_info: Dict) -> bool:
+    def validate_payment_info(self, payment_info: dict) -> bool:
         """Validate payment information"""
-        print(f"  [Payment] Validating payment information...")
+        print("  [Payment] Validating payment information...")
         required_fields = ["card_number", "cvv", "expiry"]
         for field in required_fields:
             if field not in payment_info:
                 print(f"  [Payment] ✗ Missing field: {field}")
                 return False
-        print(f"  [Payment] ✓ Payment information valid")
+        print("  [Payment] ✓ Payment information valid")
         return True
 
-    def charge(self, amount: float, payment_info: Dict) -> Dict:
+    def charge(self, amount: float, payment_info: dict) -> dict:
         """Charge the payment method"""
         print(f"  [Payment] Processing charge of ${amount:.2f}")
         # Simulate payment processing
         masked_card = f"****-****-****-{payment_info['card_number'][-4:]}"
         print(f"  [Payment] Card: {masked_card}")
-        print(f"  [Payment] ✓ Charge successful")
+        print("  [Payment] ✓ Charge successful")
 
         return {
             "transaction_id": f"TXN-{datetime.now().strftime('%Y%m%d%H%M%S')}",
@@ -87,7 +85,7 @@ class PaymentService:
     def refund(self, transaction_id: str) -> bool:
         """Process a refund"""
         print(f"  [Payment] Processing refund for {transaction_id}")
-        print(f"  [Payment] ✓ Refund processed")
+        print("  [Payment] ✓ Refund processed")
         return True
 
 
@@ -103,7 +101,7 @@ class ShippingService:
         print(f"  [Shipping] Cost: ${total:.2f}")
         return total
 
-    def create_shipment(self, order_id: str, address: Dict) -> str:
+    def create_shipment(self, order_id: str, address: dict) -> str:
         """Create a shipment"""
         print(f"  [Shipping] Creating shipment for order {order_id}")
         print(f"  [Shipping] Destination: {address['city']}, {address['state']}")
@@ -116,7 +114,7 @@ class ShippingService:
         """Schedule package pickup"""
         print(f"  [Shipping] Scheduling pickup for {tracking_number}")
         pickup_time = datetime.now()
-        print(f"  [Shipping] ✓ Pickup scheduled")
+        print("  [Shipping] ✓ Pickup scheduled")
         return pickup_time
 
 
@@ -127,21 +125,19 @@ class NotificationService:
         """Send order confirmation email"""
         print(f"  [Notification] Sending order confirmation to {email}")
         print(f"  [Notification] Order ID: {order_id}")
-        print(f"  [Notification] ✓ Email sent")
+        print("  [Notification] ✓ Email sent")
 
-    def send_shipping_notification(
-        self, email: str, tracking_number: str
-    ) -> None:
+    def send_shipping_notification(self, email: str, tracking_number: str) -> None:
         """Send shipping notification"""
         print(f"  [Notification] Sending shipping notification to {email}")
         print(f"  [Notification] Tracking: {tracking_number}")
-        print(f"  [Notification] ✓ Email sent")
+        print("  [Notification] ✓ Email sent")
 
     def send_error_notification(self, email: str, error: str) -> None:
         """Send error notification"""
         print(f"  [Notification] Sending error notification to {email}")
         print(f"  [Notification] Error: {error}")
-        print(f"  [Notification] ✓ Email sent")
+        print("  [Notification] ✓ Email sent")
 
 
 # ============================================================================
@@ -165,10 +161,10 @@ class OrderFacade:
     def place_order(
         self,
         customer_email: str,
-        items: List[Dict],
-        payment_info: Dict,
-        shipping_address: Dict,
-    ) -> Dict:
+        items: list[dict],
+        payment_info: dict,
+        shipping_address: dict,
+    ) -> dict:
         """
         Simplified interface for placing an order.
         Handles all the complexity of coordinating multiple services.
@@ -225,9 +221,7 @@ class OrderFacade:
 
             # Step 6: Create shipment
             print("\nStep 6: Creating Shipment")
-            tracking_number = self.shipping.create_shipment(
-                order_id, shipping_address
-            )
+            tracking_number = self.shipping.create_shipment(order_id, shipping_address)
             self.shipping.schedule_pickup(tracking_number)
 
             # Step 7: Send notifications
@@ -256,7 +250,7 @@ class OrderFacade:
 
         except Exception as e:
             print(f"\n{'='*70}")
-            print(f"✗ Order failed: {str(e)}")
+            print(f"✗ Order failed: {e!s}")
             print(f"{'='*70}")
 
             # Send error notification

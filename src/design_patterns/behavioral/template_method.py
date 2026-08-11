@@ -54,7 +54,6 @@ class DataMiner(ABC):
         Returns:
             File data representation.
         """
-        pass
 
     @abstractmethod
     def extract_data(self, data: str) -> str:
@@ -66,7 +65,6 @@ class DataMiner(ABC):
         Returns:
             Extracted data.
         """
-        pass
 
     def analyze_data(self, data: str) -> dict[str, str]:
         """Analyze the extracted data.
@@ -88,7 +86,6 @@ class DataMiner(ABC):
         Args:
             data: File data representation.
         """
-        pass
 
     def send_report(self, analysis: dict[str, str]) -> None:
         """Send the analysis report.
@@ -98,7 +95,6 @@ class DataMiner(ABC):
         Args:
             analysis: Analysis results.
         """
-        pass
 
 
 class PDFDataMiner(DataMiner):
@@ -132,7 +128,6 @@ class PDFDataMiner(DataMiner):
         Args:
             data: PDF file data.
         """
-        pass
 
 
 class CSVDataMiner(DataMiner):
@@ -166,7 +161,6 @@ class CSVDataMiner(DataMiner):
         Args:
             data: CSV file data.
         """
-        pass
 
     def send_report(self, analysis: dict[str, str]) -> None:
         """Send CSV mining report.
@@ -174,7 +168,6 @@ class CSVDataMiner(DataMiner):
         Args:
             analysis: Analysis results.
         """
-        pass
 
 
 class XMLDataMiner(DataMiner):
@@ -208,7 +201,6 @@ class XMLDataMiner(DataMiner):
         Args:
             data: XML file data.
         """
-        pass
 
     def analyze_data(self, data: str) -> dict[str, str]:
         """Analyze XML data with custom logic.
@@ -254,7 +246,6 @@ class Beverage(ABC):
         Returns:
             Step description.
         """
-        pass
 
     def pour_in_cup(self) -> str:
         """Pour in cup.
@@ -271,7 +262,6 @@ class Beverage(ABC):
         Returns:
             Step description.
         """
-        pass
 
     def wants_condiments(self) -> bool:
         """Hook method to determine if condiments should be added.

@@ -2,8 +2,8 @@
 
 from design_patterns.behavioral.template_method import (
     BlackCoffee,
-    CSVDataMiner,
     Coffee,
+    CSVDataMiner,
     PDFDataMiner,
     Tea,
     XMLDataMiner,

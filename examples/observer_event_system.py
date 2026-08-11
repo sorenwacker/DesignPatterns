@@ -7,23 +7,22 @@ multiple components can react to user events without tight coupling.
 
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any
 
 
 class Observer(ABC):
     """Abstract observer interface"""
 
     @abstractmethod
-    def update(self, event_type: str, data: Dict[str, Any]) -> None:
+    def update(self, event_type: str, data: dict[str, Any]) -> None:
         """Called when an event occurs"""
-        pass
 
 
 class Subject:
     """Subject that observers can subscribe to"""
 
     def __init__(self):
-        self._observers: List[Observer] = []
+        self._observers: list[Observer] = []
 
     def attach(self, observer: Observer) -> None:
         """Add an observer"""
@@ -36,7 +35,7 @@ class Subject:
         self._observers.remove(observer)
         print(f"Detached observer: {observer.__class__.__name__}")
 
-    def notify(self, event_type: str, data: Dict[str, Any]) -> None:
+    def notify(self, event_type: str, data: dict[str, Any]) -> None:
         """Notify all observers of an event"""
         print(f"\n[EVENT] {event_type}")
         for observer in self._observers:
@@ -77,22 +76,18 @@ class UserService(Subject):
 class EmailNotificationObserver(Observer):
     """Sends email notifications for events"""
 
-    def update(self, event_type: str, data: Dict[str, Any]) -> None:
+    def update(self, event_type: str, data: dict[str, Any]) -> None:
         if event_type == "user_registered":
             self._send_welcome_email(data)
         elif event_type == "user_made_purchase":
             self._send_receipt(data)
 
-    def _send_welcome_email(self, data: Dict[str, Any]) -> None:
-        print(
-            f"  [EMAIL] Sending welcome email to {data['email']}"
-        )
+    def _send_welcome_email(self, data: dict[str, Any]) -> None:
+        print(f"  [EMAIL] Sending welcome email to {data['email']}")
         print(f"          Subject: Welcome {data['name']}!")
 
-    def _send_receipt(self, data: Dict[str, Any]) -> None:
-        print(
-            f"  [EMAIL] Sending receipt to {data['email']}"
-        )
+    def _send_receipt(self, data: dict[str, Any]) -> None:
+        print(f"  [EMAIL] Sending receipt to {data['email']}")
         print(
             f"          Subject: Your purchase of {data['item']} (${data['amount']:.2f})"
         )
@@ -102,9 +97,9 @@ class AnalyticsObserver(Observer):
     """Tracks analytics for events"""
 
     def __init__(self):
-        self.events: List[Dict[str, Any]] = []
+        self.events: list[dict[str, Any]] = []
 
-    def update(self, event_type: str, data: Dict[str, Any]) -> None:
+    def update(self, event_type: str, data: dict[str, Any]) -> None:
         event_record = {"type": event_type, "data": data}
         self.events.append(event_record)
         print(f"  [ANALYTICS] Logged {event_type} event")
@@ -112,11 +107,9 @@ class AnalyticsObserver(Observer):
         if event_type == "user_registered":
             print(f"              New user: {data['name']}")
         elif event_type == "user_made_purchase":
-            print(
-                f"              Revenue: ${data['amount']:.2f}"
-            )
+            print(f"              Revenue: ${data['amount']:.2f}")
 
-    def get_summary(self) -> Dict[str, int]:
+    def get_summary(self) -> dict[str, int]:
         """Get event summary"""
         summary = {}
         for event in self.events:
@@ -129,9 +122,9 @@ class DatabaseObserver(Observer):
     """Persists events to database"""
 
     def __init__(self):
-        self.records: List[Dict[str, Any]] = []
+        self.records: list[dict[str, Any]] = []
 
-    def update(self, event_type: str, data: Dict[str, Any]) -> None:
+    def update(self, event_type: str, data: dict[str, Any]) -> None:
         record = {
             "event_type": event_type,
             "data": data,
@@ -146,17 +139,13 @@ class DatabaseObserver(Observer):
 class AdminNotificationObserver(Observer):
     """Notifies admins of important events"""
 
-    def update(self, event_type: str, data: Dict[str, Any]) -> None:
+    def update(self, event_type: str, data: dict[str, Any]) -> None:
         if event_type == "user_registered":
-            print(
-                f"  [ADMIN] New user registered: {data['name']}"
-            )
+            print(f"  [ADMIN] New user registered: {data['name']}")
 
         if event_type == "user_made_purchase":
             if data["amount"] > 100:
-                print(
-                    f"  [ADMIN] High-value purchase alert: ${data['amount']:.2f}"
-                )
+                print(f"  [ADMIN] High-value purchase alert: ${data['amount']:.2f}")
 
 
 def main():

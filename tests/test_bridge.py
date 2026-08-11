@@ -1,13 +1,13 @@
 """Tests for the Bridge pattern."""
 
 from design_patterns.structural.bridge import (
+    TV,
     AdvancedRemoteControl,
     Circle,
     Radio,
     RasterRenderer,
     RemoteControl,
     Square,
-    TV,
     VectorRenderer,
 )
 

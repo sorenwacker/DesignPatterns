@@ -1,7 +1,6 @@
 """Tests for the Command pattern."""
 
 from design_patterns.behavioral.command import (
-    Command,
     LightOffCommand,
     LightOnCommand,
     RemoteControl,

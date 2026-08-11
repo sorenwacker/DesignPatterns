@@ -1,9 +1,9 @@
 """Composite Pattern Example
 
-This module demonstrates the Composite design pattern in Python 
-using a base class `Shape`, along with concrete implementations 
-`Circle` and `Rectangle`. The `CompositeShape` class allows 
-for grouping of multiple shapes, enabling a unified interface 
+This module demonstrates the Composite design pattern in Python
+using a base class `Shape`, along with concrete implementations
+`Circle` and `Rectangle`. The `CompositeShape` class allows
+for grouping of multiple shapes, enabling a unified interface
 to draw them collectively.
 
 Example:
@@ -13,10 +13,13 @@ Example:
     composite = CompositeShape()
     composite.add(circle)
     composite.add(rectangle)
-    print(composite.draw())  # Output: Composite Shape: Drawing a circle., Drawing a rectangle.
+    print(
+        composite.draw()
+    )  # Output: Composite Shape: Drawing a circle., Drawing a rectangle.
     ```
 
 """
+
 
 class Shape:
     """Base class for all shapes."""
@@ -66,4 +69,3 @@ class CompositeShape(Shape):
             str: A string representation of all drawn shapes.
         """
         return "Composite Shape: " + ", ".join(shape.draw() for shape in self.shapes)
-

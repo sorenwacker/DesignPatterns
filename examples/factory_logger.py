@@ -7,7 +7,6 @@ based on configuration, without coupling the client code to specific logger impl
 
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import List
 
 
 class Logger(ABC):
@@ -31,7 +30,7 @@ class FileLogger(Logger):
 
     def __init__(self, filename: str = "app.log"):
         self.filename = filename
-        self.messages: List[str] = []
+        self.messages: list[str] = []
 
     def log(self, message: str) -> None:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -44,7 +43,7 @@ class DatabaseLogger(Logger):
     """Logs messages to a database (simulated)"""
 
     def __init__(self):
-        self.logs: List[tuple] = []
+        self.logs: list[tuple] = []
 
     def log(self, message: str) -> None:
         timestamp = datetime.now()
@@ -72,13 +71,12 @@ class LoggerFactory:
         """
         if logger_type == "console":
             return ConsoleLogger()
-        elif logger_type == "file":
+        if logger_type == "file":
             filename = kwargs.get("filename", "app.log")
             return FileLogger(filename)
-        elif logger_type == "database":
+        if logger_type == "database":
             return DatabaseLogger()
-        else:
-            raise ValueError(f"Unknown logger type: {logger_type}")
+        raise ValueError(f"Unknown logger type: {logger_type}")
 
 
 def main():

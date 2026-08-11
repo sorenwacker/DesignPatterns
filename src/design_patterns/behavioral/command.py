@@ -1,12 +1,12 @@
 """
 Command Pattern Module
 
-This module implements the Command design pattern, which encapsulates 
-a request as an object, thereby allowing for parameterization of clients 
-with queues, requests, and operations. 
+This module implements the Command design pattern, which encapsulates
+a request as an object, thereby allowing for parameterization of clients
+with queues, requests, and operations.
 
 Example:
-    To use the command pattern, create command objects and pass them 
+    To use the command pattern, create command objects and pass them
     to a remote control. Then execute the commands:
 
     ```
@@ -21,15 +21,12 @@ Example:
     ```
 """
 
-from typing import List
-
 
 class Command:
     """Base class for encapsulating a command."""
-    
+
     def execute(self) -> None:
         """Execute the command."""
-        pass
 
 
 class LightOnCommand(Command):
@@ -53,7 +50,7 @@ class RemoteControl:
 
     def __init__(self) -> None:
         """Initializes the remote control with an empty command list."""
-        self.commands: List[Command] = []
+        self.commands: list[Command] = []
 
     def add_command(self, command: Command) -> None:
         """

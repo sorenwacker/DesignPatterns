@@ -7,14 +7,18 @@ either handle a request or pass it to the next handler in the chain.
 
 Example:
     Creating a chain of handlers and testing it:
-    
+
     ```
     # Creating the chain of responsibility
     handler_chain = ApprovalRequestHandler(EscalationRequestHandler())
 
     # Testing the chain with different requests
-    print(handler_chain.handle("ApprovalRequest"))  # Output: ApprovalRequestHandler handled ApprovalRequest
-    print(handler_chain.handle("EscalationRequest"))  # Output: EscalationRequestHandler handled EscalationRequest
+    print(
+        handler_chain.handle("ApprovalRequest")
+    )  # Output: ApprovalRequestHandler handled ApprovalRequest
+    print(
+        handler_chain.handle("EscalationRequest")
+    )  # Output: EscalationRequestHandler handled EscalationRequest
     print(handler_chain.handle("FeedbackRequest"))  # Output: No handler for FeedbackRequest
     ```
 
@@ -35,7 +39,7 @@ class RequestHandler:
     specific requests or pass them to the next handler in the chain.
     """
 
-    def __init__(self, successor: Optional['RequestHandler'] = None) -> None:
+    def __init__(self, successor: Optional["RequestHandler"] = None) -> None:
         """Initializes the handler with an optional successor.
 
         Args:
@@ -95,5 +99,6 @@ class EscalationRequestHandler(RequestHandler):
         if request == "EscalationRequest":
             return "EscalationRequestHandler handled EscalationRequest"
         return super().handle(request)
+
 
 # The example usage for testing the chain of handlers is found in the module docstring.

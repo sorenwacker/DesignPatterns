@@ -1,11 +1,12 @@
 """Composition Pattern Example
 
-This module demonstrates the Composition design pattern in Python 
-with a `Car` class composed of `Engine` and `Wheel` classes. 
-The `Car` class encapsulates the functionality of its components, 
-showcasing how objects can be composed to build more complex 
+This module demonstrates the Composition design pattern in Python
+with a `Car` class composed of `Engine` and `Wheel` classes.
+The `Car` class encapsulates the functionality of its components,
+showcasing how objects can be composed to build more complex
 structures.
 """
+
 
 class Engine:
     """Represents a car engine."""
@@ -45,9 +46,15 @@ class Car:
         Returns:
             str: A message indicating the car is driving.
         """
-        return self.engine.start() + " " + " ".join(wheel.rotate() for wheel in self.wheels)
+        return (
+            self.engine.start()
+            + " "
+            + " ".join(wheel.rotate() for wheel in self.wheels)
+        )
 
 
 if __name__ == "__main__":
     car = Car()
-    print(car.drive())  # Output: Engine started. Wheel is rotating. Wheel is rotating. Wheel is rotating. Wheel is rotating.
+    print(
+        car.drive()
+    )  # Output: Engine started. Wheel is rotating. Wheel is rotating. Wheel is rotating. Wheel is rotating.

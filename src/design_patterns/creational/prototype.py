@@ -94,9 +94,11 @@ class Document(Prototype):
         Returns:
             A string describing the document.
         """
-        return (f"Document: {self.title}, "
-                f"Font: {self.font} {self.font_size}pt, "
-                f"Sections: {len(self.sections)}")
+        return (
+            f"Document: {self.title}, "
+            f"Font: {self.font} {self.font_size}pt, "
+            f"Sections: {len(self.sections)}"
+        )
 
 
 class Shape(Prototype):
@@ -133,7 +135,9 @@ class Shape(Prototype):
         Returns:
             String representation.
         """
-        return f"{self.__class__.__name__}(x={self.x}, y={self.y}, color='{self.color}')"
+        return (
+            f"{self.__class__.__name__}(x={self.x}, y={self.y}, color='{self.color}')"
+        )
 
 
 class Circle(Shape):
@@ -183,8 +187,10 @@ class Rectangle(Shape):
         Returns:
             String representation.
         """
-        return (f"Rectangle(x={self.x}, y={self.y}, color='{self.color}', "
-                f"width={self.width}, height={self.height})")
+        return (
+            f"Rectangle(x={self.x}, y={self.y}, color='{self.color}', "
+            f"width={self.width}, height={self.height})"
+        )
 
 
 class PrototypeRegistry:

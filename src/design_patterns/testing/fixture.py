@@ -11,9 +11,10 @@ These patterns help reduce test code duplication, improve readability, and ensur
 consistent test data across a test suite.
 """
 
+from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from typing import Any, Generator
+from typing import Any
 
 
 @dataclass

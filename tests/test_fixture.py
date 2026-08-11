@@ -1,13 +1,14 @@
 """Tests for the Fixture pattern."""
 
 import pytest
+
 from design_patterns.testing.fixture import (
     FixtureContext,
-    database_fixture,
-    User,
-    UserFixtures,
     Order,
     OrderBuilder,
+    User,
+    UserFixtures,
+    database_fixture,
 )
 
 

@@ -176,10 +176,7 @@ class GameState:
             Memento with current game state.
         """
         return GameMemento(
-            level=self.level,
-            score=self.score,
-            lives=self.lives,
-            position=self.position
+            level=self.level, score=self.score, lives=self.lives, position=self.position
         )
 
     def load_checkpoint(self, memento: GameMemento) -> None:
@@ -199,11 +196,7 @@ class GameMemento:
     """Memento for game state."""
 
     def __init__(
-        self,
-        level: int,
-        score: int,
-        lives: int,
-        position: tuple[int, int]
+        self, level: int, score: int, lives: int, position: tuple[int, int]
     ) -> None:
         """Initialize game memento.
 
@@ -217,7 +210,7 @@ class GameMemento:
             "level": level,
             "score": score,
             "lives": lives,
-            "position": position
+            "position": position,
         }
 
     def get_state(self) -> dict[str, Any]:
@@ -285,7 +278,7 @@ class Configuration:
             "theme": "light",
             "language": "en",
             "auto_save": True,
-            "font_size": 12
+            "font_size": 12,
         }
 
     def set(self, key: str, value: Any) -> None:

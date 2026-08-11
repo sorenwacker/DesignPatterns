@@ -7,25 +7,25 @@ where multiple layers of functionality can be added to request processing.
 
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any
 
 
 class Request:
     """HTTP Request object"""
 
-    def __init__(self, method: str, path: str, headers: Dict[str, str] = None):
+    def __init__(self, method: str, path: str, headers: dict[str, str] = None):
         self.method = method
         self.path = path
         self.headers = headers or {}
         self.user: str | None = None
         self.start_time: datetime | None = None
-        self.metadata: Dict[str, Any] = {}
+        self.metadata: dict[str, Any] = {}
 
 
 class Response:
     """HTTP Response object"""
 
-    def __init__(self, status_code: int, body: str, headers: Dict[str, str] = None):
+    def __init__(self, status_code: int, body: str, headers: dict[str, str] = None):
         self.status_code = status_code
         self.body = body
         self.headers = headers or {}
@@ -37,7 +37,6 @@ class RequestHandler(ABC):
     @abstractmethod
     def handle(self, request: Request) -> Response:
         """Handle the request and return a response"""
-        pass
 
 
 class BaseRequestHandler(RequestHandler):
@@ -50,14 +49,12 @@ class BaseRequestHandler(RequestHandler):
         if request.path == "/api/users":
             body = '{"users": ["Alice", "Bob", "Charlie"]}'
             return Response(200, body)
-        elif request.path == "/api/profile":
+        if request.path == "/api/profile":
             if request.user:
                 body = f'{{"user": "{request.user}", "email": "{request.user}@example.com"}}'
                 return Response(200, body)
-            else:
-                return Response(401, '{"error": "Unauthorized"}')
-        else:
-            return Response(404, '{"error": "Not Found"}')
+            return Response(401, '{"error": "Unauthorized"}')
+        return Response(404, '{"error": "Not Found"}')
 
 
 class RequestHandlerDecorator(RequestHandler):
@@ -90,7 +87,7 @@ class AuthenticationMiddleware(RequestHandlerDecorator):
     """Validates authentication tokens"""
 
     def handle(self, request: Request) -> Response:
-        print(f"\n[AUTH] Checking authentication...")
+        print("\n[AUTH] Checking authentication...")
 
         auth_header = request.headers.get("Authorization")
 
@@ -119,10 +116,10 @@ class RateLimitMiddleware(RequestHandlerDecorator):
     def __init__(self, handler: RequestHandler, max_requests: int = 10):
         super().__init__(handler)
         self.max_requests = max_requests
-        self.request_counts: Dict[str, int] = {}
+        self.request_counts: dict[str, int] = {}
 
     def handle(self, request: Request) -> Response:
-        print(f"\n[RATE LIMIT] Checking rate limit...")
+        print("\n[RATE LIMIT] Checking rate limit...")
 
         # Use IP address or user for rate limiting
         identifier = request.headers.get("X-Forwarded-For", "127.0.0.1")
@@ -162,7 +159,7 @@ class CorsMiddleware(RequestHandlerDecorator):
     """Adds CORS headers to responses"""
 
     def handle(self, request: Request) -> Response:
-        print(f"\n[CORS] Adding CORS headers...")
+        print("\n[CORS] Adding CORS headers...")
 
         response = self._handler.handle(request)
 
@@ -171,7 +168,7 @@ class CorsMiddleware(RequestHandlerDecorator):
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE"
         response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
 
-        print(f"[CORS] CORS headers added")
+        print("[CORS] CORS headers added")
 
         return response
 
@@ -225,7 +222,9 @@ def main():
 
     # Make unauthenticated request
     print("\n\n>> Request 2: Unauthenticated user accessing profile")
-    request4 = Request("GET", "/api/profile", headers={"X-Forwarded-For": "192.168.1.2"})
+    request4 = Request(
+        "GET", "/api/profile", headers={"X-Forwarded-For": "192.168.1.2"}
+    )
     response4 = handler.handle(request4)
     print(f"\nFinal Response: {response4.status_code}")
     print(f"Body: {response4.body}")

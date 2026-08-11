@@ -1,6 +1,11 @@
 """Tests for the Composite pattern."""
 
-from design_patterns.structural.composite import Circle, CompositeShape, Rectangle, Shape
+from design_patterns.structural.composite import (
+    Circle,
+    CompositeShape,
+    Rectangle,
+    Shape,
+)
 
 
 def test_circle_draw():
@@ -33,7 +38,9 @@ def test_composite_shape_multiple_elements():
     composite = CompositeShape()
     composite.add(Circle())
     composite.add(Rectangle())
-    assert composite.draw() == "Composite Shape: Drawing a circle., Drawing a rectangle."
+    assert (
+        composite.draw() == "Composite Shape: Drawing a circle., Drawing a rectangle."
+    )
 
 
 def test_composite_shape_nested():

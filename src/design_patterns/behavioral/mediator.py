@@ -38,7 +38,6 @@ class Mediator(ABC):
             message: Message to send.
             sender: Colleague sending the message.
         """
-        pass
 
 
 class Colleague(ABC):
@@ -59,7 +58,6 @@ class Colleague(ABC):
         Args:
             message: Message received.
         """
-        pass
 
     @abstractmethod
     def send(self, message: str) -> None:
@@ -68,7 +66,6 @@ class Colleague(ABC):
         Args:
             message: Message to send.
         """
-        pass
 
 
 class ChatRoom(Mediator):

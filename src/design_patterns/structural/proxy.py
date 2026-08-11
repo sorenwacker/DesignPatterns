@@ -22,7 +22,6 @@ Example:
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Optional
 
 
 class Image(ABC):
@@ -35,7 +34,6 @@ class Image(ABC):
         Returns:
             Display message.
         """
-        pass
 
     @abstractmethod
     def get_filename(self) -> str:
@@ -44,7 +42,6 @@ class Image(ABC):
         Returns:
             Filename string.
         """
-        pass
 
 
 class RealImage(Image):
@@ -61,7 +58,6 @@ class RealImage(Image):
 
     def _load_from_disk(self) -> None:
         """Simulate expensive loading operation."""
-        pass
 
     def display(self) -> str:
         """Display the image.
@@ -90,7 +86,7 @@ class ImageProxy(Image):
             filename: Image filename.
         """
         self.filename = filename
-        self._real_image: Optional[RealImage] = None
+        self._real_image: RealImage | None = None
 
     def display(self) -> str:
         """Display image, loading it if necessary.
@@ -132,7 +128,6 @@ class Internet(ABC):
         Returns:
             Connection result.
         """
-        pass
 
 
 class RealInternet(Internet):
@@ -195,7 +190,6 @@ class Database(ABC):
         Returns:
             Query result.
         """
-        pass
 
 
 class RealDatabase(Database):
@@ -260,7 +254,6 @@ class Document(ABC):
         Returns:
             Document content.
         """
-        pass
 
     @abstractmethod
     def write(self, content: str) -> str:
@@ -272,7 +265,6 @@ class Document(ABC):
         Returns:
             Write result.
         """
-        pass
 
 
 class RealDocument(Document):
