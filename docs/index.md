@@ -1,6 +1,6 @@
 # Design Patterns in Python
 
-Python implementation of the 23 Gang of Four design patterns with type hints and comprehensive examples.
+Python implementations of the Gang of Four design patterns, along with testing and gate patterns, with type hints and examples.
 
 ## Getting Started
 
@@ -9,6 +9,8 @@ Explore patterns by category using the sidebar navigation:
 - **Creational** (5) - Object creation mechanisms
 - **Behavioral** (11) - Object interaction and responsibility
 - **Structural** (7) - Object composition and relationships
+- **Testing** (1) - Test setup and test data construction
+- **Gates** (7) - Automated enforcement of structural rules
 
 ## Quick Links
 

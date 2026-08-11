@@ -42,3 +42,15 @@
 | Pattern | Purpose | Key Benefit |
 |---------|---------|-------------|
 | **Fixture** | Provide fixed baseline state for tests | Reusable test setup and consistent test data |
+
+## Gate Patterns
+
+| Pattern | Purpose | Key Benefit |
+|---------|---------|-------------|
+| **Absence** | Assert a withdrawn name stays withdrawn | Carries the removal reason forward |
+| **Population** | Assert only one implementation of a kind exists | Detects duplicates by shape, not by name |
+| **Contract** | Assert a substitute matches the real collaborator | Catches signature and asynchrony drift |
+| **Grandfathered Debt** | Apply a limit forward while tolerating existing violations | Ratchets debt downward without a retrofit |
+| **Boundary** | Assert a layer does not know about another | Enforces layering, including vocabulary |
+| **Live Contract** | Assert beliefs about an external system are true of it | Detects silent acceptance and discard |
+| **Read-After-Write** | Confirm a write landed by reading it back | Separates a refused write from a discarded one |

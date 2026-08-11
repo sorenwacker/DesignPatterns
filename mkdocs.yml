@@ -36,6 +36,15 @@ nav:
           - Bridge: patterns/structural/bridge.md
       - Testing:
           - Fixture: patterns/testing/fixture.md
+      - Gates:
+          - Overview: patterns/gates/index.md
+          - Absence: patterns/gates/absence.md
+          - Population: patterns/gates/population.md
+          - Contract: patterns/gates/contract.md
+          - Grandfathered Debt: patterns/gates/grandfathered_debt.md
+          - Boundary: patterns/gates/boundary.md
+          - Live Contract: patterns/gates/live_contract.md
+          - Read-After-Write: patterns/gates/read_after_write.md
   - Reference:
       - Pattern Selection Guide: pattern_guide.md
       - Pattern Comparison: pattern_comparison.md
