@@ -1,7 +1,8 @@
 class Expression:
     """Base class for interpreting expressions in a given context."""
 
-    def interpret(self, context: str) -> bool:
+    # `context` is part of the Expression interface; the base only raises.
+    def interpret(self, context: str) -> bool:  # noqa: ARG002
         """
         Interpret the given context.
 

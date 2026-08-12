@@ -28,7 +28,16 @@ dev = [
   "mkdocs-autorefs>=1.2.0,<2",
   "setuptools-scm>=8.1.0,<9",
   "mypy>=1.0.0,<2",
+  "ruff==0.6.9",  # pinned to the pre-commit rev so both agree
+  "vulture>=2.13,<3",
 ]
+
+[tool.vulture]
+paths = ["src", "tests", "examples"]
+# 60 is the level at which vulture reports unused functions, methods, and
+# attributes. Above it only unused imports are caught, which ruff already does,
+# so a higher threshold would make this gate decorative.
+min_confidence = 60
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
@@ -76,7 +85,7 @@ line-length = 88  # how long you want lines to be, 88 is black's default
 [tool.ruff.format]
 docstring-code-format = true  # code snippets in docstrings will be formatted
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.lint]

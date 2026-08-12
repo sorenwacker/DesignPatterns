@@ -1,53 +1,70 @@
-See the [Scientific Python Developer Guide][spc-dev-intro] for a detailed
-description of best practices for developing scientific packages.
+See the [Scientific Python Developer Guide][spc-dev-intro] for a detailed description of best practices for developing scientific packages.
 
 [spc-dev-intro]: https://learn.scientific-python.org/development/
 
-# Setting up a development environment manually
+# Setting up a development environment
 
-You can set up a development environment by running:
-
-```zsh
-python3 -m venv venv          # create a virtualenv called venv
-source ./venv/bin/activate   # now `python` points to the virtualenv python
-pip install -v -e ".[dev]"    # -v for verbose, -e for editable, [dev] for dev dependencies
-```
-
-# Post setup
-
-You should prepare pre-commit, which will help you by checking that commits pass
-required checks:
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management and virtual environments.
 
 ```bash
-pip install pre-commit # or brew install pre-commit on macOS
-pre-commit install # this will install a pre-commit hook into the git repo
+uv sync --extra dev
 ```
 
-You can also/alternatively run `pre-commit run` (changes only) or
-`pre-commit run --all-files` to check even without installing the hook.
+Then install the pre-commit hook so the gates run before each commit:
+
+```bash
+uv run pre-commit install
+```
+
+# Quality gates
+
+Every rule this project adopts has a gate that enforces it. A rule that exists only as prose erodes silently, so each one below fails the build rather than relying on review.
+
+| Gate | Enforces | Runs in |
+|---|---|---|
+| ruff check | Lint rules configured in `pyproject.toml` | pre-commit, CI |
+| ruff format | Consistent formatting | pre-commit, CI |
+| mypy | Type annotations on `src/` | pre-commit, CI |
+| vulture | No unused functions, methods, or attributes | pre-commit, CI |
+| pytest | Every pattern has passing tests | CI |
+| Module length | No module exceeds 1000 lines | pytest (`tests/test_module_length_gate.py`) |
+| mkdocs --strict | Documentation builds with no warnings | CI |
+
+Vulture runs at 60% confidence, the level at which it reports unused functions, methods, and attributes. A higher threshold catches only unused imports, which ruff already covers, and would make the gate decorative.
+
+Run them all locally with:
+
+```bash
+make check
+```
+
+Or individually: `make lint`, `make typecheck`, `make deadcode`, `make test`, `make docs-build`.
+
+## The module length gate
+
+`tests/test_module_length_gate.py` enforces the 1000-line cap using the `GrandfatheredLimit` class from this catalog's own gate patterns. It applies three checks: a new module over the cap fails, a module recorded as existing debt may shrink but never grow, and a recorded entry that now passes the cap must be deleted. The `GRANDFATHERED` mapping is empty today because no module exceeds the cap; add an entry only when adopting a stricter rule that existing code cannot meet at once.
 
 # Testing
 
-Use pytest to run the unit checks:
-
 ```bash
-pytest
+make test              # run the suite
+make coverage          # run with a coverage report
 ```
 
-# Coverage
+Tests use pytest. Write the test before the implementation and confirm it fails against the unfixed code first: a test that passes on broken code is worse than none.
 
-Use pytest-cov to generate coverage reports:
-
-```bash
-pytest --cov=design_patterns
-```
-
-# Pre-commit
-
-This project uses pre-commit for all style checking. Install pre-commit and run:
+# Documentation
 
 ```bash
-pre-commit run -a
+make docs              # serve locally with hot reload
+make docs-build        # build with --strict, as CI does
 ```
 
-to check all files.
+Documentation lives under `docs/` and is built with mkdocs. Every pattern page follows the same structure: Overview, Usage Guidelines, Implementation, Trade-offs, Real-World Examples, Related Patterns, and an API Reference block that pulls docstrings from the module.
+
+# Adding a pattern
+
+1. Write the documentation page under `docs/patterns/<category>/` and add it to the `nav` in `mkdocs.yml` and the table in `docs/overview.md`.
+2. Write the tests under `tests/` and confirm they fail.
+3. Implement the module under `src/design_patterns/<category>/`.
+4. Run `make check`.

@@ -18,7 +18,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.6.8"
+    rev: "v0.6.9"
     hooks:
       # first, lint + autofix
       - id: ruff
@@ -26,3 +26,17 @@ repos:
         args: ["--fix", "--show-fixes"]
       # then, format
       - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: "v1.11.2"
+    hooks:
+      - id: mypy
+        files: ^src/
+        args: ["--config-file=pyproject.toml"]
+
+  # Dead code. The threshold lives in pyproject.toml; see the comment there
+  # for why it is set where it is.
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: "v2.13"
+    hooks:
+      - id: vulture
