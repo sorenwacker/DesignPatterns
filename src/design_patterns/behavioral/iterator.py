@@ -211,7 +211,6 @@ class InOrderIterator(Iterator):
             root: Root of the tree.
         """
         self._stack: list[TreeNode] = []
-        self._current = root
         self._push_left_nodes(root)
 
     def _push_left_nodes(self, node: TreeNode | None) -> None:

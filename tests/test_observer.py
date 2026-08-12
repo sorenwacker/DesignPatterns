@@ -176,3 +176,11 @@ def test_newsletter_empty():
     newsletter = Newsletter("Empty News")
     assert newsletter.get_latest_article() == ""
     assert newsletter.get_article_count() == 0
+
+
+def test_weather_station_get_pressure():
+    """Test that the station reports the pressure it was given."""
+    station = WeatherStation()
+    station.set_measurements(25.0, 60.0, 1013.25)
+
+    assert station.get_pressure() == 1013.25

@@ -179,3 +179,14 @@ def test_shape_repr():
     assert "Rectangle" in repr(rect)
     assert "width=100" in repr(rect)
     assert "height=50" in repr(rect)
+
+
+def test_document_get_info():
+    """Test that a document describes its own title, font, and size."""
+    document = Document("Report", "Arial", 12)
+
+    info = document.get_info()
+
+    assert "Report" in info
+    assert "Arial" in info
+    assert "12" in info

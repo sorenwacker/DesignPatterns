@@ -86,3 +86,10 @@ def test_configuration_manager_initialization():
     assert config2.get("key1") == "value1"
     assert config1._initialized is True
     assert config2._initialized is True
+
+
+def test_database_connection_exposes_its_connection_string():
+    """Test that the singleton connection reports its connection string."""
+    connection = DatabaseConnection()
+
+    assert connection.connection_string == "Connected to database"
