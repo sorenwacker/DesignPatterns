@@ -69,11 +69,13 @@ testpaths = [
 
 [tool.coverage]
 run.source = ["design_patterns"]
-port.exclude_lines = [
+report.exclude_lines = [
   'pragma: no cover',
   '\.\.\.',
   'if typing.TYPE_CHECKING:',
 ]
+# Measured 97% on 260812. Raise this when coverage improves; never lower it.
+report.fail_under = 97
 
 
 

@@ -6,7 +6,7 @@ help:
 	@echo "check       run every quality gate"
 	@echo "lint        ruff check"
 	@echo "format      ruff format"
-	@echo "typecheck   mypy on src"
+	@echo "typecheck   mypy on src and examples"
 	@echo "deadcode    vulture"
 	@echo "test        pytest"
 	@echo "coverage    pytest with a coverage report"
@@ -19,7 +19,7 @@ install:
 hooks:
 	uv run pre-commit install
 
-check: lint typecheck deadcode test docs-build
+check: lint typecheck deadcode coverage docs-build
 
 lint:
 	uv run ruff check .
@@ -30,7 +30,7 @@ format:
 	uv run ruff check --fix .
 
 typecheck:
-	uv run mypy src
+	uv run mypy src examples
 
 deadcode:
 	uv run vulture

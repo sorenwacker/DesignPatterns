@@ -31,7 +31,7 @@ repos:
     rev: "v1.20.2"
     hooks:
       - id: mypy
-        files: ^src/
+        files: ^(src|examples)/
         args: ["--config-file=pyproject.toml"]
 
   # Dead code. The threshold lives in pyproject.toml; see the comment there

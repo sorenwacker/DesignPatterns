@@ -24,9 +24,10 @@ Every rule this project adopts has a gate that enforces it. A rule that exists o
 |---|---|---|
 | ruff check | Lint rules configured in `pyproject.toml` | pre-commit, CI |
 | ruff format | Consistent formatting | pre-commit, CI |
-| mypy | Type annotations on `src/` | pre-commit, CI |
+| mypy | Type annotations on `src/` and `examples/` | pre-commit, CI |
 | vulture | No unused functions, methods, or attributes | pre-commit, CI |
 | pytest | Every pattern has passing tests | CI |
+| Coverage | Line coverage stays at or above 97% | CI, `make check` |
 | Module length | No module exceeds 1000 lines | pytest (`tests/test_module_length_gate.py`) |
 | mkdocs --strict | Documentation builds with no warnings | CI |
 
@@ -38,7 +39,11 @@ Run them all locally with:
 make check
 ```
 
-Or individually: `make lint`, `make typecheck`, `make deadcode`, `make test`, `make docs-build`.
+Or individually: `make lint`, `make typecheck`, `make deadcode`, `make coverage`, `make docs-build`. Use `make test` for a fast run without the coverage threshold.
+
+## The coverage threshold
+
+`fail_under` in `pyproject.toml` records the coverage measured on the day it was adopted (97% on 260812). It is a ratchet: raise it when coverage improves, never lower it to make a change pass.
 
 ## The module length gate
 
