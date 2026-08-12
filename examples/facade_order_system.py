@@ -6,6 +6,7 @@ system that involves multiple subsystems (inventory, payment, shipping, notifica
 """
 
 from datetime import datetime
+from typing import Any
 
 # ============================================================================
 # COMPLEX SUBSYSTEMS
@@ -16,7 +17,7 @@ class InventoryService:
     """Manages product inventory"""
 
     def __init__(self):
-        self.inventory = {
+        self.inventory: dict[str, dict[str, Any]] = {
             "LAPTOP-001": {"name": "Laptop", "quantity": 10, "price": 999.99},
             "MOUSE-002": {"name": "Mouse", "quantity": 50, "price": 29.99},
             "KEYBOARD-003": {"name": "Keyboard", "quantity": 30, "price": 79.99},
@@ -29,7 +30,7 @@ class InventoryService:
             print(f"  [Inventory] Product {product_id} not found")
             return False
 
-        available = self.inventory[product_id]["quantity"] >= quantity
+        available = bool(self.inventory[product_id]["quantity"] >= quantity)
         if available:
             print(
                 f"  [Inventory] ✓ Available: "
@@ -53,7 +54,7 @@ class InventoryService:
 
     def get_price(self, product_id: str) -> float:
         """Get product price"""
-        return self.inventory.get(product_id, {}).get("price", 0.0)
+        return float(self.inventory.get(product_id, {}).get("price", 0.0))
 
 
 class PaymentService:
@@ -187,7 +188,7 @@ class OrderFacade:
 
             # Step 2: Check inventory
             print("\nStep 2: Checking Inventory")
-            total_amount = 0
+            total_amount = 0.0
             for item in items:
                 product_id = item["product_id"]
                 quantity = item["quantity"]

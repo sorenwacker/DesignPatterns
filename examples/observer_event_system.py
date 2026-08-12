@@ -112,7 +112,7 @@ class AnalyticsObserver(Observer):
 
     def get_summary(self) -> dict[str, int]:
         """Get event summary"""
-        summary = {}
+        summary: dict[str, int] = {}
         for event in self.events:
             event_type = event["type"]
             summary[event_type] = summary.get(event_type, 0) + 1

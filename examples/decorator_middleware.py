@@ -208,7 +208,7 @@ def main():
     print("=" * 70)
 
     # Build middleware stack: Timing -> Logging -> Auth -> Rate Limit -> Handler
-    handler = BaseRequestHandler()
+    handler: RequestHandler = BaseRequestHandler()
     handler = RateLimitMiddleware(handler, max_requests=5)
     handler = AuthenticationMiddleware(handler)
     handler = LoggingMiddleware(handler)
