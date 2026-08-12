@@ -148,6 +148,7 @@ class ConfigurationManager:
 
     _instance: ConfigurationManager | None = None
     _lock: Lock = Lock()
+    _initialized: bool
 
     def __new__(cls) -> ConfigurationManager:
         """Create or return the singleton instance.
