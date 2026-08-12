@@ -13,7 +13,7 @@ from typing import Any
 class Request:
     """HTTP Request object"""
 
-    def __init__(self, method: str, path: str, headers: dict[str, str] = None):
+    def __init__(self, method: str, path: str, headers: dict[str, str] | None = None):
         self.method = method
         self.path = path
         self.headers = headers or {}
@@ -25,7 +25,9 @@ class Request:
 class Response:
     """HTTP Response object"""
 
-    def __init__(self, status_code: int, body: str, headers: dict[str, str] = None):
+    def __init__(
+        self, status_code: int, body: str, headers: dict[str, str] | None = None
+    ):
         self.status_code = status_code
         self.body = body
         self.headers = headers or {}
@@ -51,7 +53,10 @@ class BaseRequestHandler(RequestHandler):
             return Response(200, body)
         if request.path == "/api/profile":
             if request.user:
-                body = f'{{"user": "{request.user}", "email": "{request.user}@example.com"}}'
+                body = (
+                    f'{{"user": "{request.user}", '
+                    f'"email": "{request.user}@example.com"}}'
+                )
                 return Response(200, body)
             return Response(401, '{"error": "Unauthorized"}')
         return Response(404, '{"error": "Not Found"}')
@@ -77,7 +82,8 @@ class LoggingMiddleware(RequestHandlerDecorator):
         response = self._handler.handle(request)
 
         print(
-            f"[LOGGING] {timestamp} - Response {response.status_code} ({len(response.body)} bytes)"
+            f"[LOGGING] {timestamp} - Response {response.status_code} "
+            f"({len(response.body)} bytes)"
         )
 
         return response
@@ -131,7 +137,8 @@ class RateLimitMiddleware(RequestHandlerDecorator):
 
         self.request_counts[identifier] = current_count + 1
         print(
-            f"[RATE LIMIT] Request {current_count + 1}/{self.max_requests} for {identifier}"
+            f"[RATE LIMIT] Request {current_count + 1}/{self.max_requests} "
+            f"for {identifier}"
         )
 
         return self._handler.handle(request)
@@ -193,7 +200,7 @@ def main():
     print("=" * 70)
     logged_handler = LoggingMiddleware(BaseRequestHandler())
     request2 = Request("GET", "/api/users")
-    response2 = logged_handler.handle(request2)
+    logged_handler.handle(request2)
 
     # Scenario 3: Stack multiple middleware
     print("\n\n" + "=" * 70)

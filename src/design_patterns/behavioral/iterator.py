@@ -111,7 +111,8 @@ class BookIterator(Iterator):
             StopIteration: When no more books exist.
         """
         if not self.has_next():
-            raise StopIteration("No more books")
+            msg = "No more books"
+            raise StopIteration(msg)
 
         book = self._books[self._index]
         self._index += 1
@@ -241,7 +242,8 @@ class InOrderIterator(Iterator):
             StopIteration: When no more nodes exist.
         """
         if not self.has_next():
-            raise StopIteration("No more nodes")
+            msg = "No more nodes"
+            raise StopIteration(msg)
 
         node = self._stack.pop()
         value = node.value

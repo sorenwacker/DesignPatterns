@@ -161,7 +161,10 @@ class Circle(Shape):
         Returns:
             String representation.
         """
-        return f"Circle(x={self.x}, y={self.y}, color='{self.color}', radius={self.radius})"
+        return (
+            f"Circle(x={self.x}, y={self.y}, "
+            f"color='{self.color}', radius={self.radius})"
+        )
 
 
 class Rectangle(Shape):
@@ -235,7 +238,8 @@ class PrototypeRegistry:
             KeyError: If the prototype name is not registered.
         """
         if name not in self._prototypes:
-            raise KeyError(f"Prototype '{name}' not found in registry")
+            msg = f"Prototype '{name}' not found in registry"
+            raise KeyError(msg)
         return self._prototypes[name].clone()
 
     def deep_clone(self, name: str) -> Prototype:
@@ -251,5 +255,6 @@ class PrototypeRegistry:
             KeyError: If the prototype name is not registered.
         """
         if name not in self._prototypes:
-            raise KeyError(f"Prototype '{name}' not found in registry")
+            msg = f"Prototype '{name}' not found in registry"
+            raise KeyError(msg)
         return self._prototypes[name].deep_clone()

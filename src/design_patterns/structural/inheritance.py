@@ -39,7 +39,8 @@ class Animal:
         Raises:
             NotImplementedError: Subclasses must implement this method.
         """
-        raise NotImplementedError("Subclasses must implement this method.")
+        msg = "Subclasses must implement this method."
+        raise NotImplementedError(msg)
 
 
 class Dog(Animal):

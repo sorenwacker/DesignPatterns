@@ -11,6 +11,8 @@ from design_patterns.testing.fixture import (
     database_fixture,
 )
 
+FAILURE_MESSAGE = "Test exception"
+
 
 class TestFixtureContextClass:
     """Tests for FixtureContext dataclass."""
@@ -55,13 +57,19 @@ class TestDatabaseFixture:
 
     def test_teardown_on_exception(self):
         """Test that fixture cleans up even when exception occurs."""
-        ctx_ref = None
-        with pytest.raises(ValueError):
+        captured: list[FixtureContext] = []
+
+        def fail_inside_the_fixture() -> None:
             with database_fixture() as ctx:
-                ctx_ref = ctx
-                raise ValueError("Test exception")
-        assert ctx_ref.data["db"]["connected"] is False
-        assert ctx_ref.resources == []
+                captured.append(ctx)
+                raise ValueError(FAILURE_MESSAGE)
+
+        with pytest.raises(ValueError, match=FAILURE_MESSAGE):
+            fail_inside_the_fixture()
+
+        (ctx,) = captured
+        assert ctx.data["db"]["connected"] is False
+        assert ctx.resources == []
 
 
 class TestUser:

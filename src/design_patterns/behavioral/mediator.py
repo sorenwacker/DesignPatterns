@@ -237,7 +237,8 @@ class SmartHome(Mediator):
         """
         self.devices[device.name] = device
 
-    def send_message(self, message: str, sender: Colleague) -> None:
+    # `sender` is part of the Colleague interface; this mediator broadcasts by event.
+    def send_message(self, message: str, sender: Colleague) -> None:  # noqa: ARG002
         """Process device event.
 
         Args:
@@ -247,15 +248,13 @@ class SmartHome(Mediator):
         self.events.append(message)
 
         # Smart home logic based on events
-        if "motion detected" in message.lower():
-            # Turn on lights when motion detected
-            if "lights" in self.devices:
-                self.devices["lights"].receive("turn on")
+        # Turn on lights when motion detected
+        if "motion detected" in message.lower() and "lights" in self.devices:
+            self.devices["lights"].receive("turn on")
 
-        if "door opened" in message.lower():
-            # Activate alarm when door opened
-            if "alarm" in self.devices:
-                self.devices["alarm"].receive("activate")
+        # Activate alarm when door opened
+        if "door opened" in message.lower() and "alarm" in self.devices:
+            self.devices["alarm"].receive("activate")
 
 
 class SmartDevice(Colleague):

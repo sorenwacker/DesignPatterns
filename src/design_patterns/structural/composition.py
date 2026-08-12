@@ -55,6 +55,4 @@ class Car:
 
 if __name__ == "__main__":
     car = Car()
-    print(
-        car.drive()
-    )  # Output: Engine started. Wheel is rotating. Wheel is rotating. Wheel is rotating. Wheel is rotating.
+    print(car.drive())  # Output: Engine started, then each of the four wheels rotating.

@@ -1,17 +1,19 @@
 """
 Adapter Pattern Example
 
-This module demonstrates the Adapter Pattern, which allows incompatible interfaces to work together.
-In this example, a legacy logging system is adapted to conform to a new logging interface.
+This module demonstrates the Adapter Pattern, which allows incompatible interfaces
+to work together. In this example, a legacy logging system is adapted to conform to
+a new logging interface.
 
 Classes:
     LoggerInterface: The target interface that clients will use.
     LegacyLogger: A legacy logging system that writes logs to the console.
-    LoggerAdapter: An adapter that allows the legacy logging system to be used with the new interface.
+    LoggerAdapter: An adapter that allows the legacy logging system to be used with
+        the new interface.
 
 Usage:
-    Create an instance of `LegacyLogger` and wrap it with `LoggerAdapter`. Then use the adapter
-    to log messages using the `log_info` and `log_error` methods.
+    Create an instance of `LegacyLogger` and wrap it with `LoggerAdapter`. Then use
+    the adapter to log messages using the `log_info` and `log_error` methods.
 
 Example:
     ```

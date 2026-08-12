@@ -27,7 +27,7 @@ Example:
 from __future__ import annotations
 
 from threading import Lock
-from typing import Any
+from typing import Any, ClassVar
 
 
 class SingletonMeta(type):
@@ -37,7 +37,7 @@ class SingletonMeta(type):
     of the class exists across multiple threads.
     """
 
-    _instances: dict[type, Any] = {}
+    _instances: ClassVar[dict[type, Any]] = {}
     _lock: Lock = Lock()
 
     def __call__(cls, *args: Any, **kwargs: Any) -> Any:

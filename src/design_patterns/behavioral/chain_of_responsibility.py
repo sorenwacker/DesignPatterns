@@ -19,7 +19,8 @@ Example:
     print(
         handler_chain.handle("EscalationRequest")
     )  # Output: EscalationRequestHandler handled EscalationRequest
-    print(handler_chain.handle("FeedbackRequest"))  # Output: No handler for FeedbackRequest
+    # Output: No handler for FeedbackRequest
+    print(handler_chain.handle("FeedbackRequest"))
     ```
 
 Classes:

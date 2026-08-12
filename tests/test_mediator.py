@@ -40,7 +40,7 @@ def test_chat_room_sender_not_receiver():
     """Test that sender doesn't receive their own message."""
     chatroom = ChatRoom()
     alice = User("Alice", chatroom)
-    bob = User("Bob", chatroom)
+    User("Bob", chatroom)
 
     alice.send("Test message")
 

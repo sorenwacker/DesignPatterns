@@ -89,7 +89,8 @@ class EmailNotificationObserver(Observer):
     def _send_receipt(self, data: dict[str, Any]) -> None:
         print(f"  [EMAIL] Sending receipt to {data['email']}")
         print(
-            f"          Subject: Your purchase of {data['item']} (${data['amount']:.2f})"
+            f"          Subject: Your purchase of {data['item']} "
+            f"(${data['amount']:.2f})"
         )
 
 
@@ -143,9 +144,8 @@ class AdminNotificationObserver(Observer):
         if event_type == "user_registered":
             print(f"  [ADMIN] New user registered: {data['name']}")
 
-        if event_type == "user_made_purchase":
-            if data["amount"] > 100:
-                print(f"  [ADMIN] High-value purchase alert: ${data['amount']:.2f}")
+        if event_type == "user_made_purchase" and data["amount"] > 100:
+            print(f"  [ADMIN] High-value purchase alert: ${data['amount']:.2f}")
 
 
 def main():

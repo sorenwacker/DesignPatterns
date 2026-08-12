@@ -2,7 +2,8 @@
 Factory Pattern Example: Logger System
 
 Demonstrates using the Factory pattern to create different types of loggers
-based on configuration, without coupling the client code to specific logger implementations.
+based on configuration, without coupling the client code to specific logger
+implementations.
 """
 
 from abc import ABC, abstractmethod
@@ -76,7 +77,8 @@ class LoggerFactory:
             return FileLogger(filename)
         if logger_type == "database":
             return DatabaseLogger()
-        raise ValueError(f"Unknown logger type: {logger_type}")
+        msg = f"Unknown logger type: {logger_type}"
+        raise ValueError(msg)
 
 
 def main():
@@ -114,7 +116,7 @@ def main():
     # Easy to add new logger types without modifying client code
     print("\n5. Error Handling:")
     try:
-        invalid_logger = LoggerFactory.create_logger("network")
+        LoggerFactory.create_logger("network")
     except ValueError as e:
         print(f"Error: {e}")
 

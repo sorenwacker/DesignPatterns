@@ -154,7 +154,8 @@ class ShoppingCart:
             ValueError: If no payment strategy is set.
         """
         if self._payment_strategy is None:
-            raise ValueError("Payment strategy not set")
+            msg = "Payment strategy not set"
+            raise ValueError(msg)
 
         total = self.get_total()
         if total == 0:

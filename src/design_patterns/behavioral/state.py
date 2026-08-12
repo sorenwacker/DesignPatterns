@@ -89,7 +89,8 @@ class DraftState(State):
         document.set_state(ModerationState())
         return "Document sent for moderation"
 
-    def approve(self, document: Document) -> str:
+    # `document` is part of the State interface; this state does not need it.
+    def approve(self, document: Document) -> str:  # noqa: ARG002
         """Cannot approve a draft.
 
         Args:
@@ -100,7 +101,8 @@ class DraftState(State):
         """
         return "Cannot approve a draft document"
 
-    def reject(self, document: Document) -> str:
+    # `document` is part of the State interface; this state does not need it.
+    def reject(self, document: Document) -> str:  # noqa: ARG002
         """Cannot reject a draft.
 
         Args:
@@ -123,7 +125,8 @@ class DraftState(State):
 class ModerationState(State):
     """State representing a document under moderation."""
 
-    def publish(self, document: Document) -> str:
+    # `document` is part of the State interface; this state does not need it.
+    def publish(self, document: Document) -> str:  # noqa: ARG002
         """Already in moderation.
 
         Args:
@@ -170,7 +173,8 @@ class ModerationState(State):
 class PublishedState(State):
     """State representing a published document."""
 
-    def publish(self, document: Document) -> str:
+    # `document` is part of the State interface; this state does not need it.
+    def publish(self, document: Document) -> str:  # noqa: ARG002
         """Already published.
 
         Args:
@@ -181,7 +185,8 @@ class PublishedState(State):
         """
         return "Document is already published"
 
-    def approve(self, document: Document) -> str:
+    # `document` is part of the State interface; this state does not need it.
+    def approve(self, document: Document) -> str:  # noqa: ARG002
         """Already published.
 
         Args:

@@ -1,9 +1,9 @@
 """Observer Pattern Module
 
-The Observer pattern defines a one-to-many dependency between objects so that when one
-object changes state, all its dependents are notified and updated automatically. This
-pattern is commonly used to implement distributed event handling systems and is the basis
-for the model-view-controller (MVC) architectural pattern.
+The Observer pattern defines a one-to-many dependency between objects so that when
+one object changes state, all its dependents are notified and updated automatically.
+This pattern is commonly used to implement distributed event handling systems and is
+the basis for the model-view-controller (MVC) architectural pattern.
 
 Example:
     Observing weather station data:
@@ -37,7 +37,8 @@ class Observer(ABC):
         """
 
 
-class Subject(ABC):
+# Subclasses inherit attach/detach/notify; there is no step for them to supply.
+class Subject(ABC):  # noqa: B024
     """Abstract base class for subjects being observed."""
 
     def __init__(self) -> None:

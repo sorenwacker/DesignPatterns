@@ -1,6 +1,7 @@
 """
 This module demonstrates the Factory design pattern, which is a creational pattern
-used to create objects without specifying the exact class of object that will be created.
+used to create objects without specifying the exact class of object that will be
+created.
 The Factory pattern defines an interface for creating an object, but allows subclasses
 to alter the type of objects that will be created. In this implementation, the
 AnimalFactory class creates instances of Dog or Cat based on the input type.
@@ -37,4 +38,5 @@ class AnimalFactory:
             return Dog(name)
         if animal_type == "cat":
             return Cat(name)
-        raise ValueError(f"Unknown animal type: {animal_type}")
+        msg = f"Unknown animal type: {animal_type}"
+        raise ValueError(msg)

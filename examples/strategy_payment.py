@@ -115,10 +115,12 @@ class ShoppingCart:
     def checkout(self) -> dict[str, any]:
         """Process checkout with selected payment strategy"""
         if not self.payment_strategy:
-            raise ValueError("No payment method selected")
+            msg = "No payment method selected"
+            raise ValueError(msg)
 
         if not self.items:
-            raise ValueError("Cart is empty")
+            msg = "Cart is empty"
+            raise ValueError(msg)
 
         total = self.get_total()
 

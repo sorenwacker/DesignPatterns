@@ -32,7 +32,8 @@ class InventoryService:
         available = self.inventory[product_id]["quantity"] >= quantity
         if available:
             print(
-                f"  [Inventory] ✓ Available: {self.inventory[product_id]['quantity']} in stock"
+                f"  [Inventory] ✓ Available: "
+                f"{self.inventory[product_id]['quantity']} in stock"
             )
         else:
             print("  [Inventory] ✗ Insufficient stock")
@@ -44,7 +45,8 @@ class InventoryService:
         if self.check_availability(product_id, quantity):
             self.inventory[product_id]["quantity"] -= quantity
             print(
-                f"  [Inventory] ✓ Reserved. Remaining: {self.inventory[product_id]['quantity']}"
+                f"  [Inventory] ✓ Reserved. Remaining: "
+                f"{self.inventory[product_id]['quantity']}"
             )
             return True
         return False
@@ -180,7 +182,8 @@ class OrderFacade:
             # Step 1: Validate payment information
             print("\nStep 1: Validating Payment")
             if not self.payment.validate_payment_info(payment_info):
-                raise ValueError("Invalid payment information")
+                msg = "Invalid payment information"
+                raise ValueError(msg)
 
             # Step 2: Check inventory
             print("\nStep 2: Checking Inventory")
@@ -190,9 +193,8 @@ class OrderFacade:
                 quantity = item["quantity"]
 
                 if not self.inventory.check_availability(product_id, quantity):
-                    raise ValueError(
-                        f"Product {product_id} not available in requested quantity"
-                    )
+                    msg = f"Product {product_id} not available in requested quantity"
+                    raise ValueError(msg)
 
                 price = self.inventory.get_price(product_id)
                 total_amount += price * quantity
@@ -217,7 +219,8 @@ class OrderFacade:
                 ):
                     # Rollback: refund payment
                     self.payment.refund(payment_result["transaction_id"])
-                    raise ValueError(f"Failed to reserve {item['product_id']}")
+                    msg = f"Failed to reserve {item['product_id']}"
+                    raise ValueError(msg)
 
             # Step 6: Create shipment
             print("\nStep 6: Creating Shipment")
@@ -277,7 +280,7 @@ def main():
     # Scenario 1: Successful order
     print("\n\n--- Scenario 1: Successful Order ---")
 
-    result1 = order_system.place_order(
+    order_system.place_order(
         customer_email="alice@example.com",
         items=[
             {"product_id": "LAPTOP-001", "quantity": 1, "weight": 5.0},
@@ -299,7 +302,7 @@ def main():
     # Scenario 2: Failed order (insufficient stock)
     print("\n\n--- Scenario 2: Order with Insufficient Stock ---")
 
-    result2 = order_system.place_order(
+    order_system.place_order(
         customer_email="bob@example.com",
         items=[
             {"product_id": "LAPTOP-001", "quantity": 50, "weight": 5.0}  # Too many
@@ -320,7 +323,7 @@ def main():
     # Scenario 3: Another successful order
     print("\n\n--- Scenario 3: Another Successful Order ---")
 
-    result3 = order_system.place_order(
+    order_system.place_order(
         customer_email="charlie@example.com",
         items=[{"product_id": "KEYBOARD-003", "quantity": 1, "weight": 1.5}],
         payment_info={

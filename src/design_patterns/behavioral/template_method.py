@@ -87,7 +87,8 @@ class DataMiner(ABC):
             data: File data representation.
         """
 
-    def send_report(self, analysis: dict[str, str]) -> None:
+    # A hook: subclasses may override it, and the default is deliberately empty.
+    def send_report(self, analysis: dict[str, str]) -> None:  # noqa: B027
         """Send the analysis report.
 
         This is a hook method with a default implementation.

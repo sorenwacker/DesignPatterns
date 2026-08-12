@@ -302,7 +302,10 @@ class JSONExporter(ShapeVisitor):
         Returns:
             JSON representation.
         """
-        return f'{{"type": "rectangle", "width": {rectangle.width}, "height": {rectangle.height}}}'
+        return (
+            f'{{"type": "rectangle", "width": {rectangle.width}, '
+            f'"height": {rectangle.height}}}'
+        )
 
     def visit_triangle(self, triangle: Triangle) -> str:
         """Export triangle to JSON.
@@ -313,7 +316,10 @@ class JSONExporter(ShapeVisitor):
         Returns:
             JSON representation.
         """
-        return f'{{"type": "triangle", "base": {triangle.base}, "height": {triangle.height}}}'
+        return (
+            f'{{"type": "triangle", "base": {triangle.base}, '
+            f'"height": {triangle.height}}}'
+        )
 
 
 class ShapeCollection:
