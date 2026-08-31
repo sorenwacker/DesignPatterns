@@ -157,6 +157,37 @@ Twenty pattern pages contain at least one code line that is not in the module th
 
 Added on 2026-08-31 as a Reference page. It has "Usage Guidelines", "Implementation", and "Pitfalls" but not the seven-section structure `CONTRIBUTING.md` prescribes, and no API Reference block for `design_patterns.structural.value_object`. Reference pages are not pattern pages, so this may be intended; noted for consistency.
 
+## Outcome
+
+Remediation ran on 2026-08-31, one finding per commit, in the order of the checklist. Every gate passed after each commit, and coverage rose from 97.28% to 98.51%, so the floor moved to 98%.
+
+| Finding | Outcome |
+|---|---|
+| H1 | Fixed. The `[project.scripts]` table is gone, and `tests/test_entry_points_gate.py` imports every declared script target. |
+| M1, M2 | Fixed. `build()` hands over the product and starts a fresh one; both builders have `reset()`; the director methods reset first. |
+| M3 | Fixed. `Range` refuses a zero step, counts down on a negative one, and takes its length from the built-in `range`. |
+| M4 | Fixed. `History.save` records a checkpoint and `undo` restores the most recent one, which is what the docstring and the docs page describe; the hard-coded empty memento is gone. |
+| M5 | Fixed. `strategy_payment.py` and `observer_event_system.py` import the library classes; `tests/test_examples.py` fails if any example redefines a library class. Two name collisions were renamed (`HttpHandler`, `LogWriter`). |
+| M6 | Fixed. `examples/README.md` lists the five scripts that exist with uv commands, and the same gate checks the list both ways and runs each script. |
+| M7 | Fixed. `singleton_decorator` returns a class built on `SingletonMeta`; the module docstring names the three implementations it contains. |
+| M8 | Fixed. `factory.md` shows the real `AnimalFactory` and says where its products come from. The cross-category import stays, now to an abstract `Animal`. |
+| M9 | Fixed. `Command` has a receiver (`Light`), `undo`, and string results; `RemoteControl.undo_last` walks the history. |
+| M10 | Fixed. README says 22 of 23 with Flyweight named as absent; the badge says 3.12+; the index counts six structural patterns. |
+| L1 | Fixed. Empty `TYPE_CHECKING` blocks, unreachable branches, the `trigger_event` alias, the no-op `send_report` override, the trailing comment, and the hatch version-file hook are gone. |
+| L2 | Fixed. `Animal`, `Shape`, `Expression`, and `LoggerInterface` are `ABC`s; the `__main__` blocks left the library modules; the missing docstrings and annotations were added. |
+| L3 | Fixed. `command.py` and `adapter.py` return strings; their tests no longer capture stdout. |
+| L4 | Fixed. `import math` is at module level in `visitor.py`. |
+| L5 | Fixed. `EncryptionDecorator` applies ROT13, documented as a real but weak cipher; the compression marker is a named constant. |
+| L6 | Fixed. `ProxyInternet` bans a host and its subdomains; `unbanned.com` connects. |
+| L7 | Fixed. `OrderBuilder` copies the item list on the way in and on `build()`. |
+| L8 | Fixed. `LiveContractGate` accepts the variable names it quotes in the skip reason. |
+| L9 | Mostly fixed. The pixi table, the `pixi.lock` gitattribute, and the README's direct tool invocations are gone. `.copier-answers.yml` is left as the template wrote it, since editing it by hand would be overwritten by the next `copier update`; `mkdocs.yml`'s `site_author` is unchanged. |
+| L10 | Fixed. The singleton tests reset the shared registries per test; `test_history_multiple_undos` uses one editor; the comment-only facade test is gone; the observer tests assert through `display()`. |
+| L11 | Fixed. `tests/test_examples.py` runs every example script. Coverage still measures the library only. |
+| L12 | Fixed. Doc snippets use `X | None` and `list[...]`, `iterator.md` shows the bases, and `composite.md`'s `remove()` now exists in the module. |
+| L13 | Fixed. |
+| L14 | Not changed. `docs/dataclasses.md` stays a reference page without the pattern-page template. |
+
 ## Remediation checklist
 
 Grouped by theme so each item is one atomic change with its own gate.
