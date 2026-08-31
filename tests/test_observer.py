@@ -15,7 +15,8 @@ def test_weather_station_attach_observer():
     phone = PhoneDisplay()
 
     station.attach(phone)
-    assert phone in station._observers
+    station.set_temperature(21.0)
+    assert phone.update_count == 1
 
 
 def test_weather_station_detach_observer():
@@ -25,7 +26,8 @@ def test_weather_station_detach_observer():
 
     station.attach(phone)
     station.detach(phone)
-    assert phone not in station._observers
+    station.set_temperature(21.0)
+    assert phone.update_count == 0
 
 
 def test_weather_station_notify_single_observer():
@@ -36,7 +38,7 @@ def test_weather_station_notify_single_observer():
     station.attach(phone)
     station.set_temperature(25.0)
 
-    assert phone._temperature == 25.0
+    assert phone.display() == "Phone Display: Temperature is 25.0°C"
     assert phone.update_count == 1
 
 
@@ -50,8 +52,8 @@ def test_weather_station_notify_multiple_observers():
     station.attach(tv)
     station.set_temperature(22.5)
 
-    assert phone._temperature == 22.5
-    assert tv._temperature == 22.5
+    assert "22.5°C" in phone.display()
+    assert "22.5°C" in tv.display()
     assert phone.update_count == 1
     assert tv.update_count == 1
 
@@ -64,8 +66,7 @@ def test_weather_station_set_measurements():
     station.attach(tv)
     station.set_measurements(20.0, 65.0, 1013.25)
 
-    assert tv._temperature == 20.0
-    assert tv._humidity == 65.0
+    assert tv.display() == "TV Display: Temperature is 20.0°C, Humidity is 65.0%"
     assert tv.update_count == 1
 
 
@@ -79,7 +80,7 @@ def test_weather_station_multiple_updates():
     station.set_temperature(25.0)
     station.set_temperature(30.0)
 
-    assert phone._temperature == 30.0
+    assert "30.0°C" in phone.display()
     assert phone.update_count == 3
 
 
@@ -112,8 +113,9 @@ def test_observer_no_duplicate_attach():
 
     station.attach(phone)
     station.attach(phone)
+    station.set_temperature(21.0)
 
-    assert len(station._observers) == 1
+    assert phone.update_count == 1
 
 
 def test_detached_observer_no_update():
@@ -126,7 +128,7 @@ def test_detached_observer_no_update():
     station.detach(phone)
     station.set_temperature(25.0)
 
-    assert phone._temperature == 20.0
+    assert "20.0°C" in phone.display()
     assert phone.update_count == 1
 
 

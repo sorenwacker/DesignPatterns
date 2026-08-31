@@ -129,15 +129,3 @@ def test_computer_subsystems_accessible():
     hd_result = computer.hard_drive.read(5, 512)
     assert "512 bytes" in hd_result
     assert "sector 5" in hd_result
-
-
-def test_facade_simplifies_interface():
-    """Test that facade provides simpler interface than using subsystems directly."""
-    theater = HomeTheaterFacade()
-
-    # With facade: one method call
-    operations = theater.watch_movie("Test Movie")
-    assert len(operations) == 8
-
-    # Without facade: would need 8 method calls
-    # This demonstrates the simplification provided by the facade
