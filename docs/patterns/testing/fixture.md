@@ -43,7 +43,8 @@ Factory patterns specialized for creating complex test objects with sensible def
 ```python
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from typing import Any, Generator
+from collections.abc import Generator
+from typing import Any
 
 
 @dataclass

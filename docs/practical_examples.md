@@ -7,8 +7,6 @@ This guide shows how design patterns solve real-world problems with concrete exa
 ### Factory Pattern - Database Connection Management
 
 ```python
-from design_patterns.creational.factory import AnimalFactory
-
 # Problem: Need to create different database connections based on configuration
 class DatabaseConnectionFactory:
     @staticmethod

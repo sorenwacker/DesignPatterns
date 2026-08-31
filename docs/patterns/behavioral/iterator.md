@@ -26,7 +26,29 @@ Provide a way to access elements of an aggregate object sequentially without exp
 
 ```python
 from __future__ import annotations
-from typing import Iterator as TypingIterator
+from abc import ABC, abstractmethod
+from collections.abc import Iterator as TypingIterator
+from typing import Any
+
+
+class Iterator(ABC):
+    """Abstract iterator interface."""
+
+    @abstractmethod
+    def has_next(self) -> bool:
+        """Check if there are more elements."""
+
+    @abstractmethod
+    def next(self) -> Any:
+        """Get the next element, raising StopIteration when none remain."""
+
+
+class Aggregate(ABC):
+    """Abstract aggregate interface."""
+
+    @abstractmethod
+    def create_iterator(self) -> Iterator:
+        """Create an iterator for this aggregate."""
 
 class Book:
     """Represents a book in the library."""
@@ -40,7 +62,7 @@ class Book:
         """String representation of the book."""
         return f"{self.title} by {self.author}"
 
-class BookIterator:
+class BookIterator(Iterator):
     """Concrete iterator for books."""
 
     def __init__(self, books: list[Book]) -> None:
@@ -61,7 +83,7 @@ class BookIterator:
         self._index += 1
         return book
 
-class BookCollection:
+class BookCollection(Aggregate):
     """Concrete aggregate of books implementing Python iterator protocol."""
 
     def __init__(self) -> None:

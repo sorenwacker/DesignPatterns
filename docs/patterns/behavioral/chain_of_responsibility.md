@@ -25,12 +25,12 @@ Avoid coupling the sender of a request to its receiver by giving more than one o
 ## Implementation
 
 ```python
-from typing import Optional
+from __future__ import annotations
 
 class RequestHandler:
     """Base class for handling requests in a chain of responsibility."""
 
-    def __init__(self, successor: Optional['RequestHandler'] = None) -> None:
+    def __init__(self, successor: RequestHandler | None = None) -> None:
         """Initializes the handler with an optional successor.
 
         Args:

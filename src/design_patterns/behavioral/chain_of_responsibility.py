@@ -29,7 +29,7 @@ Classes:
     EscalationRequestHandler: Handles escalation requests.
 """
 
-from typing import Optional
+from __future__ import annotations
 
 
 class RequestHandler:
@@ -40,11 +40,11 @@ class RequestHandler:
     specific requests or pass them to the next handler in the chain.
     """
 
-    def __init__(self, successor: Optional["RequestHandler"] = None) -> None:
+    def __init__(self, successor: RequestHandler | None = None) -> None:
         """Initializes the handler with an optional successor.
 
         Args:
-            successor (Optional[RequestHandler]): The next handler in the chain.
+            successor: The next handler in the chain, if any.
         """
         self.successor = successor
 
@@ -100,6 +100,3 @@ class EscalationRequestHandler(RequestHandler):
         if request == "EscalationRequest":
             return "EscalationRequestHandler handled EscalationRequest"
         return super().handle(request)
-
-
-# The example usage for testing the chain of handlers is found in the module docstring.

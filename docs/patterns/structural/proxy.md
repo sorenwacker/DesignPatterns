@@ -27,7 +27,7 @@ Provide a surrogate or placeholder for another object to control access to it. T
 ```python
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Optional
+from __future__ import annotations
 
 class Image(ABC):
     """Abstract interface for images."""
@@ -68,7 +68,7 @@ class ImageProxy(Image):
     def __init__(self, filename: str) -> None:
         """Initialize proxy without loading image."""
         self.filename = filename
-        self._real_image: Optional[RealImage] = None
+        self._real_image: RealImage | None = None
 
     def display(self) -> str:
         """Display image, loading it if necessary."""
