@@ -146,15 +146,20 @@ class ComputerBuilder:
         return self
 
     def build(self) -> Computer:
-        """Build and return the configured Computer instance.
+        """Hand over the configured Computer and start a fresh one.
+
+        The builder keeps no reference to the product it returns, so later
+        setter calls configure the next computer rather than mutating one a
+        caller already holds.
 
         Returns:
             The fully constructed Computer instance.
         """
-        return self._computer
+        computer, self._computer = self._computer, Computer()
+        return computer
 
     def reset(self) -> ComputerBuilder:
-        """Reset the builder to start building a new computer.
+        """Discard the partially configured computer and start over.
 
         Returns:
             The builder instance with a new Computer.
@@ -162,6 +167,8 @@ class ComputerBuilder:
         self._computer = Computer()
         return self
 ```
+
+One builder can produce several independent products. `build()` hands over the current product and starts a new one, and the director methods on `HouseBuilder` (`build_simple_house`, `build_luxury_house`) reset before they configure, so a luxury house built earlier leaves no garage or garden on the simple house built next.
 
 ### Usage
 

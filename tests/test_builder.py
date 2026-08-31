@@ -139,3 +139,43 @@ def test_builder_method_chaining():
     assert builder._computer.cpu == "Intel"
     assert builder._computer.ram == 16
     assert builder._computer.storage == "512GB"
+
+
+def test_build_hands_over_the_computer():
+    """A setter called after build() must not change the computer already built."""
+    builder = ComputerBuilder()
+    first = builder.set_cpu("Intel i5").build()
+    builder.set_cpu("AMD Ryzen 9")
+
+    assert first.cpu == "Intel i5"
+
+
+def test_one_builder_produces_independent_computers():
+    """Consecutive builds without reset() yield distinct, unshared products."""
+    builder = ComputerBuilder()
+    first = builder.set_cpu("Intel i5").add_peripheral("Keyboard").build()
+    second = builder.set_cpu("AMD Ryzen 7").build()
+
+    assert first is not second
+    assert first.peripherals == ["Keyboard"]
+    assert second.peripherals == []
+
+
+def test_build_hands_over_the_house():
+    """A setter called after build() must not change the house already built."""
+    builder = HouseBuilder()
+    first = builder.set_walls("Brick").build()
+    builder.set_walls("Stone")
+
+    assert first.walls == "Brick"
+
+
+def test_house_directors_do_not_carry_state_between_calls():
+    """A luxury house built earlier leaves no garage or garden on the simple house."""
+    builder = HouseBuilder()
+    builder.build_luxury_house()
+    simple = builder.build_simple_house()
+
+    assert simple.garage is False
+    assert simple.garden is False
+    assert simple.windows == 4

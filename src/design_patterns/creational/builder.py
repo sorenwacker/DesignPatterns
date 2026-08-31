@@ -145,15 +145,20 @@ class ComputerBuilder:
         return self
 
     def build(self) -> Computer:
-        """Build and return the configured Computer instance.
+        """Hand over the configured Computer and start a fresh one.
+
+        The builder keeps no reference to the product it returns, so later
+        setter calls configure the next computer rather than mutating one a
+        caller already holds.
 
         Returns:
             The fully constructed Computer instance.
         """
-        return self._computer
+        computer, self._computer = self._computer, Computer()
+        return computer
 
     def reset(self) -> ComputerBuilder:
-        """Reset the builder to start building a new computer.
+        """Discard the partially configured computer and start over.
 
         Returns:
             The builder instance with a new Computer.
@@ -289,23 +294,35 @@ class HouseBuilder:
         return self
 
     def build(self) -> House:
-        """Build and return the configured House instance.
+        """Hand over the configured House and start a fresh one.
 
         Returns:
             The fully constructed House instance.
         """
-        return self._house
+        house, self._house = self._house, House()
+        return house
+
+    def reset(self) -> HouseBuilder:
+        """Discard the partially configured house and start over.
+
+        Returns:
+            The builder instance with a new House.
+        """
+        self._house = House()
+        return self
 
     def build_simple_house(self) -> House:
         """Build a simple house with basic features.
 
-        This is a director method that encapsulates a common configuration.
+        This is a director method that encapsulates a common configuration. It
+        starts from a fresh house so earlier calls leave nothing behind.
 
         Returns:
             A simple house.
         """
         return (
-            self.set_foundation("Concrete slab")
+            self.reset()
+            .set_foundation("Concrete slab")
             .set_walls("Brick")
             .set_roof("Asphalt shingles")
             .set_windows(4)
@@ -316,13 +333,15 @@ class HouseBuilder:
     def build_luxury_house(self) -> House:
         """Build a luxury house with premium features.
 
-        This is a director method that encapsulates a premium configuration.
+        This is a director method that encapsulates a premium configuration. It
+        starts from a fresh house so earlier calls leave nothing behind.
 
         Returns:
             A luxury house.
         """
         return (
-            self.set_foundation("Deep foundation")
+            self.reset()
+            .set_foundation("Deep foundation")
             .set_walls("Stone")
             .set_roof("Tile")
             .set_windows(12)
