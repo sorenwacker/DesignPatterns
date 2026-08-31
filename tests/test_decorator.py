@@ -143,7 +143,7 @@ def test_encryption_decorator_internals():
     enc = EncryptionDecorator(file)
 
     encrypted = enc._encrypt("hello")
-    assert encrypted == "olleh"
+    assert encrypted == "uryyb"
 
     decrypted = enc._decrypt(encrypted)
     assert decrypted == "hello"

@@ -20,6 +20,7 @@ Example:
 
 from __future__ import annotations
 
+import codecs
 from abc import ABC, abstractmethod
 
 
@@ -249,7 +250,12 @@ class DataSourceDecorator(DataSource):
 
 
 class EncryptionDecorator(DataSourceDecorator):
-    """Decorator that adds encryption to data operations."""
+    """Decorator that encrypts on write and decrypts on read.
+
+    The cipher is ROT13, a letter substitution that is its own inverse. It is
+    a real cipher and a weak one, chosen so the example stays readable; it is
+    not a way to protect data.
+    """
 
     def write_data(self, data: str) -> None:
         """Write encrypted data.
@@ -270,7 +276,7 @@ class EncryptionDecorator(DataSourceDecorator):
         return self._decrypt(encrypted)
 
     def _encrypt(self, data: str) -> str:
-        """Simple encryption (reversed string).
+        """Apply ROT13.
 
         Args:
             data: Data to encrypt.
@@ -278,10 +284,10 @@ class EncryptionDecorator(DataSourceDecorator):
         Returns:
             Encrypted data.
         """
-        return data[::-1]
+        return codecs.encode(data, "rot_13")
 
     def _decrypt(self, data: str) -> str:
-        """Simple decryption (reverse the reversed string).
+        """Apply ROT13 again, which undoes it.
 
         Args:
             data: Data to decrypt.
@@ -289,7 +295,10 @@ class EncryptionDecorator(DataSourceDecorator):
         Returns:
             Decrypted data.
         """
-        return data[::-1]
+        return codecs.decode(data, "rot_13")
+
+
+COMPRESSION_MARKER = "[COMPRESSED]"
 
 
 class CompressionDecorator(DataSourceDecorator):
@@ -322,7 +331,7 @@ class CompressionDecorator(DataSourceDecorator):
         Returns:
             Compressed data.
         """
-        return f"[COMPRESSED]{data}"
+        return f"{COMPRESSION_MARKER}{data}"
 
     def _decompress(self, data: str) -> str:
         """Simple decompression simulation (remove prefix).
@@ -333,6 +342,4 @@ class CompressionDecorator(DataSourceDecorator):
         Returns:
             Decompressed data.
         """
-        if data.startswith("[COMPRESSED]"):
-            return data[12:]
-        return data
+        return data.removeprefix(COMPRESSION_MARKER)
