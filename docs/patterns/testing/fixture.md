@@ -145,8 +145,8 @@ class OrderBuilder:
         return self
 
     def with_items(self, items: list[str]) -> "OrderBuilder":
-        """Set the order items."""
-        self._items = items
+        """Set the order items. The list is copied, so later edits by the caller do not reach the order."""
+        self._items = list(items)
         return self
 
     def with_total(self, total: float) -> "OrderBuilder":

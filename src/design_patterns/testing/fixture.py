@@ -208,7 +208,7 @@ class OrderBuilder:
         Returns:
             OrderBuilder: Self for method chaining.
         """
-        self._items = items
+        self._items = list(items)
         return self
 
     def with_total(self, total: float) -> "OrderBuilder":
@@ -253,7 +253,7 @@ class OrderBuilder:
         return Order(
             id=self._id,
             customer_id=self._customer_id,
-            items=self._items,
+            items=list(self._items),
             total=self._total,
             status=self._status,
         )

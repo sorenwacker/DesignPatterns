@@ -160,6 +160,18 @@ class TestOrderBuilder:
         order = OrderBuilder().with_items(items).build()
         assert order.items == items
 
+    def test_with_items_copies_the_list(self):
+        """The order must not share a list with the caller or the builder."""
+        items = ["widget"]
+        builder = OrderBuilder().with_items(items)
+        first = builder.build()
+        items.append("gadget")
+        second = builder.build()
+
+        assert first.items == ["widget"]
+        assert second.items == ["widget"]
+        assert first.items is not second.items
+
     def test_with_total(self):
         """Test builder can set custom total."""
         order = OrderBuilder().with_total(99.99).build()
