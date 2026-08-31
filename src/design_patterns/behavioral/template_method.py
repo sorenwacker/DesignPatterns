@@ -163,13 +163,6 @@ class CSVDataMiner(DataMiner):
             data: CSV file data.
         """
 
-    def send_report(self, analysis: dict[str, str]) -> None:
-        """Send CSV mining report.
-
-        Args:
-            analysis: Analysis results.
-        """
-
 
 class XMLDataMiner(DataMiner):
     """Concrete data miner for XML files."""

@@ -103,7 +103,7 @@ def test_smart_home_motion_sensor():
     motion_sensor = SmartDevice("motion_sensor", smart_home)
     lights = SmartDevice("lights", smart_home)
 
-    motion_sensor.trigger_event("motion detected")
+    motion_sensor.send("motion detected")
 
     assert lights.state == "on"
 
@@ -114,7 +114,7 @@ def test_smart_home_door_sensor():
     door_sensor = SmartDevice("door_sensor", smart_home)
     alarm = SmartDevice("alarm", smart_home)
 
-    door_sensor.trigger_event("door opened")
+    door_sensor.send("door opened")
 
     assert alarm.state == "on"
 
@@ -129,7 +129,7 @@ def test_smart_home_multiple_devices():
     assert lights.state == "off"
     assert alarm.state == "off"
 
-    motion_sensor.trigger_event("motion detected")
+    motion_sensor.send("motion detected")
     assert lights.state == "on"
 
 
@@ -149,7 +149,7 @@ def test_smart_home_events_logged():
     smart_home = SmartHome()
     device = SmartDevice("sensor", smart_home)
 
-    device.trigger_event("test event")
+    device.send("test event")
 
     assert len(smart_home.events) == 1
     assert "sensor: test event" in smart_home.events[0]

@@ -21,10 +21,6 @@ Example:
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    pass
 
 
 class Mediator(ABC):
@@ -173,9 +169,7 @@ class AirTrafficControl(Mediator):
         Returns:
             Landing permission status.
         """
-        if isinstance(aircraft, Aircraft):
-            return f"Landing clearance granted for {aircraft.call_sign}"
-        return "Permission denied"
+        return f"Landing clearance granted for {aircraft.call_sign}"
 
 
 class Aircraft(Colleague):
@@ -189,6 +183,7 @@ class Aircraft(Colleague):
             atc: Air traffic control mediator.
         """
         super().__init__(atc)
+        self.atc = atc
         self.call_sign = call_sign
         self.messages: list[str] = []
         atc.register_aircraft(self)
@@ -216,9 +211,7 @@ class Aircraft(Colleague):
         Returns:
             Landing permission response.
         """
-        if isinstance(self.mediator, AirTrafficControl):
-            return self.mediator.request_landing(self)
-        return "No ATC available"
+        return self.atc.request_landing(self)
 
 
 class SmartHome(Mediator):
@@ -293,11 +286,3 @@ class SmartDevice(Colleague):
             message: Event message.
         """
         self.mediator.send_message(f"{self.name}: {message}", self)
-
-    def trigger_event(self, event: str) -> None:
-        """Trigger an event.
-
-        Args:
-            event: Event description.
-        """
-        self.send(event)
