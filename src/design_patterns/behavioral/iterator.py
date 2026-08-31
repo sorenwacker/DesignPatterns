@@ -299,7 +299,11 @@ class BinaryTree:
 
 
 class Range:
-    """Custom range implementation demonstrating iterator pattern."""
+    """Custom range implementation demonstrating iterator pattern.
+
+    Mirrors the built-in ``range``: the end is exclusive, a negative step
+    counts down, and a zero step is refused because it could never terminate.
+    """
 
     def __init__(self, start: int, end: int, step: int = 1) -> None:
         """Initialize range.
@@ -307,8 +311,14 @@ class Range:
         Args:
             start: Start value.
             end: End value (exclusive).
-            step: Step size.
+            step: Step size, positive to count up or negative to count down.
+
+        Raises:
+            ValueError: If step is zero.
         """
+        if step == 0:
+            msg = "step must not be zero"
+            raise ValueError(msg)
         self.start = start
         self.end = end
         self.step = step
@@ -320,7 +330,7 @@ class Range:
             Range iterator.
         """
         current = self.start
-        while current < self.end:
+        while (current < self.end) if self.step > 0 else (current > self.end):
             yield current
             current += self.step
 
@@ -330,4 +340,4 @@ class Range:
         Returns:
             Number of elements in range.
         """
-        return max(0, (self.end - self.start + self.step - 1) // self.step)
+        return len(range(self.start, self.end, self.step))

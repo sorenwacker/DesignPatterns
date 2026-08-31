@@ -168,6 +168,28 @@ def test_custom_range_length():
     assert len(r) == 5
 
 
+def test_custom_range_negative_step():
+    """A negative step counts down, mirroring the built-in range."""
+    r = Range(10, 0, -3)
+
+    assert list(r) == [10, 7, 4, 1]
+    assert len(r) == 4
+
+
+def test_custom_range_negative_step_with_ascending_bounds_is_empty():
+    """Counting down from below the end produces nothing and terminates."""
+    r = Range(0, 10, -1)
+
+    assert list(r) == []
+    assert len(r) == 0
+
+
+def test_custom_range_zero_step_is_rejected():
+    """A zero step can never reach the end, so it is refused up front."""
+    with pytest.raises(ValueError, match="step must not be zero"):
+        Range(0, 10, 0)
+
+
 def test_custom_range_empty():
     """Test empty Range."""
     r = Range(5, 5)
