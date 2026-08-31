@@ -9,53 +9,43 @@ from design_patterns.structural.adapter import (
 )
 
 
-def test_legacy_logger_writes_log(capsys):
-    """Test that LegacyLogger writes logs correctly."""
-    logger = LegacyLogger()
-    logger.write_log("Test message")
-    captured = capsys.readouterr()
-    assert captured.out == "Legacy Log: Test message\n"
+def test_legacy_logger_writes_log():
+    """The legacy logger formats a line in its own style."""
+    assert LegacyLogger().write_log("Test message") == "Legacy Log: Test message"
 
 
 def test_logger_adapter_implements_interface():
-    """Test that LoggerAdapter implements LoggerInterface."""
-    legacy_logger = LegacyLogger()
-    adapter = LoggerAdapter(legacy_logger)
-    assert isinstance(adapter, LoggerInterface)
+    """The adapter is usable wherever the target interface is expected."""
+    assert isinstance(LoggerAdapter(LegacyLogger()), LoggerInterface)
 
 
-def test_logger_adapter_log_info(capsys):
-    """Test that LoggerAdapter logs info messages."""
-    legacy_logger = LegacyLogger()
-    adapter = LoggerAdapter(legacy_logger)
-    adapter.log_info("Information message")
-    captured = capsys.readouterr()
-    assert captured.out == "Legacy Log: INFO: Information message\n"
-
-
-def test_logger_adapter_log_error(capsys):
-    """Test that LoggerAdapter logs error messages."""
-    legacy_logger = LegacyLogger()
-    adapter = LoggerAdapter(legacy_logger)
-    adapter.log_error("Error message")
-    captured = capsys.readouterr()
-    assert captured.out == "Legacy Log: ERROR: Error message\n"
-
-
-def test_logger_adapter_multiple_messages(capsys):
-    """Test that LoggerAdapter handles multiple log messages."""
-    legacy_logger = LegacyLogger()
-    adapter = LoggerAdapter(legacy_logger)
-    adapter.log_info("First message")
-    adapter.log_error("Second message")
-    adapter.log_info("Third message")
-    captured = capsys.readouterr()
-    expected = (
-        "Legacy Log: INFO: First message\n"
-        "Legacy Log: ERROR: Second message\n"
-        "Legacy Log: INFO: Third message\n"
+def test_logger_adapter_log_info():
+    """An info call becomes a legacy line with the INFO prefix."""
+    adapter = LoggerAdapter(LegacyLogger())
+    assert adapter.log_info("Information message") == (
+        "Legacy Log: INFO: Information message"
     )
-    assert captured.out == expected
+
+
+def test_logger_adapter_log_error():
+    """An error call becomes a legacy line with the ERROR prefix."""
+    adapter = LoggerAdapter(LegacyLogger())
+    assert adapter.log_error("Error message") == "Legacy Log: ERROR: Error message"
+
+
+def test_logger_adapter_keeps_no_state_between_messages():
+    """Each call is translated on its own."""
+    adapter = LoggerAdapter(LegacyLogger())
+    lines = [
+        adapter.log_info("First message"),
+        adapter.log_error("Second message"),
+        adapter.log_info("Third message"),
+    ]
+    assert lines == [
+        "Legacy Log: INFO: First message",
+        "Legacy Log: ERROR: Second message",
+        "Legacy Log: INFO: Third message",
+    ]
 
 
 def test_logger_interface_cannot_be_instantiated():

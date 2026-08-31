@@ -7,7 +7,7 @@ a new logging interface.
 
 Classes:
     LoggerInterface: The target interface that clients will use.
-    LegacyLogger: A legacy logging system that writes logs to the console.
+    LegacyLogger: A legacy logging system with its own line format.
     LoggerAdapter: An adapter that allows the legacy logging system to be used with
         the new interface.
 
@@ -20,10 +20,10 @@ Example:
     legacy_logger = LegacyLogger()
     logger = LoggerAdapter(legacy_logger)
     logger.log_info("This is an informational message.")
-    > Legacy Log: INFO: This is an informational message.
+    # "Legacy Log: INFO: This is an informational message."
 
     logger.log_error("This is an error message.")
-    > Legacy Log: ERROR: This is an error message.
+    # "Legacy Log: ERROR: This is an error message."
     ```
 """
 
@@ -37,36 +37,45 @@ class LoggerInterface(ABC):
     """
 
     @abstractmethod
-    def log_info(self, message: str) -> None:
+    def log_info(self, message: str) -> str:
         """Logs an informational message.
 
         Args:
             message (str): The message to log as informational.
+
+        Returns:
+            str: The line that was logged.
         """
 
     @abstractmethod
-    def log_error(self, message: str) -> None:
+    def log_error(self, message: str) -> str:
         """Logs an error message.
 
         Args:
             message (str): The message to log as an error.
+
+        Returns:
+            str: The line that was logged.
         """
 
 
 class LegacyLogger:
     """A legacy logging system.
 
-    This class represents an existing logging system that has its own interface.
-    It logs messages to the console.
+    This class represents an existing logging system that has its own interface
+    and its own line format.
     """
 
-    def write_log(self, message: str) -> None:
+    def write_log(self, message: str) -> str:
         """Writes a log message.
 
         Args:
             message (str): The log message to write.
+
+        Returns:
+            str: The line in the legacy format.
         """
-        print(f"Legacy Log: {message}")
+        return f"Legacy Log: {message}"
 
 
 class LoggerAdapter(LoggerInterface):
@@ -84,18 +93,24 @@ class LoggerAdapter(LoggerInterface):
         """
         self._legacy_logger = legacy_logger
 
-    def log_info(self, message: str) -> None:
+    def log_info(self, message: str) -> str:
         """Logs an informational message using the legacy logger.
 
         Args:
             message (str): The message to log as informational.
-        """
-        self._legacy_logger.write_log(f"INFO: {message}")
 
-    def log_error(self, message: str) -> None:
+        Returns:
+            str: The line the legacy logger produced.
+        """
+        return self._legacy_logger.write_log(f"INFO: {message}")
+
+    def log_error(self, message: str) -> str:
         """Logs an error message using the legacy logger.
 
         Args:
             message (str): The message to log as an error.
+
+        Returns:
+            str: The line the legacy logger produced.
         """
-        self._legacy_logger.write_log(f"ERROR: {message}")
+        return self._legacy_logger.write_log(f"ERROR: {message}")

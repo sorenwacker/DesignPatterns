@@ -33,7 +33,7 @@ class LoggerInterface(ABC):
     This interface defines the logging methods that the application expects.
     """
     @abstractmethod
-    def log_info(self, message: str) -> None:
+    def log_info(self, message: str) -> str:
         """Logs an informational message.
 
         Args:
@@ -41,7 +41,7 @@ class LoggerInterface(ABC):
         """
 
     @abstractmethod
-    def log_error(self, message: str) -> None:
+    def log_error(self, message: str) -> str:
         """Logs an error message.
 
         Args:
@@ -52,15 +52,15 @@ class LegacyLogger:
     """A legacy logging system.
 
     This class represents an existing logging system that has its own interface.
-    It logs messages to the console.
+    It has its own line format.
     """
-    def write_log(self, message: str) -> None:
-        """Writes a log message.
+    def write_log(self, message: str) -> str:
+        """Writes a log message and returns the formatted line.
 
         Args:
             message: The log message to write.
         """
-        print(f"Legacy Log: {message}")
+        return f"Legacy Log: {message}"
 
 class LoggerAdapter(LoggerInterface):
     """An adapter for the legacy logger.
@@ -77,21 +77,21 @@ class LoggerAdapter(LoggerInterface):
         """
         self._legacy_logger = legacy_logger
 
-    def log_info(self, message: str) -> None:
+    def log_info(self, message: str) -> str:
         """Logs an informational message using the legacy logger.
 
         Args:
             message: The message to log as informational.
         """
-        self._legacy_logger.write_log(f"INFO: {message}")
+        return self._legacy_logger.write_log(f"INFO: {message}")
 
-    def log_error(self, message: str) -> None:
+    def log_error(self, message: str) -> str:
         """Logs an error message using the legacy logger.
 
         Args:
             message: The message to log as an error.
         """
-        self._legacy_logger.write_log(f"ERROR: {message}")
+        return self._legacy_logger.write_log(f"ERROR: {message}")
 ```
 
 ### Usage
