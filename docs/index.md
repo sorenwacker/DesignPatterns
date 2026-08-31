@@ -8,7 +8,7 @@ Explore patterns by category using the sidebar navigation:
 
 - **Creational** (5) - Object creation mechanisms
 - **Behavioral** (11) - Object interaction and responsibility
-- **Structural** (7) - Object composition and relationships
+- **Structural** (6) - Object composition and relationships
 - **Testing** (1) - Test setup and test data construction
 - **Gates** (7) - Automated enforcement of structural rules
 

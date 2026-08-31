@@ -1,10 +1,10 @@
 # Design Patterns in Python
 
 [![Docs](https://github.com/sorenwacker/DesignPatterns/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/sorenwacker/DesignPatterns/actions/workflows/deploy-docs.yml)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-A library demonstrating the 23 Gang of Four design patterns implemented in Python with modern idioms and type hints.
+Python implementations of 22 of the 23 Gang of Four design patterns (Flyweight is not included), together with testing patterns and gate patterns, with type hints and tests.
 
 ## Patterns
 
@@ -53,22 +53,19 @@ Full documentation available at: https://sorenwacker.github.io/DesignPatterns/
 ## Installation
 
 ```bash
-# Using uv (recommended)
-uv pip install -e .
-
-# Using pip
-pip install -e .
+uv sync --extra dev
 ```
 
 ## Usage
 
-Run examples:
+Run an example:
+
 ```bash
-python examples/factory_logger.py
-python examples/strategy_payment.py
+uv run python examples/factory_logger.py
 ```
 
-Use in code:
+Use the library in code:
+
 ```python
 from design_patterns.creational.factory import AnimalFactory
 from design_patterns.behavioral.strategy import ShoppingCart, CreditCardPayment
@@ -82,15 +79,7 @@ cart.set_payment_strategy(CreditCardPayment("1234-5678"))
 
 ## Development
 
-Run tests:
-```bash
-pytest
-```
-
-Generate documentation locally:
-```bash
-mkdocs serve
-```
+`make check` runs every quality gate; `make docs` serves the documentation with hot reload. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full list of gates and the workflow for adding a pattern.
 
 ## License
 
