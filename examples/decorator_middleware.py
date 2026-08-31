@@ -33,15 +33,15 @@ class Response:
         self.headers = headers or {}
 
 
-class RequestHandler(ABC):
-    """Abstract request handler interface"""
+class HttpHandler(ABC):
+    """Abstract HTTP handler interface"""
 
     @abstractmethod
     def handle(self, request: Request) -> Response:
         """Handle the request and return a response"""
 
 
-class BaseRequestHandler(RequestHandler):
+class EndpointHandler(HttpHandler):
     """Base request handler that returns simple responses"""
 
     def handle(self, request: Request) -> Response:
@@ -62,17 +62,17 @@ class BaseRequestHandler(RequestHandler):
         return Response(404, '{"error": "Not Found"}')
 
 
-class RequestHandlerDecorator(RequestHandler):
-    """Base decorator for request handlers"""
+class Middleware(HttpHandler):
+    """Base decorator that wraps another HTTP handler"""
 
-    def __init__(self, handler: RequestHandler):
+    def __init__(self, handler: HttpHandler):
         self._handler = handler
 
     def handle(self, request: Request) -> Response:
         return self._handler.handle(request)
 
 
-class LoggingMiddleware(RequestHandlerDecorator):
+class LoggingMiddleware(Middleware):
     """Logs all requests and responses"""
 
     def handle(self, request: Request) -> Response:
@@ -89,7 +89,7 @@ class LoggingMiddleware(RequestHandlerDecorator):
         return response
 
 
-class AuthenticationMiddleware(RequestHandlerDecorator):
+class AuthenticationMiddleware(Middleware):
     """Validates authentication tokens"""
 
     def handle(self, request: Request) -> Response:
@@ -116,10 +116,10 @@ class AuthenticationMiddleware(RequestHandlerDecorator):
         return token_map.get(token, "guest")
 
 
-class RateLimitMiddleware(RequestHandlerDecorator):
+class RateLimitMiddleware(Middleware):
     """Implements rate limiting"""
 
-    def __init__(self, handler: RequestHandler, max_requests: int = 10):
+    def __init__(self, handler: HttpHandler, max_requests: int = 10):
         super().__init__(handler)
         self.max_requests = max_requests
         self.request_counts: dict[str, int] = {}
@@ -144,7 +144,7 @@ class RateLimitMiddleware(RequestHandlerDecorator):
         return self._handler.handle(request)
 
 
-class TimingMiddleware(RequestHandlerDecorator):
+class TimingMiddleware(Middleware):
     """Measures request processing time"""
 
     def handle(self, request: Request) -> Response:
@@ -162,7 +162,7 @@ class TimingMiddleware(RequestHandlerDecorator):
         return response
 
 
-class CorsMiddleware(RequestHandlerDecorator):
+class CorsMiddleware(Middleware):
     """Adds CORS headers to responses"""
 
     def handle(self, request: Request) -> Response:
@@ -189,7 +189,7 @@ def main():
 
     # Scenario 1: Basic handler without middleware
     print("\n\n--- Scenario 1: No Middleware ---")
-    basic_handler = BaseRequestHandler()
+    basic_handler = EndpointHandler()
     request1 = Request("GET", "/api/users")
     response1 = basic_handler.handle(request1)
     print(f"Response: {response1.status_code} - {response1.body}")
@@ -198,7 +198,7 @@ def main():
     print("\n\n" + "=" * 70)
     print("--- Scenario 2: With Logging Middleware ---")
     print("=" * 70)
-    logged_handler = LoggingMiddleware(BaseRequestHandler())
+    logged_handler = LoggingMiddleware(EndpointHandler())
     request2 = Request("GET", "/api/users")
     logged_handler.handle(request2)
 
@@ -208,7 +208,7 @@ def main():
     print("=" * 70)
 
     # Build middleware stack: Timing -> Logging -> Auth -> Rate Limit -> Handler
-    handler: RequestHandler = BaseRequestHandler()
+    handler: HttpHandler = EndpointHandler()
     handler = RateLimitMiddleware(handler, max_requests=5)
     handler = AuthenticationMiddleware(handler)
     handler = LoggingMiddleware(handler)
@@ -241,7 +241,7 @@ def main():
     print("--- Scenario 4: Rate Limiting ---")
     print("=" * 70)
 
-    rate_limited_handler = RateLimitMiddleware(BaseRequestHandler(), max_requests=3)
+    rate_limited_handler = RateLimitMiddleware(EndpointHandler(), max_requests=3)
 
     for i in range(5):
         print(f"\n>> Request {i + 1}")

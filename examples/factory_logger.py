@@ -1,5 +1,5 @@
 """
-Factory Pattern Example: Logger System
+Factory Pattern Example: LogWriter System
 
 Demonstrates using the Factory pattern to create different types of loggers
 based on configuration, without coupling the client code to specific logger
@@ -10,15 +10,15 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 
 
-class Logger(ABC):
+class LogWriter(ABC):
     """Abstract logger interface"""
 
     @abstractmethod
     def log(self, message: str) -> None:
-        pass
+        """Write one message"""
 
 
-class ConsoleLogger(Logger):
+class ConsoleLogger(LogWriter):
     """Logs messages to console"""
 
     def log(self, message: str) -> None:
@@ -26,7 +26,7 @@ class ConsoleLogger(Logger):
         print(f"[CONSOLE {timestamp}] {message}")
 
 
-class FileLogger(Logger):
+class FileLogger(LogWriter):
     """Logs messages to a file"""
 
     def __init__(self, filename: str = "app.log"):
@@ -40,7 +40,7 @@ class FileLogger(Logger):
         print(f"Logged to {self.filename}: {log_entry}")
 
 
-class DatabaseLogger(Logger):
+class DatabaseLogger(LogWriter):
     """Logs messages to a database (simulated)"""
 
     def __init__(self):
@@ -56,7 +56,7 @@ class LoggerFactory:
     """Factory for creating logger instances"""
 
     @staticmethod
-    def create_logger(logger_type: str, **kwargs) -> Logger:
+    def create_logger(logger_type: str, **kwargs) -> LogWriter:
         """
         Create a logger based on type.
 
@@ -65,7 +65,7 @@ class LoggerFactory:
             **kwargs: Additional arguments for specific logger types
 
         Returns:
-            Logger instance
+            LogWriter instance
 
         Raises:
             ValueError: If logger type is unknown
@@ -85,23 +85,23 @@ def main():
     """Demonstrate the Factory pattern with different logger types"""
 
     print("=" * 60)
-    print("Factory Pattern: Logger System")
+    print("Factory Pattern: LogWriter System")
     print("=" * 60)
 
     # Configuration could come from environment variables, config files, etc.
     # For this demo, we'll use different types
 
-    print("\n1. Console Logger:")
+    print("\n1. Console LogWriter:")
     console_logger = LoggerFactory.create_logger("console")
     console_logger.log("Application started")
     console_logger.log("User logged in")
 
-    print("\n2. File Logger:")
+    print("\n2. File LogWriter:")
     file_logger = LoggerFactory.create_logger("file", filename="debug.log")
     file_logger.log("Debug: Processing request")
     file_logger.log("Debug: Request completed")
 
-    print("\n3. Database Logger:")
+    print("\n3. Database LogWriter:")
     db_logger = LoggerFactory.create_logger("database")
     db_logger.log("Critical: Database connection lost")
     db_logger.log("Info: Database connection restored")

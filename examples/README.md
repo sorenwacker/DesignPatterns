@@ -1,66 +1,27 @@
-# Runnable Examples
+# Runnable examples
 
-This directory contains practical, runnable examples demonstrating design patterns in real-world scenarios.
+Each script in this directory is a consumer of the `design_patterns` library: it imports a pattern from the library and applies it to a realistic scenario. A test suite gate (`tests/test_examples.py`) checks that no example redefines a library class, that every script listed here exists, that every script is listed, and that every script runs to completion.
 
 ## Setup
 
-First, install the package in editable mode:
-
 ```bash
-pixi run pip install -e .
+uv sync --extra dev
 ```
 
-Or with uv:
+## Running an example
 
 ```bash
-uv pip install -e .
+uv run python examples/factory_logger.py
 ```
 
-## Running Examples
+## Available examples
 
-Once installed, run any example directly:
+| Script | Pattern | Scenario |
+|---|---|---|
+| `factory_logger.py` | Factory | Creating console, file, and database log writers from a configuration value |
+| `strategy_payment.py` | Strategy | Paying a shopping cart with interchangeable payment methods and sorting with interchangeable algorithms |
+| `observer_event_system.py` | Observer | Email, analytics, database, and admin components reacting to user events |
+| `decorator_middleware.py` | Decorator | Stacking logging, authentication, rate limiting, timing, and CORS middleware around an HTTP handler |
+| `facade_order_system.py` | Facade | Placing an order through one call that coordinates inventory, payment, shipping, and notifications |
 
-```bash
-python examples/factory_logger.py
-```
-
-Or with pixi:
-
-```bash
-pixi run python examples/factory_logger.py
-```
-
-## Available Examples
-
-### Creational Patterns
-
-- **factory_logger.py** - Creating different logger types based on configuration
-- **singleton_config.py** - Managing application configuration with Singleton
-- **builder_http_request.py** - Building complex HTTP requests with Builder pattern
-- **prototype_document.py** - Cloning expensive document objects
-
-### Behavioral Patterns
-
-- **strategy_payment.py** - Implementing multiple payment methods with Strategy
-- **observer_event_system.py** - Building an event notification system
-- **command_text_editor.py** - Implementing undo/redo with Command pattern
-- **state_order_workflow.py** - Managing order states with State pattern
-
-### Structural Patterns
-
-- **decorator_middleware.py** - Stacking middleware with Decorator pattern
-- **adapter_legacy_integration.py** - Integrating with legacy systems using Adapter
-- **facade_order_system.py** - Simplifying complex order processing with Facade
-- **proxy_lazy_loading.py** - Implementing lazy loading with Proxy pattern
-
-## Learning Path
-
-1. Start with simple patterns: Factory, Strategy, Decorator
-2. Move to patterns with state: Observer, State, Memento
-3. Tackle complex patterns: Visitor, Mediator, Interpreter
-
-Each example includes:
-- Real-world scenario description
-- Complete working code
-- Comments explaining key concepts
-- Output showing the pattern in action
+Each example prints the scenario as it runs and ends with the benefits the pattern provides in that setting.
