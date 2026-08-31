@@ -64,6 +64,16 @@ class TestConfiguration:
         assert "CONTRACT_URL" in reason
         assert "CONTRACT_TOKEN" in reason
 
+    def test_the_skip_reason_names_the_variables_the_caller_uses(self):
+        """A project reading other variables must not be told to set these."""
+        gate = LiveContractGate(
+            None, None, url_variable="SEEK_URL", token_variable="SEEK_TOKEN"
+        )
+        reason = gate.skip_reason()
+        assert "SEEK_URL" in reason
+        assert "SEEK_TOKEN" in reason
+        assert "CONTRACT_URL" not in reason
+
 
 class TestCheck:
     """Tests for comparison against a live instance."""

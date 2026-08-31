@@ -61,9 +61,17 @@ class ObservedBehaviour:
 class LiveContractGate:
     """Compares recorded external behaviour against a live instance."""
 
-    def __init__(self, url: str | None, token: str | None) -> None:
+    def __init__(
+        self,
+        url: str | None,
+        token: str | None,
+        url_variable: str = "CONTRACT_URL",
+        token_variable: str = "CONTRACT_TOKEN",
+    ) -> None:
         self._url = url
         self._token = token
+        self._url_variable = url_variable
+        self._token_variable = token_variable
 
     @property
     def configured(self) -> bool:
@@ -73,7 +81,8 @@ class LiveContractGate:
     def skip_reason(self) -> str:
         """Why the gate is inactive, naming the variables that activate it."""
         return (
-            "set CONTRACT_URL and CONTRACT_TOKEN to run against an instance"
+            f"set {self._url_variable} and {self._token_variable} to run "
+            f"against an instance"
         )
 
     def check(self, recorded: ObservedBehaviour, current: Any) -> None:

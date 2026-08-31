@@ -69,15 +69,27 @@ class LiveContractGate:
         ```
     """
 
-    def __init__(self, url: str | None, token: str | None) -> None:
+    def __init__(
+        self,
+        url: str | None,
+        token: str | None,
+        url_variable: str = "CONTRACT_URL",
+        token_variable: str = "CONTRACT_TOKEN",
+    ) -> None:
         """Point the gate at an instance, if one was supplied.
 
         Args:
             url: Base URL of the instance, typically from the environment.
             token: Credential for that instance, typically from the environment.
+            url_variable: Name of the environment variable the caller reads
+                ``url`` from, quoted in the skip reason.
+            token_variable: Name of the environment variable the caller reads
+                ``token`` from, quoted in the skip reason.
         """
         self._url = url
         self._token = token
+        self._url_variable = url_variable
+        self._token_variable = token_variable
 
     @property
     def configured(self) -> bool:
@@ -95,7 +107,10 @@ class LiveContractGate:
             str: Text naming the variables that activate the gate, so a skipped
                 run says how to become a real one.
         """
-        return "set CONTRACT_URL and CONTRACT_TOKEN to run against an instance"
+        return (
+            f"set {self._url_variable} and {self._token_variable} to run "
+            f"against an instance"
+        )
 
     def check(self, recorded: ObservedBehaviour, current: Any) -> None:
         """Assert that the system still behaves as recorded.
