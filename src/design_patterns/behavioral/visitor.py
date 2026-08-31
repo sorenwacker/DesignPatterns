@@ -23,11 +23,8 @@ Example:
 
 from __future__ import annotations
 
+import math
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    pass
 
 
 class ShapeVisitor(ABC):
@@ -167,8 +164,6 @@ class AreaCalculator(ShapeVisitor):
         Returns:
             Area description.
         """
-        import math
-
         area = math.pi * circle.radius**2
         return f"Circle area: {area:.2f}"
 
@@ -209,8 +204,6 @@ class PerimeterCalculator(ShapeVisitor):
         Returns:
             Perimeter description.
         """
-        import math
-
         perimeter = 2 * math.pi * circle.radius
         return f"Circle perimeter: {perimeter:.2f}"
 
@@ -235,8 +228,6 @@ class PerimeterCalculator(ShapeVisitor):
         Returns:
             Perimeter description.
         """
-        import math
-
         hypotenuse = math.sqrt(triangle.base**2 + triangle.height**2)
         perimeter = triangle.base + triangle.height + hypotenuse
         return f"Triangle perimeter: {perimeter:.2f}"

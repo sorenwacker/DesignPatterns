@@ -77,7 +77,6 @@ class AreaCalculator(ShapeVisitor):
 
     def visit_circle(self, circle: Circle) -> str:
         """Calculate circle area."""
-        import math
         area = math.pi * circle.radius ** 2
         return f"Circle area: {area:.2f}"
 
