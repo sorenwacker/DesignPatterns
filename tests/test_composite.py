@@ -62,3 +62,23 @@ def test_composite_shape_is_shape():
     """Test that CompositeShape is a Shape."""
     composite = CompositeShape()
     assert isinstance(composite, Shape)
+
+
+def test_composite_shape_remove():
+    """A removed shape no longer takes part in drawing."""
+    composite = CompositeShape()
+    circle = Circle()
+    composite.add(circle)
+    composite.add(Rectangle())
+
+    composite.remove(circle)
+    assert composite.draw() == "Composite Shape: Drawing a rectangle."
+
+
+def test_composite_shape_remove_absent_shape_is_a_no_op():
+    """Removing a shape that was never added leaves the composite unchanged."""
+    composite = CompositeShape()
+    composite.add(Circle())
+
+    composite.remove(Rectangle())
+    assert composite.draw() == "Composite Shape: Drawing a circle."

@@ -63,6 +63,15 @@ class CompositeShape(Shape):
         """
         self.shapes.append(shape)
 
+    def remove(self, shape: Shape) -> None:
+        """Removes a shape from the composite shape.
+
+        Args:
+            shape (Shape): The shape to be removed. Absent shapes are ignored.
+        """
+        if shape in self.shapes:
+            self.shapes.remove(shape)
+
     def draw(self) -> str:
         """Draws all shapes in the composite shape.
 
