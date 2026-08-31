@@ -6,8 +6,8 @@ like configuration settings, logging, or database connections.
 
 This module demonstrates three implementations:
 1. Metaclass-based Singleton (thread-safe)
-2. Decorator-based Singleton
-3. Module-level Singleton (Pythonic approach)
+2. Decorator-based Singleton, built on the same metaclass
+3. Class-attribute Singleton using ``__new__`` with a double-checked lock
 
 Example:
     Using the metaclass-based singleton:
@@ -84,31 +84,17 @@ class DatabaseConnection(metaclass=SingletonMeta):
 def singleton_decorator(cls: type) -> type:
     """Decorator that converts a class into a singleton.
 
+    The decorated name stays a class: ``isinstance`` and subclassing keep
+    working, and ``__init__`` runs once. The instance caching is the
+    metaclass's, so the two forms share one thread-safe mechanism.
+
     Args:
         cls: The class to convert into a singleton.
 
     Returns:
-        A wrapper class that implements singleton behavior.
+        A subclass of ``cls`` whose metaclass is ``SingletonMeta``.
     """
-    instances: dict[type, Any] = {}
-    lock = Lock()
-
-    def get_instance(*args: Any, **kwargs: Any) -> Any:
-        """Get or create the singleton instance.
-
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-
-        Returns:
-            The singleton instance.
-        """
-        with lock:
-            if cls not in instances:
-                instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-
-    return get_instance  # type: ignore[return-value]
+    return SingletonMeta(cls.__name__, (cls,), {"__doc__": cls.__doc__})
 
 
 @singleton_decorator
