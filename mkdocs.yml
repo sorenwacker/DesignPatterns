@@ -50,6 +50,7 @@ nav:
       - Pattern Comparison: pattern_comparison.md
       - Practical Examples: practical_examples.md
       - Anti-Patterns: anti_patterns.md
+      - Dataclasses vs Plain Classes: dataclasses.md
       - Quick Reference: quick_reference.md
 
 theme:
