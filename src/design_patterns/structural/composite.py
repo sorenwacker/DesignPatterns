@@ -20,24 +20,30 @@ Example:
 
 """
 
+from abc import ABC, abstractmethod
 
-class Shape:
+
+class Shape(ABC):
     """Base class for all shapes."""
 
+    @abstractmethod
     def draw(self) -> str:
         """Draws the shape.
 
-        Raises:
-            NotImplementedError: Subclasses must implement this method.
+        Returns:
+            str: A description of what was drawn.
         """
-        msg = "Subclasses must implement this method."
-        raise NotImplementedError(msg)
 
 
 class Circle(Shape):
     """Represents a circle shape."""
 
     def draw(self) -> str:
+        """Draws the circle.
+
+        Returns:
+            str: A description of what was drawn.
+        """
         return "Drawing a circle."
 
 
@@ -45,15 +51,20 @@ class Rectangle(Shape):
     """Represents a rectangle shape."""
 
     def draw(self) -> str:
+        """Draws the rectangle.
+
+        Returns:
+            str: A description of what was drawn.
+        """
         return "Drawing a rectangle."
 
 
 class CompositeShape(Shape):
     """A composite shape that can contain other shapes."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initializes a CompositeShape with an empty list of shapes."""
-        self.shapes = []
+        self.shapes: list[Shape] = []
 
     def add(self, shape: Shape) -> None:
         """Adds a shape to the composite shape.

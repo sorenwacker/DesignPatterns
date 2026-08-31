@@ -7,8 +7,10 @@ subclasses to implement the `speak` method, providing specific
 implementations for different animal types.
 """
 
+from abc import ABC, abstractmethod
 
-class Animal:
+
+class Animal(ABC):
     """Base class for all animals.
 
     This class defines the common interface for all animal types,
@@ -25,7 +27,7 @@ class Animal:
         ```
     """
 
-    def __init__(self, name: str):
+    def __init__(self, name: str) -> None:
         """Initializes an Animal instance.
 
         Args:
@@ -33,20 +35,24 @@ class Animal:
         """
         self.name = name
 
+    @abstractmethod
     def speak(self) -> str:
-        """Abstract method for speaking.
+        """Produce the sound this animal makes.
 
-        Raises:
-            NotImplementedError: Subclasses must implement this method.
+        Returns:
+            str: A sentence naming the animal and its sound.
         """
-        msg = "Subclasses must implement this method."
-        raise NotImplementedError(msg)
 
 
 class Dog(Animal):
     """Class representing a dog, a type of Animal."""
 
     def speak(self) -> str:
+        """Bark.
+
+        Returns:
+            str: The dog's name and its sound.
+        """
         return f"{self.name} says woof!"
 
 
@@ -54,4 +60,9 @@ class Cat(Animal):
     """Class representing a cat, a type of Animal."""
 
     def speak(self) -> str:
+        """Meow.
+
+        Returns:
+            str: The cat's name and its sound.
+        """
         return f"{self.name} says meow!"

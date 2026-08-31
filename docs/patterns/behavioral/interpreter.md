@@ -25,9 +25,12 @@ Define a representation for a grammar along with an interpreter that uses the re
 ## Implementation
 
 ```python
-class Expression:
+from abc import ABC, abstractmethod
+
+class Expression(ABC):
     """Base class for interpreting expressions in a given context."""
 
+    @abstractmethod
     def interpret(self, context: str) -> bool:
         """Interpret the given context.
 
@@ -37,7 +40,6 @@ class Expression:
         Returns:
             bool: The result of the interpretation.
         """
-        pass
 
 class TerminalExpression(Expression):
     """Terminal expression that checks for a literal value."""

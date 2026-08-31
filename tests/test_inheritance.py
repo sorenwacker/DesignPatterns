@@ -41,10 +41,7 @@ def test_cat_is_animal():
     assert isinstance(cat, Animal)
 
 
-def test_animal_speak_not_implemented():
-    """Test that base Animal.speak raises NotImplementedError."""
-    animal = Animal("Generic")
-    with pytest.raises(
-        NotImplementedError, match="Subclasses must implement this method"
-    ):
-        animal.speak()
+def test_animal_cannot_be_instantiated():
+    """Animal is abstract; only concrete animals can be created."""
+    with pytest.raises(TypeError, match="abstract"):
+        Animal("Generic")  # type: ignore[abstract]

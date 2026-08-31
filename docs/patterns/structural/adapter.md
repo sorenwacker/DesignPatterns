@@ -25,26 +25,28 @@ Convert the interface of a class into another interface clients expect. This pat
 ## Implementation
 
 ```python
-class LoggerInterface:
+from abc import ABC, abstractmethod
+
+class LoggerInterface(ABC):
     """The target interface that clients will use.
 
     This interface defines the logging methods that the application expects.
     """
+    @abstractmethod
     def log_info(self, message: str) -> None:
         """Logs an informational message.
 
         Args:
             message: The message to log as informational.
         """
-        raise NotImplementedError
 
+    @abstractmethod
     def log_error(self, message: str) -> None:
         """Logs an error message.
 
         Args:
             message: The message to log as an error.
         """
-        raise NotImplementedError
 
 class LegacyLogger:
     """A legacy logging system.

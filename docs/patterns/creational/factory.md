@@ -25,39 +25,34 @@ Define an interface for creating objects, but let subclasses or factory methods 
 ## Implementation
 
 ```python
-from abc import ABC, abstractmethod
+from design_patterns.structural.inheritance import Animal, Cat, Dog
 
-# Product Interface
-class Animal(ABC):
-    @abstractmethod
-    def speak(self) -> str:
-        pass
 
-# Concrete Products
-class Dog(Animal):
-    def __init__(self, name: str):
-        self.name = name
-
-    def speak(self) -> str:
-        return f"{self.name} says woof!"
-
-class Cat(Animal):
-    def __init__(self, name: str):
-        self.name = name
-
-    def speak(self) -> str:
-        return f"{self.name} says meow!"
-
-# Factory
 class AnimalFactory:
+    """Factory class to create Animal instances."""
+
     def get_animal(self, animal_type: str, name: str) -> Animal:
+        """Creates an instance of Animal based on the provided type.
+
+        Args:
+            animal_type (str): The type of animal to create ('dog' or 'cat').
+            name (str): The name of the animal.
+
+        Returns:
+            Animal: An instance of Dog or Cat.
+
+        Raises:
+            ValueError: If the animal_type is not 'dog' or 'cat'.
+        """
         if animal_type == "dog":
             return Dog(name)
-        elif animal_type == "cat":
+        if animal_type == "cat":
             return Cat(name)
-        else:
-            raise ValueError(f"Unknown animal type: {animal_type}")
+        msg = f"Unknown animal type: {animal_type}"
+        raise ValueError(msg)
 ```
+
+The products come from `design_patterns.structural.inheritance`: `Animal` is an abstract base with an abstract `speak`, and `Dog` and `Cat` are its concrete subclasses. The factory is the only place that maps a string to a concrete class, so callers never name `Dog` or `Cat` themselves.
 
 ### Usage
 

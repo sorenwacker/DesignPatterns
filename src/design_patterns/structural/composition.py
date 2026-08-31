@@ -51,8 +51,3 @@ class Car:
             + " "
             + " ".join(wheel.rotate() for wheel in self.wheels)
         )
-
-
-if __name__ == "__main__":
-    car = Car()
-    print(car.drive())  # Output: Engine started, then each of the four wheels rotating.

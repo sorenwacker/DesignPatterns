@@ -25,16 +25,18 @@ Compose objects into tree structures to represent part-whole hierarchies. This p
 ## Implementation
 
 ```python
-class Shape:
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
     """Base class for all shapes."""
 
+    @abstractmethod
     def draw(self) -> str:
         """Draws the shape.
 
-        Raises:
-            NotImplementedError: Subclasses must implement this method.
+        Returns:
+            str: A description of what was drawn.
         """
-        raise NotImplementedError("Subclasses must implement this method.")
 
 class Circle(Shape):
     """Represents a circle shape."""

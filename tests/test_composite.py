@@ -1,5 +1,7 @@
 """Tests for the Composite pattern."""
 
+import pytest
+
 from design_patterns.structural.composite import (
     Circle,
     CompositeShape,
@@ -82,3 +84,9 @@ def test_composite_shape_remove_absent_shape_is_a_no_op():
 
     composite.remove(Rectangle())
     assert composite.draw() == "Composite Shape: Drawing a circle."
+
+
+def test_shape_cannot_be_instantiated():
+    """Shape is abstract; the composite and the leaves are the concrete shapes."""
+    with pytest.raises(TypeError, match="abstract"):
+        Shape()  # type: ignore[abstract]

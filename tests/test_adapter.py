@@ -1,5 +1,7 @@
 """Tests for the Adapter pattern."""
 
+import pytest
+
 from design_patterns.structural.adapter import (
     LegacyLogger,
     LoggerAdapter,
@@ -54,3 +56,9 @@ def test_logger_adapter_multiple_messages(capsys):
         "Legacy Log: INFO: Third message\n"
     )
     assert captured.out == expected
+
+
+def test_logger_interface_cannot_be_instantiated():
+    """The target interface is abstract; the adapter is the concrete logger."""
+    with pytest.raises(TypeError, match="abstract"):
+        LoggerInterface()  # type: ignore[abstract]

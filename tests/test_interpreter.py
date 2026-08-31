@@ -1,7 +1,10 @@
 """Tests for the Interpreter pattern."""
 
+import pytest
+
 from design_patterns.behavioral.interpreter import (
     AndExpression,
+    Expression,
     OrExpression,
     TerminalExpression,
 )
@@ -80,3 +83,9 @@ def test_complex_expression():
     assert full_name.interpret("Jane Doe") is True
     assert full_name.interpret("John Smith") is False
     assert full_name.interpret("Bob Doe") is False
+
+
+def test_expression_cannot_be_instantiated():
+    """Expression is abstract; grammar rules are its concrete subclasses."""
+    with pytest.raises(TypeError, match="abstract"):
+        Expression()  # type: ignore[abstract]

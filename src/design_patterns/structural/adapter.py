@@ -27,28 +27,30 @@ Example:
     ```
 """
 
+from abc import ABC, abstractmethod
 
-class LoggerInterface:
+
+class LoggerInterface(ABC):
     """The target interface that clients will use.
 
     This interface defines the logging methods that the application expects.
     """
 
+    @abstractmethod
     def log_info(self, message: str) -> None:
         """Logs an informational message.
 
         Args:
             message (str): The message to log as informational.
         """
-        raise NotImplementedError
 
+    @abstractmethod
     def log_error(self, message: str) -> None:
         """Logs an error message.
 
         Args:
             message (str): The message to log as an error.
         """
-        raise NotImplementedError
 
 
 class LegacyLogger:
@@ -74,7 +76,7 @@ class LoggerAdapter(LoggerInterface):
     the application to use the legacy logging system through the new interface.
     """
 
-    def __init__(self, legacy_logger: LegacyLogger):
+    def __init__(self, legacy_logger: LegacyLogger) -> None:
         """Initializes the LoggerAdapter with a legacy logger.
 
         Args:
