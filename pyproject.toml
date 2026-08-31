@@ -52,9 +52,6 @@ version-file = "_version.py"
 [project.urls]
 Homepage = "https://github.com/sorenwacker/DesignPatterns"
 
-[project.scripts]
-main_script = "design_patterns.main:main"
-
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
