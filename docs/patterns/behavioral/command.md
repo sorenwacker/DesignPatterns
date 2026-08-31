@@ -25,73 +25,107 @@ Encapsulate a request as an object, thereby allowing for parameterization of cli
 ## Implementation
 
 ```python
-from typing import List
+from __future__ import annotations
 
-class Command:
-    """Base class for encapsulating a command."""
+from abc import ABC, abstractmethod
 
-    def execute(self) -> None:
-        """Execute the command."""
-        pass
 
-class LightOnCommand(Command):
-    """Command to turn on the light."""
-
-    def execute(self) -> None:
-        """Turns on the light."""
-        print("Light is on")
-
-class LightOffCommand(Command):
-    """Command to turn off the light."""
-
-    def execute(self) -> None:
-        """Turns off the light."""
-        print("Light is off")
-
-class RemoteControl:
-    """Invoker class that holds and executes commands."""
+class Light:
+    """Receiver: the object a command acts on."""
 
     def __init__(self) -> None:
-        """Initializes the remote control with an empty command list."""
-        self.commands: List[Command] = []
+        self.is_on = False
+
+    def turn_on(self) -> str:
+        self.is_on = True
+        return "Light is on"
+
+    def turn_off(self) -> str:
+        self.is_on = False
+        return "Light is off"
+
+
+class Command(ABC):
+    """Interface every command implements: do the action, and reverse it."""
+
+    @abstractmethod
+    def execute(self) -> str:
+        """Perform the action and describe what happened."""
+
+    @abstractmethod
+    def undo(self) -> str:
+        """Reverse the action and describe what happened."""
+
+
+class LightOnCommand(Command):
+    """Command to turn a light on; undo turns it off again."""
+
+    def __init__(self, light: Light) -> None:
+        self._light = light
+
+    def execute(self) -> str:
+        return self._light.turn_on()
+
+    def undo(self) -> str:
+        return self._light.turn_off()
+
+
+class LightOffCommand(Command):
+    """Command to turn a light off; undo turns it on again."""
+
+    def __init__(self, light: Light) -> None:
+        self._light = light
+
+    def execute(self) -> str:
+        return self._light.turn_off()
+
+    def undo(self) -> str:
+        return self._light.turn_on()
+
+
+class RemoteControl:
+    """Invoker: queues commands, runs them, and can undo the last one run."""
+
+    def __init__(self) -> None:
+        self.commands: list[Command] = []
+        self._history: list[Command] = []
 
     def add_command(self, command: Command) -> None:
-        """Adds a command to the invoker's queue.
-
-        Args:
-            command: The command to add.
-        """
         self.commands.append(command)
 
-    def execute_commands(self) -> None:
-        """Executes all stored commands."""
-        for command in self.commands:
-            command.execute()
+    def execute_commands(self) -> list[str]:
+        results = [command.execute() for command in self.commands]
+        self._history.extend(self.commands)
         self.commands.clear()
+        return results
+
+    def undo_last(self) -> str:
+        if not self._history:
+            return "Nothing to undo"
+        return self._history.pop().undo()
 ```
 
 ### Usage
 
 ```python
-# Create remote control (invoker)
+light = Light()
 remote = RemoteControl()
 
-# Create commands
-light_on = LightOnCommand()
-light_off = LightOffCommand()
+remote.add_command(LightOnCommand(light))
+remote.add_command(LightOffCommand(light))
+remote.add_command(LightOnCommand(light))
 
-# Add commands to remote
-remote.add_command(light_on)
-remote.add_command(light_off)
-remote.add_command(light_on)
+print(remote.execute_commands())  # ["Light is on", "Light is off", "Light is on"]
+print(light.is_on)                # True
 
-# Execute all commands
-remote.execute_commands()
-# Output:
-# Light is on
-# Light is off
-# Light is on
+print(remote.undo_last())         # "Light is off"
+print(light.is_on)                # False
+print(remote.undo_last())         # "Light is on"
+print(remote.undo_last())         # "Light is off"
+print(remote.undo_last())         # "Nothing to undo"
 ```
+
+The invoker never touches the light; it only knows that a command can be executed and undone. The receiver keeps the state, the command records how to change it and how to change it back, and the history in the invoker turns that into undo.
 
 ## Trade-offs
 
