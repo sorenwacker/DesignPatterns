@@ -22,6 +22,7 @@ Example:
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from urllib.parse import urlsplit
 
 
 class Image(ABC):
@@ -154,18 +155,37 @@ class ProxyInternet(Internet):
         self._banned_sites = ["banned.com", "restricted.net", "blocked.org"]
 
     def connect(self, url: str) -> str:
-        """Connect to URL if not banned.
+        """Connect to URL unless its host is banned.
+
+        A banned site covers the host itself and every subdomain of it;
+        a host that merely contains a banned name, such as unbanned.com,
+        is allowed.
 
         Args:
-            url: URL to connect to.
+            url: URL to connect to, with or without a scheme.
 
         Returns:
             Connection result or blocked message.
         """
+        host = self._host_of(url)
         for banned in self._banned_sites:
-            if banned in url:
+            if host == banned or host.endswith(f".{banned}"):
                 return f"Access denied to {url}"
         return self._real_internet.connect(url)
+
+    @staticmethod
+    def _host_of(url: str) -> str:
+        """Extract the host name from a URL that may lack a scheme.
+
+        Args:
+            url: URL as the caller wrote it.
+
+        Returns:
+            The lower-cased host name.
+        """
+        if "//" not in url:
+            url = f"//{url}"
+        return (urlsplit(url).hostname or "").lower()
 
     def add_banned_site(self, site: str) -> None:
         """Add a site to the banned list.

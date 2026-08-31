@@ -164,12 +164,22 @@ def test_protected_document_role_based_access():
     assert "Access denied" in user_result
 
 
-def test_proxy_internet_partial_url_match():
-    """Test that banned site check works with partial matches."""
+def test_proxy_internet_blocks_banned_hosts_and_their_subdomains():
+    """The ban applies to the host name, however the URL is written."""
     internet = ProxyInternet()
 
-    result = internet.connect("http://www.banned.com/page")
-    assert "Access denied" in result
+    assert "Access denied" in internet.connect("http://www.banned.com/page")
+    assert "Access denied" in internet.connect("https://restricted.net")
+    assert "Access denied" in internet.connect("banned.com")
 
-    result = internet.connect("https://restricted.net")
-    assert "Access denied" in result
+
+def test_proxy_internet_does_not_block_a_host_that_merely_contains_a_banned_name():
+    """unbanned.com is not banned.com."""
+    internet = ProxyInternet()
+
+    assert (
+        internet.connect("https://unbanned.com") == "Connected to https://unbanned.com"
+    )
+    assert internet.connect("notbanned.com/banned.com") == (
+        "Connected to notbanned.com/banned.com"
+    )
