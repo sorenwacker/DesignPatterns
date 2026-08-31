@@ -42,53 +42,54 @@ def test_history_save():
     assert history.get_history_size() == 1
 
 
-def test_history_undo():
-    """Test undo functionality."""
+def test_history_undo_restores_the_most_recent_checkpoint():
+    """The documented example: save before each change, undo walks back."""
     editor = TextEditor()
     history = History()
 
-    editor.write("Hello")
+    editor.write("Hello ")
     history.save(editor)
 
-    editor.write(" World")
+    editor.write("World!")
     history.save(editor)
 
     editor.write("!!!")
-    history.save(editor)  # Save current state
 
-    # Undo removes most recent and restores to previous
-    history.undo(editor)
-    assert editor.get_content() == "Hello World"
+    assert history.undo(editor) is True
+    assert editor.get_content() == "Hello World!"
 
-    history.undo(editor)
-    assert editor.get_content() == "Hello"
+    assert history.undo(editor) is True
+    assert editor.get_content() == "Hello "
 
 
 def test_history_undo_empty():
-    """Test undo with no history."""
+    """Undo with no checkpoint reports failure and leaves the editor alone."""
+    editor = TextEditor()
+    history = History()
+    editor.write("Untouched")
+
+    assert history.undo(editor) is False
+    assert editor.get_content() == "Untouched"
+
+
+def test_history_undo_consumes_checkpoints():
+    """Each undo uses up one checkpoint; the last undo returns False."""
     editor = TextEditor()
     history = History()
 
-    result = history.undo(editor)
-    assert result is False
+    editor.write("A")
+    history.save(editor)
+    editor.write("B")
+    history.save(editor)
+    editor.write("C")
 
-
-def test_history_multiple_undos():
-    """Test multiple consecutive undos."""
-    editor = TextEditor()
-    history = History()
-
-    states = ["A", "AB", "ABC"]
-    for state in states:
-        editor = TextEditor()
-        editor.write(state)
-        history.save(editor)
-
+    assert history.get_history_size() == 2
     history.undo(editor)
     assert editor.get_content() == "AB"
-
     history.undo(editor)
     assert editor.get_content() == "A"
+    assert history.undo(editor) is False
+    assert history.get_history_size() == 0
 
 
 def test_game_state_initial():

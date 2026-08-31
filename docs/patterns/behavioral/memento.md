@@ -70,22 +70,21 @@ class History:
         self._mementos: list[Memento] = []
 
     def save(self, editor: TextEditor) -> None:
-        """Save current editor state."""
+        """Record a checkpoint of the editor's current content."""
         self._mementos.append(editor.save())
 
     def undo(self, editor: TextEditor) -> bool:
-        """Undo to previous state."""
-        if len(self._mementos) <= 1:
-            if self._mementos:
-                self._mementos.pop()
-                editor.restore(Memento(""))  # Restore to empty
-                return True
-            return False
+        """Restore the most recent checkpoint and discard it.
 
-        self._mementos.pop()  # Remove most recent state
-        editor.restore(self._mementos[-1])  # Restore to previous state
+        Returns False when no checkpoint remains, leaving the editor as it is.
+        """
+        if not self._mementos:
+            return False
+        editor.restore(self._mementos.pop())
         return True
 ```
+
+Call `save` before a change you may want to undo. Each `undo` returns the editor to the most recent checkpoint and consumes it, so a run of undos walks back through the checkpoints in reverse order.
 
 ### Usage
 
