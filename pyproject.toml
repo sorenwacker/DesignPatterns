@@ -68,8 +68,8 @@ report.exclude_lines = [
   '\.\.\.',
   'if typing.TYPE_CHECKING:',
 ]
-# Measured 97% on 260812. Raise this when coverage improves; never lower it.
-report.fail_under = 97
+# Measured 98.5% on 260831 (97% on 260812). Raise this when coverage improves; never lower it.
+report.fail_under = 98
 
 
 

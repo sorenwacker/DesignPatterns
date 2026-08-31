@@ -27,7 +27,7 @@ Every rule this project adopts has a gate that enforces it. A rule that exists o
 | mypy | Type annotations on `src/` and `examples/` | pre-commit, CI |
 | vulture | No unused functions, methods, or attributes | pre-commit, CI |
 | pytest | Every pattern has passing tests | CI |
-| Coverage | Line coverage stays at or above 97% | CI, `make check` |
+| Coverage | Line coverage stays at or above 98% | CI, `make check` |
 | Module length | No module exceeds 1000 lines | pytest (`tests/test_module_length_gate.py`) |
 | mkdocs --strict | Documentation builds with no warnings | CI |
 
@@ -43,7 +43,7 @@ Or individually: `make lint`, `make typecheck`, `make deadcode`, `make coverage`
 
 ## The coverage threshold
 
-`fail_under` in `pyproject.toml` records the coverage measured on the day it was adopted (97% on 260812). It is a ratchet: raise it when coverage improves, never lower it to make a change pass.
+`fail_under` in `pyproject.toml` records the coverage last measured (98% on 260831; it was 97% when adopted on 260812). It is a ratchet: raise it when coverage improves, never lower it to make a change pass.
 
 ## The module length gate
 
